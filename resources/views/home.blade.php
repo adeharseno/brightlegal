@@ -4,7 +4,49 @@
 
 @section('content')
 
-
+    <div class="relative pt-[160px] pb-[120px] mt-[-12px] bg-[#6C342C]">
+        <div class="absolute top-0 left-0 bottom-0 right-0 transform rotate-180" style="background: linear-gradient(180deg, #944229 13.02%, rgba(108, 52, 44, 0) 100%), #3B0014;"></div>
+        <div class="relative z-10 container max-w-[1240px] mx-auto">
+            <div class="flex flex-wrap">
+                <div class="basis-full lg:basis-1/2"></div>
+                <div class="basis-full lg:basis-1/2">
+                    <p class="text-white opacity-60 font-medium text-xl leading-[160%]">We combine local expertise, clear communication, and a supportive approach to help you make the right legal decisions in Bali.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-20">
+                <a href="#" class="group">
+                    <div class="h-[500px] overflow-hidden rounded-xl mb-5">
+                        <img src="https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
+                    </div>
+                    <div>
+                        <h4 class="mb-4 title font-semibold text-2xl text-[#D9D9D9]">Clear, step-by-step guidance</h4>
+                        <p class="text-white opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
+                    </div>
+                </a>
+                <a href="#" class="group">
+                    <div class="h-[500px] overflow-hidden rounded-xl mb-5">
+                        <img src="https://fastly.picsum.photos/id/17/2500/1667.jpg?hmac=HD-JrnNUZjFiP2UZQvWcKrgLoC_pc_ouUSWv8kHsJJY" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
+                    </div>
+                    <div>
+                        <h4 class="mb-4 title font-semibold text-2xl text-[#D9D9D9]">Clear, step-by-step guidance</h4>
+                        <p class="text-white opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
+                    </div>
+                </a>
+                <a href="#" class="group">
+                    <div class="h-[500px] overflow-hidden rounded-xl mb-5">
+                        <img src="https://fastly.picsum.photos/id/27/3264/1836.jpg?hmac=p3BVIgKKQpHhfGRRCbsi2MCAzw8mWBCayBsKxxtWO8g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
+                    </div>
+                    <div>
+                        <h4 class="mb-4 title font-semibold text-2xl text-[#D9D9D9]">Clear, step-by-step guidance</h4>
+                        <p class="text-white opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="#" class="bg-[rgba(245,245,245,0.3)] inline-block bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full flex items-center gap-2 transition"><span class="gradient-text">Just starting your research? Download our free legal guides to navigate Indonesian law</span> <i class="fa-solid fa-arrow-right text-sm"></i></a>
+            </div>
+        </div>
+    </div>
 
     <div class="mx-auto bg-[#73302A] rounded-[12px] pt-[140px] pb-[200px] relative z-[2]" x-data="{ activeCard: 6 }">
         <!-- Header -->
@@ -193,7 +235,7 @@
     </div>
 
     <div class="relative pt-[180px] pb-[130px] mt-[-12px] bg-[#6C342C]">
-        <div class="absolute top-0 left-0 bottom-0 right-0 transform rotate-180 bg-[linear-gradient(180deg,#944229_13.02%,rgba(108,52,44,0)_100%)]"></div>
+        <div class="absolute top-0 left-0 bottom-0 right-0 transform rotate-180" style="background: linear-gradient(180deg, #944229 13.02%, rgba(108, 52, 44, 0) 100%), #3B0014;"></div>
         <div class="relative z-10 container max-w-[1240px] mx-auto">
             <div class="flex flex-wrap">
                 <div class="basis-full lg:basis-1/4">

@@ -50,3 +50,11 @@
 .writing-mode-vertical {
     writing-mode: vertical-rl;
 }
+
+.gradient-text {
+    background: linear-gradient(90.11deg, #F35E49 -33.71%, #F1AE43 25.24%, #B8C1F8 82.88%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}

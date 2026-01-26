@@ -2,10 +2,10 @@
     <div class="max-w-[1240px] mx-auto px-6 lg:px-8 pt-16">
 
         <div class="flex flex-wrap">
-            <div class="basis-full lg:basis-1/4">
+            <div class="basis-full lg:basis-1/3">
                 <!-- Brand Section -->
                 <div class="lg:col-span-1">
-                    <h2 class="text-[#B8C1F8] text-[38px] font-light leading-tight mb-20 title">
+                    <h2 class="text-[#B8C1F8] text-[42px] font-medium leading-tight mb-20 title">
                         Your legal partner<br>in paradise.
                     </h2>
                     <a href="#" class="bg-[#B8C1F8] text-[#3B0014] font-semibold px-6 py-2.5 rounded-full transition-colors duration-300">
@@ -13,7 +13,7 @@
                     </a>
                 </div>
             </div>
-            <div class="basis-full lg:basis-3/4 pl-[125px]">
+            <div class="basis-full lg:basis-2/3 pl-[125px]">
                 <!-- Main Footer Content -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
                     
