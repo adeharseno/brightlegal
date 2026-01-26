@@ -11,12 +11,10 @@
         <div class="max-w-[1240px] mx-auto">
             <div class="flex justify-between items-center mb-[60px]">
                 <div>
-                    <p class="text-[#F1ECEC] text-base font-medium mb-2">What they say</p>
+                    <p class="title text-[#F1ECEC] text-base font-medium mb-2">What they say</p>
                     <h2 class="text-[#D9D9D9] text-[52px] font-medium">Our clients say it best...</h2>
                 </div>
-                <button class="bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full flex items-center gap-2 transition">
-                    View more testimonials →
-                </button>
+                <a href="#" class="bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full flex items-center gap-2 transition">View more testimonials <i class="fa-solid fa-arrow-right text-sm"></i></a>
             </div>
         </div>
 
@@ -194,8 +192,15 @@
         </div>
     </div>
 
-    <div class="pt-[180px] pb-[130px] mt-[-12px] bg-[linear-gradient(180deg,#944229_13.02%,rgba(108,52,44,0)_100%)]">
+    <div class="relative pt-[180px] pb-[130px] mt-[-12px] bg-[#6C342C]">
+        <div class="absolute top-0 left-0 bottom-0 right-0 transform rotate-180 bg-[linear-gradient(180deg,#944229_13.02%,rgba(108,52,44,0)_100%)]"></div>
         <div class="relative z-10 container max-w-[1240px] mx-auto">
+            <div class="flex flex-wrap">
+                <div class="basis-full lg:basis-1/4">
+                </div>
+                <div class="basis-full lg:basis-3/4">
+                </div>
+            </div>
             <div class="grid lg:grid-cols-2 gap-12 items-start">
                 <!-- Left Side - Title -->
                 <div class="mt-[-50px]">
@@ -327,10 +332,16 @@
         </div>
     </div>
 
-<style>
-    .writing-mode-vertical {
-        writing-mode: vertical-rl;
-    }
-</style>
+    <div class="relative z-[2]">
+        <img src="{{ asset('assets/images/brightlegal-artwork.png') }}" class="w-full" alt="Bright Legal Artwork">
+    </div>
+
+    <div class="relative mt-[-60px] pt-[254px] pb-[166px] bg-[#CBD4FF] rounded-b-[60px]">
+        <div class="absolute left-0 top-0 right-0 bottom-0 bg-left bg-no-repeat bg-contain" style="background-image: url('{{ asset('assets/images/Bright Legal_Icon-06 1.png') }}');"></div>
+        <div class="relative z-10 container max-w-[1240px] mx-auto text-center">
+            <h4 class="text-[84px] font-medium leading-[110%] text-[#3B0014] mb-[32px]">Ready to talk?</h4>
+            <a href="#" class="bg-[#3B0014] bg-opacity-30 hover:bg-opacity-40 text-[#B8C1F8] px-6 py-3 rounded-full flex items-center gap-2 transition inline-block">Book free consultation <i class="fa-solid fa-arrow-right text-sm"></i></a>
+        </div>
+    </div>
 
 @endsection
