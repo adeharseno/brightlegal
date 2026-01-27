@@ -7,7 +7,7 @@
     <div class="pt-[240px] pb-[100px] relative">
         <div class="absolute top-0 left-0 bottom-0 right-0 transform" style="background: linear-gradient(180deg, #6C342C 0%, #3B0014 100%);"></div>
         <div class="relative z-10 container max-w-[1240px] mx-auto px-4 lg:px-8">
-            <h4 class="text-[84px] font-medium leading-[110%] gradient-text">We help you handle <br /> the legal side of Bali life</h4>
+            <h4 class="text-[84px] font-medium leading-[110%] gradient-text">{!! $servicesSettings->title ?? 'We help you handle <br /> the legal side of Bali life' !!}</h4>
         </div>
     </div>
 
@@ -17,6 +17,11 @@
                 <!-- Sidebar Navigation -->
                 <div class="basis-full lg:basis-1/4">
                     <ul>
+                        @forelse($categories as $category)
+                        <li class="block mb-[50px]">
+                            <button @click="activeTab = 'category-{{ $category->id }}'" :class="activeTab === 'category-{{ $category->id }}' ? 'text-[#d9d9d9] opacity-100' : 'text-[#d9d9d9] opacity-50'" class="text-[20px] font-semibold leading-[130%] transition-opacity duration-300 cursor-pointer">{{ $category->name }}</button>
+                        </li>
+                        @empty
                         <li class="block mb-[50px]">
                             <button @click="activeTab = 'visa'" :class="activeTab === 'visa' ? 'text-[#d9d9d9] opacity-100' : 'text-[#d9d9d9] opacity-50'" class="text-[20px] font-semibold leading-[130%] transition-opacity duration-300 cursor-pointer">Visa</button>
                         </li>
@@ -26,130 +31,57 @@
                         <li class="block mb-[50px]">
                             <button @click="activeTab = 'agreements-contracts'" :class="activeTab === 'agreements-contracts' ? 'text-[#d9d9d9] opacity-100' : 'text-[#d9d9d9] opacity-50'" class="text-[20px] font-semibold leading-[130%] transition-opacity duration-300 cursor-pointer">Agreements & contracts</button>
                         </li>
-                        <li class="block mb-[50px]">
-                            <button @click="activeTab = 'property-due-diligence'" :class="activeTab === 'property-due-diligence' ? 'text-[#d9d9d9] opacity-100' : 'text-[#d9d9d9] opacity-50'" class="text-[20px] font-semibold leading-[130%] transition-opacity duration-300 cursor-pointer">Property due diligence</button>
-                        </li>
-                        <li class="block mb-[50px]">
-                            <button @click="activeTab = 'accounting-taxes'" :class="activeTab === 'accounting-taxes' ? 'text-[#d9d9d9] opacity-100' : 'text-[#d9d9d9] opacity-50'" class="text-[20px] font-semibold leading-[130%] transition-opacity duration-300 cursor-pointer">Accounting & taxes</button>
-                        </li>
-                        <li class="block mb-[50px]">
-                            <button @click="activeTab = 'legal-disputes'" :class="activeTab === 'legal-disputes' ? 'text-[#d9d9d9] opacity-100' : 'text-[#d9d9d9] opacity-50'" class="text-[20px] font-semibold leading-[130%] transition-opacity duration-300 cursor-pointer">Legal disputes</button>
-                        </li>
+                        @endforelse
                     </ul>
                 </div>
 
                 <!-- Content Area -->
                 <div class="basis-full lg:basis-3/4">
-                    @php
-                        $services = [
-                            ['id' => 'visa-1', 'category' => 'visa', 'image' => 'https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g', 'title' => '1.184.099 kWh', 'description' => 'clean energy generated from solar'],
-                            ['id' => 'visa-2', 'category' => 'visa', 'image' => 'https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g', 'title' => '1,053.848 tons CO₂e', 'description' => 'emissions reduced'],
-                            ['id' => 'company-1', 'category' => 'company-setup', 'image' => 'https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g', 'title' => '11% lower operational', 'description' => 'energy use'],
-                            ['id' => 'company-2', 'category' => 'company-setup', 'image' => 'https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g', 'title' => '300,000+ clean water', 'description' => 'refills through Pure Hub'],
-                            ['id' => 'agreement-1', 'category' => 'agreements-contracts', 'image' => 'https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g', 'title' => '255.08 kg', 'description' => 'waste removed from Benoa Beach'],
-                            ['id' => 'agreement-2', 'category' => 'agreements-contracts', 'image' => 'https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g', 'title' => '990 kg CO₂', 'description' => 'absorbed through mangrove planting (20 year projection)'],
-                            ['id' => 'property-1', 'category' => 'property-due-diligence', 'image' => 'https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g', 'title' => '100% of employees', 'description' => 'received performance reviews'],
-                            ['id' => 'property-2', 'category' => 'property-due-diligence', 'image' => 'https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g', 'title' => 'Rp115,200,000', 'description' => 'raised to support disability communities'],
-                        ];
-                    @endphp
-
-                    <!-- Visa Tab -->
+                    @forelse($categories as $category)
+                    <!-- {{ $category->name }} Tab -->
+                    <div x-show="activeTab === 'category-{{ $category->id }}'" x-transition>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                            @forelse($category->services as $service)
+                            <button @click="openModal('{{ $service->id }}', '{{ addslashes($service->title) }}', '{{ $service->image ? Storage::url($service->image) : 'https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g' }}')" class="group mb-[72px] text-left w-full hover:opacity-80 transition-opacity">
+                                <div class="h-[440px] overflow-hidden rounded-xl mb-6 relative">
+                                    <div class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-90 z-[2] transition-all duration-500 ease-in-out flex items-center justify-center rounded-full bg-[rgba(251,244,225,0.2)]">
+                                        <img src="{{ asset('assets/images/plus.png') }}" class="" alt="">
+                                    </div>
+                                    @if($service->image)
+                                    <img src="{{ Storage::url($service->image) }}" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="{{ $service->title }}">
+                                    @else
+                                    <img src="https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="{{ $service->title }}">
+                                    @endif
+                                </div>
+                                <h3 class="mb-5 font-semibold text-[28px] opacity-80 text-[#f5f5f5]">{{ $service->title }}</h3>
+                                <hr class="border-[#6C342C] my-5">
+                                <div class="text-[#F1ECEC] text-lg opacity-60 font-medium">{!! Str::limit(strip_tags($service->description), 100) !!}</div>
+                            </button>
+                            @empty
+                            <p class="text-[#F1ECEC] opacity-60">No services available in this category.</p>
+                            @endforelse
+                        </div>
+                    </div>
+                    @empty
+                    <!-- Default tabs when no CMS data -->
                     <div x-show="activeTab === 'visa'" x-transition>
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                            @foreach($services as $item)
-                                @if($item['category'] === 'visa')
-                                    <button @click="openModal('{{ $item['id'] }}', '{{ addslashes($item['title']) }}', '{{ $item['image'] }}')" class="group mb-[72px] text-left w-full hover:opacity-80 transition-opacity">
-                                        <div class="h-[440px] overflow-hidden rounded-xl mb-6 relative">
-                                            <div class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-90 z-[2] transition-all duration-500 ease-in-out flex items-center justify-center rounded-full bg-[rgba(251,244,225,0.2)]">
-                                                <img src="{{ asset('assets/images/plus.png') }}" class="" alt="">
-                                            </div>
-                                            <img src="{{ $item['image'] }}" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
-                                        </div>
-                                        <h3 class="mb-5 font-semibold text-[28px] opacity-80 text-[#f5f5f5]">{{ $item['title'] }}</h3>
-                                        <hr class="border-[#6C342C] my-5">
-                                        <p class="text-[#F1ECEC] text-lg opacity-60 font-medium">{{ $item['description'] }}</p>
-                                    </button>
-                                @endif
-                            @endforeach
+                            <p class="text-[#F1ECEC] opacity-60">No services available yet. Add services via CMS.</p>
                         </div>
                     </div>
 
-                    <!-- Company Setup Tab -->
                     <div x-show="activeTab === 'company-setup'" x-transition>
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                            @foreach($services as $item)
-                                @if($item['category'] === 'company-setup')
-                                    <button @click="openModal('{{ $item['id'] }}', '{{ addslashes($item['title']) }}', '{{ $item['image'] }}')" class="group mb-[72px] text-left w-full hover:opacity-80 transition-opacity">
-                                        <div class="h-[440px] overflow-hidden rounded-xl mb-6 relative">
-                                            <div class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-90 z-[2] transition-all duration-500 ease-in-out flex items-center justify-center rounded-full bg-[rgba(251,244,225,0.2)]">
-                                                <img src="{{ asset('assets/images/plus.png') }}" class="" alt="">
-                                            </div>
-                                            <img src="{{ $item['image'] }}" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
-                                        </div>
-                                        <h3 class="mb-5 font-semibold text-[28px] opacity-80 text-[#f5f5f5]">{{ $item['title'] }}</h3>
-                                        <hr class="border-[#6C342C] my-5">
-                                        <p class="text-[#F1ECEC] text-lg opacity-60 font-medium">{{ $item['description'] }}</p>
-                                    </button>
-                                @endif
-                            @endforeach
+                            <p class="text-[#F1ECEC] opacity-60">No services available yet. Add services via CMS.</p>
                         </div>
                     </div>
 
-                    <!-- Agreements & Contracts Tab -->
                     <div x-show="activeTab === 'agreements-contracts'" x-transition>
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                            @foreach($services as $item)
-                                @if($item['category'] === 'agreements-contracts')
-                                    <button @click="openModal('{{ $item['id'] }}', '{{ addslashes($item['title']) }}', '{{ $item['image'] }}')" class="group mb-[72px] text-left w-full hover:opacity-80 transition-opacity">
-                                        <div class="h-[440px] overflow-hidden rounded-xl mb-6 relative">
-                                            <div class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-90 z-[2] transition-all duration-500 ease-in-out flex items-center justify-center rounded-full bg-[rgba(251,244,225,0.2)]">
-                                                <img src="{{ asset('assets/images/plus.png') }}" class="" alt="">
-                                            </div>
-                                            <img src="{{ $item['image'] }}" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
-                                        </div>
-                                        <h3 class="mb-5 font-semibold text-[28px] opacity-80 text-[#f5f5f5]">{{ $item['title'] }}</h3>
-                                        <hr class="border-[#6C342C] my-5">
-                                        <p class="text-[#F1ECEC] text-lg opacity-60 font-medium">{{ $item['description'] }}</p>
-                                    </button>
-                                @endif
-                            @endforeach
+                            <p class="text-[#F1ECEC] opacity-60">No services available yet. Add services via CMS.</p>
                         </div>
                     </div>
-
-                    <!-- Property Due Diligence Tab -->
-                    <div x-show="activeTab === 'property-due-diligence'" x-transition>
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                            @foreach($services as $item)
-                                @if($item['category'] === 'property-due-diligence')
-                                    <button @click="openModal('{{ $item['id'] }}', '{{ addslashes($item['title']) }}', '{{ $item['image'] }}')" class="group mb-[72px] text-left w-full hover:opacity-80 transition-opacity">
-                                        <div class="h-[440px] overflow-hidden rounded-xl mb-6 relative">
-                                            <div class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-90 z-[2] transition-all duration-500 ease-in-out flex items-center justify-center rounded-full bg-[rgba(251,244,225,0.2)]">
-                                                <img src="{{ asset('assets/images/plus.png') }}" class="" alt="">
-                                            </div>
-                                            <img src="{{ $item['image'] }}" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
-                                        </div>
-                                        <h3 class="mb-5 font-semibold text-[28px] opacity-80 text-[#f5f5f5]">{{ $item['title'] }}</h3>
-                                        <hr class="border-[#6C342C] my-5">
-                                        <p class="text-[#F1ECEC] text-lg opacity-60 font-medium">{{ $item['description'] }}</p>
-                                    </button>
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <!-- Accounting & Taxes Tab -->
-                    <div x-show="activeTab === 'accounting-taxes'" x-transition>
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                            <p class="text-[#F1ECEC] opacity-60">Coming soon...</p>
-                        </div>
-                    </div>
-
-                    <!-- Legal Disputes Tab -->
-                    <div x-show="activeTab === 'legal-disputes'" x-transition>
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                            <p class="text-[#F1ECEC] opacity-60">Coming soon...</p>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -172,7 +104,7 @@
                  x-transition:leave="transition ease-in duration-300" 
                  x-transition:leave-start="opacity-100 scale-100" 
                  x-transition:leave-end="opacity-0 scale-95"
-                 class="bg-[#3B0014] rounded-2xl max-w-2xl w-full overflow-hidden"
+                 class="bg-[#3B0014] rounded-2xl max-w-2xl w-full overflow-hidden max-h-[90vh] overflow-y-auto"
                  x-data="{ modalTab: 'benefits' }">
                 
                 <!-- Modal Header with Title and Close Button -->
@@ -205,23 +137,202 @@
                 <!-- Modal Content -->
                 <div class="p-8">
                     <!-- Loading State -->
-                    <div x-show="modalLoading" class="text-center py-6">
+                    <div x-show="modalLoading" 
+                         x-transition:enter="transition ease-out duration-300" 
+                         x-transition:enter-start="opacity-0" 
+                         x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition ease-in duration-200" 
+                         x-transition:leave-start="opacity-100" 
+                         x-transition:leave-end="opacity-0"
+                         class="text-center py-6">
                         <div class="inline-block animate-spin text-[#FBF4E1] text-2xl mb-2">⟳</div>
                         <p class="text-[#FBF4E1]">Loading details...</p>
                     </div>
 
                     <!-- Benefits Tab -->
-                    <div x-show="!modalLoading && modalTab === 'benefits'" x-transition class="space-y-4">
+                    <div x-show="!modalLoading && modalTab === 'benefits'" 
+                         x-transition:enter="transition ease-out duration-300" 
+                         x-transition:enter-start="opacity-0" 
+                         x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition ease-in duration-200" 
+                         x-transition:leave-start="opacity-100" 
+                         x-transition:leave-end="opacity-0"
+                         class="space-y-4">
+                        <div x-html="modalContent.benefits" class="text-[#F1ECEC] prose prose-invert max-w-none"></div>
+                    </div>
+
+                    <!-- Documents Tab -->
+                    <div x-show="!modalLoading && modalTab === 'documents'" 
+                         x-transition:enter="transition ease-out duration-300" 
+                         x-transition:enter-start="opacity-0" 
+                         x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition ease-in duration-200" 
+                         x-transition:leave-start="opacity-100" 
+                         x-transition:leave-end="opacity-0"
+                         class="space-y-4">
+                        <div x-html="modalContent.documents" class="text-[#F1ECEC] prose prose-invert max-w-none"></div>
+                    </div>
+
+                    <!-- Notes Tab -->
+                    <div x-show="!modalLoading && modalTab === 'notes'" 
+                         x-transition:enter="transition ease-out duration-300" 
+                         x-transition:enter-start="opacity-0" 
+                         x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition ease-in duration-200" 
+                         x-transition:leave-start="opacity-100" 
+                         x-transition:leave-end="opacity-0"
+                         class="space-y-4">
+                        <div x-html="modalContent.notes" class="text-[#F1ECEC] prose prose-invert max-w-none"></div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="flex justify-end mt-6">
+                        <button @click="requestService(modalData.id)" 
+                                class="bg-[#B8C1F8] text-[#3B0014] cursor-pointer px-6 py-2 rounded-full font-medium transition-colors duration-300">
+                            Consult about this
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alpine.js Component Script -->
+    <script>
+        function servicesTabs() {
+            return {
+                activeTab: '{{ $categories->first() ? "category-" . $categories->first()->id : "visa" }}',
+                modalOpen: false,
+                modalLoading: false,
+                modalContent: {
+                    benefits: '',
+                    documents: '',
+                    notes: ''
+                },
+                modalData: {
+                    id: '',
+                    title: '',
+                    image: ''
+                },
+
+                // Service data from CMS
+                servicesData: @json($categories->flatMap(function($cat) { 
+                    return $cat->services->map(function($s) { 
+                        return [
+                            'id' => $s->id,
+                            'key_benefit' => $s->key_benefit,
+                            'required_document' => $s->required_document,
+                            'important_note' => $s->important_note
+                        ];
+                    }); 
+                })->keyBy('id')),
+
+                openModal(id, title, image) {
+                    this.modalData = { id, title, image };
+                    this.modalOpen = true;
+                    this.modalContent = { benefits: '', documents: '', notes: '' };
+                    this.loadServiceDetails(id);
+                },
+
+                closeModal() {
+                    this.modalOpen = false;
+                    this.modalData = { id: '', title: '', image: '' };
+                    this.modalContent = { benefits: '', documents: '', notes: '' };
+                },
+
+                async loadServiceDetails(serviceId) {
+                    this.modalLoading = true;
+                    try {
+                        // Short delay for UX
+                        await new Promise(resolve => setTimeout(resolve, 300));
+                        
+                        // Get data from CMS
+                        const serviceData = this.servicesData[serviceId];
+                        
+                        if (serviceData) {
+                            this.modalContent = {
+                                benefits: serviceData.key_benefit || '<p class="opacity-60">No key benefits specified.</p>',
+                                documents: serviceData.required_document || '<p class="opacity-60">No required documents specified.</p>',
+                                notes: serviceData.important_note || '<p class="opacity-60">No important notes specified.</p>'
+                            };
+                        } else {
+                            this.modalContent = {
+                                benefits: '<p class="opacity-60">No key benefits specified.</p>',
+                                documents: '<p class="opacity-60">No required documents specified.</p>',
+                                notes: '<p class="opacity-60">No important notes specified.</p>'
+                            };
+                        }
+                    } catch (error) {
+                        console.error('Error loading service details:', error);
+                        this.modalContent = {
+                            benefits: '<p class="text-red-400">Error loading details. Please try again.</p>',
+                            documents: '<p class="text-red-400">Error loading details. Please try again.</p>',
+                            notes: '<p class="text-red-400">Error loading details. Please try again.</p>'
+                        };
+                    } finally {
+                        this.modalLoading = false;
+                    }
+                },
+
+                async requestService(serviceId) {
+                    alert(`Consultation request for "${this.modalData.title}" submitted!\n\nPlease contact us for more information.`);
+                    this.closeModal();
+                }
+            };
+        }
+    </script>
+                        Important notes
+                    </button>
+                </div>
+
+                <!-- Modal Content -->
+                <div class="p-8">
+                    <!-- Loading State -->
+                    <div x-show="modalLoading" 
+                         x-transition:enter="transition ease-out duration-300" 
+                         x-transition:enter-start="opacity-0" 
+                         x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition ease-in duration-200" 
+                         x-transition:leave-start="opacity-100" 
+                         x-transition:leave-end="opacity-0"
+                         class="text-center py-6">
+                        <div class="inline-block animate-spin text-[#FBF4E1] text-2xl mb-2">⟳</div>
+                        <p class="text-[#FBF4E1]">Loading details...</p>
+                    </div>
+
+                    <!-- Benefits Tab -->
+                    <div x-show="!modalLoading && modalTab === 'benefits'" 
+                         x-transition:enter="transition ease-out duration-300" 
+                         x-transition:enter-start="opacity-0" 
+                         x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition ease-in duration-200" 
+                         x-transition:leave-start="opacity-100" 
+                         x-transition:leave-end="opacity-0"
+                         class="space-y-4">
                         <div x-html="modalContent.benefits" class="text-[#F1ECEC]"></div>
                     </div>
 
                     <!-- Documents Tab -->
-                    <div x-show="!modalLoading && modalTab === 'documents'" x-transition class="space-y-4">
+                    <div x-show="!modalLoading && modalTab === 'documents'" 
+                         x-transition:enter="transition ease-out duration-300" 
+                         x-transition:enter-start="opacity-0" 
+                         x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition ease-in duration-200" 
+                         x-transition:leave-start="opacity-100" 
+                         x-transition:leave-end="opacity-0"
+                         class="space-y-4">
                         <div x-html="modalContent.documents" class="text-[#F1ECEC]"></div>
                     </div>
 
                     <!-- Notes Tab -->
-                    <div x-show="!modalLoading && modalTab === 'notes'" x-transition class="space-y-4">
+                    <div x-show="!modalLoading && modalTab === 'notes'" 
+                         x-transition:enter="transition ease-out duration-300" 
+                         x-transition:enter-start="opacity-0" 
+                         x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition ease-in duration-200" 
+                         x-transition:leave-start="opacity-100" 
+                         x-transition:leave-end="opacity-0"
+                         class="space-y-4">
                         <div x-html="modalContent.notes" class="text-[#F1ECEC]"></div>
                     </div>
 
@@ -233,7 +344,7 @@
                     <!-- CTA Button -->
                     <div class="flex justify-end">
                         <button @click="requestService(modalData.id)" 
-                                class="bg-[#E97D8C] hover:bg-[#f09aa3] text-white px-6 py-2 rounded-full font-medium transition-colors duration-300">
+                                class="bg-[#B8C1F8] text-[#3B0014] cursor-pointer px-6 py-2 rounded-full font-medium transition-colors duration-300">
                             Consult about this
                         </button>
                     </div>
@@ -435,9 +546,40 @@
                 <div class="basis-full lg:basis-3/4">
                     <div class="space-y-2" x-data="{ active: null }">
                         <div class="mb-[40px]">
-                            <p class="text-[#FBF4E1] text-base font-medium mb-9">Visa questions</p>
+                            <p class="text-[#FBF4E1] text-base font-medium mb-9">{{ $faqsSettings->title ?? 'Visa questions' }}</p>
+                            @if($faqsSettings && $faqsSettings->description)
+                                <div class="text-[#FBF4E1] text-[52px] leading-[120%] font-medium">{!! $faqsSettings->description !!}</div>
+                            @else
                             <h3 class="text-[#FBF4E1] text-[52px] leading-[120%] font-medium">Frequently asked questions</h3>
+                            @endif
                         </div>
+                        @forelse($faqs as $index => $faq)
+                        <!-- Question {{ $index + 1 }} -->
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden transition-all duration-300">
+                            <button 
+                                @click="active = active === {{ $index + 1 }} ? null : {{ $index + 1 }}"
+                                class="w-full px-6 py-5 flex items-center justify-between text-left text-white hover:bg-white/5 transition-colors"
+                            >
+                                <span class="text-base lg:text-lg font-light">{{ $faq->title }}</span>
+                                <span class="text-2xl font-light transition-transform duration-300" :class="active === {{ $index + 1 }} ? 'rotate-45' : ''">+</span>
+                            </button>
+                            <div 
+                                x-show="active === {{ $index + 1 }}"
+                                x-transition:enter="transition-all ease-out duration-500"
+                                x-transition:enter-start="opacity-0 max-h-0"
+                                x-transition:enter-end="opacity-100 max-h-96"
+                                x-transition:leave="transition-all ease-in duration-300"
+                                x-transition:leave-start="opacity-100 max-h-96"
+                                x-transition:leave-end="opacity-0 max-h-0"
+                                class="overflow-hidden"
+                                style="display: none;"
+                            >
+                                <div class="px-6 py-5 text-white/90 text-sm lg:text-base leading-relaxed">
+                                    {!! $faq->description !!}
+                                </div>
+                            </div>
+                        </div>
+                        @empty
                         <!-- Question 1 -->
                         <div class="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden transition-all duration-300">
                             <button 
@@ -463,287 +605,10 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Question 2 -->
-                        <div class="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden transition-all duration-300">
-                            <button 
-                                @click="active = active === 2 ? null : 2"
-                                class="w-full px-6 py-5 flex items-center justify-between text-left text-white hover:bg-white/5 transition-colors"
-                            >
-                                <span class="text-base lg:text-lg font-light">Can I legally own a business in Bali as a foreigner?</span>
-                                <span class="text-2xl font-light transition-transform duration-300" :class="active === 2 ? 'rotate-45' : ''">+</span>
-                            </button>
-                            <div 
-                                x-show="active === 2"
-                                x-transition:enter="transition-all ease-out duration-500"
-                                x-transition:enter-start="opacity-0 max-h-0"
-                                x-transition:enter-end="opacity-100 max-h-96"
-                                x-transition:leave="transition-all ease-in duration-300"
-                                x-transition:leave-start="opacity-100 max-h-96"
-                                x-transition:leave-end="opacity-0 max-h-0"
-                                class="overflow-hidden"
-                                style="display: none;"
-                            >
-                                <div class="px-6 py-5 text-white/90 text-sm lg:text-base leading-relaxed">
-                                    Yes, foreigners can own businesses in Bali through specific legal structures such as PT PMA (foreign investment company). We can guide you through the requirements, including minimum capital investment and ownership structures that comply with Indonesian law.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Question 3 -->
-                        <div class="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden transition-all duration-300">
-                            <button 
-                                @click="active = active === 3 ? null : 3"
-                                class="w-full px-6 py-5 flex items-center justify-between text-left text-white hover:bg-white/5 transition-colors"
-                            >
-                                <span class="text-base lg:text-lg font-light">What's the difference between a PT and a PT PMA?</span>
-                                <span class="text-2xl font-light transition-transform duration-300" :class="active === 3 ? 'rotate-45' : ''">+</span>
-                            </button>
-                            <div 
-                                x-show="active === 3"
-                                x-transition:enter="transition-all ease-out duration-500"
-                                x-transition:enter-start="opacity-0 max-h-0"
-                                x-transition:enter-end="opacity-100 max-h-96"
-                                x-transition:leave="transition-all ease-in duration-300"
-                                x-transition:leave-start="opacity-100 max-h-96"
-                                x-transition:leave-end="opacity-0 max-h-0"
-                                class="overflow-hidden"
-                                style="display: none;"
-                            >
-                                <div class="px-6 py-5 text-white/90 text-sm lg:text-base leading-relaxed">
-                                    A PT (Perseroan Terbatas) is a local Indonesian company owned by Indonesian nationals, while a PT PMA (Penanaman Modal Asing) is a foreign investment company that allows foreign ownership. PT PMA typically requires higher minimum capital and has different licensing requirements.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Question 4 -->
-                        <div class="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden transition-all duration-300">
-                            <button 
-                                @click="active = active === 4 ? null : 4"
-                                class="w-full px-6 py-5 flex items-center justify-between text-left text-white hover:bg-white/5 transition-colors"
-                            >
-                                <span class="text-base lg:text-lg font-light">How long does it take to set up a company in Indonesia?</span>
-                                <span class="text-2xl font-light transition-transform duration-300" :class="active === 4 ? 'rotate-45' : ''">+</span>
-                            </button>
-                            <div 
-                                x-show="active === 4"
-                                x-collapse
-                                x-cloak
-                            >
-                                <div class="px-6 py-5 text-white/90 text-sm lg:text-base leading-relaxed">
-                                    The timeline varies based on company type and completeness of documentation. Generally, a PT can be established in 2-4 weeks, while a PT PMA may take 4-8 weeks due to additional approvals required. We streamline the process to ensure efficient setup.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Question 5 -->
-                        <div class="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden transition-all duration-300">
-                            <button 
-                                @click="active = active === 5 ? null : 5"
-                                class="w-full px-6 py-5 flex items-center justify-between text-left text-white hover:bg-white/5 transition-colors"
-                            >
-                                <span class="text-base lg:text-lg font-light">Do I need a local partner to open a business?</span>
-                                <span class="text-2xl font-light transition-transform duration-300" :class="active === 5 ? 'rotate-45' : ''">+</span>
-                            </button>
-                            <div 
-                                x-show="active === 5"
-                                x-collapse
-                                x-cloak
-                            >
-                                <div class="px-6 py-5 text-white/90 text-sm lg:text-base leading-relaxed">
-                                    It depends on your business sector and chosen structure. Some business activities allow 100% foreign ownership through PT PMA, while others require Indonesian partnership. We can advise on the best structure for your specific business type and goals.
-                                </div>
-                            </div>
-                        </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="mx-auto bg-[#73302A] mt-[-12px] rounded-[12px] pt-[140px] pb-[200px] relative z-[3]" x-data="{ activeCard: 6 }">
-        <!-- Header -->
-        <div class="max-w-[1240px] mx-auto px-4 lg:px-8">
-            <div class="flex justify-between items-center mb-[60px]">
-                <div>
-                    <p class="title text-[#F1ECEC] text-base font-medium mb-2">What they say</p>
-                    <h2 class="text-[#D9D9D9] text-[52px] font-medium">Our clients say it best...</h2>
-                </div>
-                <a href="#" class="bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full flex items-center gap-2 transition">View more testimonials <i class="fa-solid fa-arrow-right text-sm"></i></a>
-            </div>
-        </div>
-
-        <!-- Testimonial Cards -->
-        <div class="flex gap-0 h-[482px] max-w-[1240px] mx-auto px-4 lg:px-8">
-
-            <!-- Card 1 -->
-            <div @click="activeCard = 1" 
-                    :class="activeCard === 1 ? 'flex-[2] min-w-[400px]' : 'flex-[0_0_80px] min-w-[120px]'"
-                    class="testimonial-card bg-[#410014] cursor-pointer rounded-l-[20px] transition-all duration-500 overflow-hidden relative mr-[-20px]">
-                <div x-show="activeCard === 1" class="content h-full flex py-[52px] px-[48px]">
-                    <div class="flex flex-col items-center opacity-40">
-                        <span class="number text-white text-[28px] font-light mb-6">1</span>
-                        <div class="flex-1 w-px bg-white bg-opacity-20"></div>
-                        <span class="label text-white text-[14px] mt-6 writing-mode-vertical transform rotate-180">Property Agreements</span>
-                    </div>
-                    <div class="pl-[53px] flex flex-col justify-between">
-                        <p class="text-white text-[32px] pt-10">"Working with this team transformed our business completely. Their expertise and dedication are unmatched in the industry."</p>
-                        <div class="flex items-center gap-4">
-                            <img src="https://ui-avatars.com/api/?name=John+Smith&background=random" alt="John Smith" class="w-14 h-14 rounded-full">
-                            <div>
-                                <p class="text-white font-semibold text-lg">John Smith</p>
-                                <p class="text-red-300 text-sm">CEO of Tech Corp. | United States 🇺🇸</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div x-show="activeCard !== 1" class="collapsed-view py-[52px] pl-[52px] pr-[72px] h-full flex flex-col items-center opacity-40">
-                    <span class="number text-white text-[28px] font-light mb-6">1</span>
-                    <div class="flex-1 w-px bg-white bg-opacity-20"></div>
-                    <span class="label text-white text-[14px] mt-6 writing-mode-vertical transform rotate-180">Property Agreements</span>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div @click="activeCard = 2" 
-                    :class="activeCard === 2 ? 'flex-[2] min-w-[400px]' : 'flex-[0_0_80px] min-w-[120px]'"
-                    class="testimonial-card bg-[#D9D9D9] cursor-pointer rounded-l-[20px] transition-all duration-500 overflow-hidden relative mr-[-20px]">
-                <div x-show="activeCard === 2" class="content h-full flex py-[52px] px-[48px]">
-                    <div class="flex flex-col items-center opacity-40">
-                        <span class="number text-gray-600 text-[28px] font-light mb-6">2</span>
-                        <div class="flex-1 w-px bg-gray-600 bg-opacity-20"></div>
-                        <span class="label text-gray-600 text-[14px] mt-6 writing-mode-vertical transform rotate-180">Ownership & Land Status</span>
-                    </div>
-                    <div class="pl-[53px] flex flex-col justify-between">
-                        <p class="text-gray-800 text-[32px] pt-10">"Exceptional service from start to finish. They understood our needs perfectly and delivered beyond expectations."</p>
-                        <div class="flex items-center gap-4">
-                            <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=random" alt="Sarah Johnson" class="w-14 h-14 rounded-full">
-                            <div>
-                                <p class="text-gray-800 font-semibold text-lg">Sarah Johnson</p>
-                                <p class="text-gray-600 text-sm">Director of Operations | Canada 🇨🇦</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div x-show="activeCard !== 2" class="collapsed-view py-[52px] pl-[52px] pr-[72px] h-full flex flex-col items-center opacity-40">
-                    <span class="number text-gray-600 text-[28px] font-light mb-6">2</span>
-                    <div class="flex-1 w-px bg-gray-600 bg-opacity-20"></div>
-                    <span class="label text-gray-600 text-[14px] mt-6 writing-mode-vertical transform rotate-180">Ownership & Land Status</span>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div @click="activeCard = 3" 
-                    :class="activeCard === 3 ? 'flex-[2] min-w-[400px]' : 'flex-[0_0_80px] min-w-[120px]'"
-                    class="testimonial-card bg-[#F1AE43] cursor-pointer rounded-l-[20px] transition-all duration-500 overflow-hidden relative mr-[-20px]">
-                <div x-show="activeCard === 3" class="content h-full flex py-[52px] px-[48px]">
-                    <div class="flex flex-col items-center opacity-40">
-                        <span class="number text-yellow-900 text-[28px] font-light mb-6">3</span>
-                        <div class="flex-1 w-px bg-yellow-900 bg-opacity-20"></div>
-                        <span class="label text-yellow-900 text-[14px] mt-6 writing-mode-vertical transform rotate-180">Company set-up</span>
-                    </div>
-                    <div class="pl-[53px] flex flex-col justify-between">
-                        <p class="text-gray-900 text-[32px] pt-10">"Their innovative approach helped us achieve results we never thought possible. Truly a game-changer for our company."</p>
-                        <div class="flex items-center gap-4">
-                            <img src="https://ui-avatars.com/api/?name=Michael+Brown&background=random" alt="Michael Brown" class="w-14 h-14 rounded-full">
-                            <div>
-                                <p class="text-gray-900 font-semibold text-lg">Michael Brown</p>
-                                <p class="text-gray-700 text-sm">Founder of StartupX | Australia 🇦🇺</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div x-show="activeCard !== 3" class="collapsed-view py-[52px] pl-[52px] pr-[72px] h-full flex flex-col items-center opacity-40">
-                    <span class="number text-yellow-900 text-[28px] font-light mb-6">3</span>
-                    <div class="flex-1 w-px bg-yellow-900 bg-opacity-20"></div>
-                    <span class="label text-yellow-900 text-[14px] mt-6 writing-mode-vertical transform rotate-180">Company set-up</span>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div @click="activeCard = 4" 
-                    :class="activeCard === 4 ? 'flex-[2] min-w-[400px]' : 'flex-[0_0_80px] min-w-[120px]'"
-                    class="testimonial-card bg-[#974126] cursor-pointer rounded-l-[20px] transition-all duration-500 overflow-hidden relative mr-[-20px]">
-                <div x-show="activeCard === 4" class="content h-full flex py-[52px] px-[48px]">
-                    <div class="flex flex-col items-center opacity-40">
-                        <span class="number text-white text-[28px] font-light mb-6">4</span>
-                        <div class="flex-1 w-px bg-white bg-opacity-20"></div>
-                        <span class="label text-white text-[14px] mt-6 writing-mode-vertical transform rotate-180">Property Agreements</span>
-                    </div>
-                    <div class="pl-[53px] flex flex-col justify-between">
-                        <p class="text-white text-[32px] pt-10">"Professional, reliable, and results-driven. They've been instrumental in our growth and success over the past year."</p>
-                        <div class="flex items-center gap-4">
-                            <img src="https://ui-avatars.com/api/?name=Emma+Wilson&background=random" alt="Emma Wilson" class="w-14 h-14 rounded-full">
-                            <div>
-                                <p class="text-white font-semibold text-lg">Emma Wilson</p>
-                                <p class="text-red-300 text-sm">Managing Partner | Germany 🇩🇪</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div x-show="activeCard !== 4" class="collapsed-view py-[52px] pl-[52px] pr-[72px] h-full flex flex-col items-center opacity-40">
-                    <span class="number text-white text-[28px] font-light mb-6">4</span>
-                    <div class="flex-1 w-px bg-white bg-opacity-20"></div>
-                    <span class="label text-white text-[14px] mt-6 writing-mode-vertical transform rotate-180">Property Agreements</span>
-                </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div @click="activeCard = 5" 
-                    :class="activeCard === 5 ? 'flex-[2] min-w-[400px]' : 'flex-[0_0_80px] min-w-[120px]'"
-                    class="testimonial-card bg-white cursor-pointer rounded-l-[20px] transition-all duration-500 overflow-hidden relative mr-[-20px]">
-                <div x-show="activeCard === 5" class="content h-full flex py-[52px] px-[48px]">
-                    <div class="flex flex-col items-center opacity-40">
-                        <span class="number text-gray-500 text-[28px] font-light mb-6">5</span>
-                        <div class="flex-1 w-px bg-gray-500 bg-opacity-20"></div>
-                        <span class="label text-gray-500 text-[14px] mt-6 writing-mode-vertical transform rotate-180">Land Use & Zoning</span>
-                    </div>
-                    <div class="pl-[53px] flex flex-col justify-between">
-                        <p class="text-gray-800 text-[32px] pt-10">"The level of attention to detail and customer care is outstanding. They make everything easy and stress-free."</p>
-                        <div class="flex items-center gap-4">
-                            <img src="https://ui-avatars.com/api/?name=David+Lee&background=random" alt="David Lee" class="w-14 h-14 rounded-full">
-                            <div>
-                                <p class="text-gray-800 font-semibold text-lg">David Lee</p>
-                                <p class="text-gray-600 text-sm">VP of Sales | Singapore 🇸🇬</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div x-show="activeCard !== 5" class="collapsed-view py-[52px] pl-[52px] pr-[72px] h-full flex flex-col items-center opacity-40">
-                    <span class="number text-gray-500 text-[28px] font-light mb-6">5</span>
-                    <div class="flex-1 w-px bg-gray-500 bg-opacity-20"></div>
-                    <span class="label text-gray-500 text-[14px] mt-6 writing-mode-vertical transform rotate-180">Land Use & Zoning</span>
-                </div>
-            </div>
-
-            <!-- Card 6 - Active by default -->
-            <div @click="activeCard = 6" 
-                    :class="activeCard === 6 ? 'flex-[2] min-w-[400px]' : 'flex-[0_0_80px] min-w-[120px]'"
-                    class="testimonial-card bg-[#B8C1F8] cursor-pointer rounded-[20px] transition-all duration-500 overflow-hidden relative">
-                <div x-show="activeCard === 6" class="content h-full flex py-[52px] px-[48px]">
-                    <div class="flex flex-col items-center opacity-40">
-                        <span class="number text-indigo-800 text-[28px] font-light mb-6">6</span>
-                        <div class="flex-1 w-px bg-indigo-800 bg-opacity-20"></div>
-                        <span class="label text-indigo-800 text-[14px] mt-6 writing-mode-vertical transform rotate-180">Visa service</span>
-                    </div>
-                    <div class="pl-[53px] flex flex-col justify-between">
-                        <p class="text-gray-900 text-[32px] pt-10">"Ullamcorper ultrices at felis suspendisse. Scelerisque eget augue dolor est. Aenean habitant placerat fringilla sed tellus viverra".</p>
-                        <div class="flex items-center gap-4">
-                            <img src="https://ui-avatars.com/api/?name=Jane+Doe&background=random" alt="Jane Doe" class="w-14 h-14 rounded-full">
-                            <div>
-                                <p class="text-gray-900 font-semibold text-lg">Jane Doe</p>
-                                <p class="text-gray-700 text-sm">CEO of Acme inc. | United Kingdom 🇬🇧</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div x-show="activeCard !== 6" class="collapsed-view py-[52px] px-6 h-full flex flex-col items-center opacity-40">
-                    <span class="number text-indigo-800 text-[28px] font-light mb-6">6</span>
-                    <div class="flex-1 w-px bg-indigo-800 bg-opacity-20"></div>
-                    <span class="label text-indigo-800 text-[14px] mt-6 writing-mode-vertical transform rotate-180">Visa service</span>
-                </div>
-            </div>
-
         </div>
     </div>
 
@@ -754,8 +619,8 @@
     <div class="relative mt-[-60px] pt-[254px] pb-[166px] bg-[#CBD4FF] rounded-b-[60px]">
         <div class="absolute left-0 top-0 right-0 bottom-0 bg-left bg-no-repeat bg-contain" style="background-image: url('{{ asset('assets/images/Bright Legal_Icon-06 1.png') }}');"></div>
         <div class="relative z-10 container max-w-[1240px] mx-auto text-center">
-            <h4 class="text-[84px] font-medium leading-[110%] text-[#3B0014] mb-[32px]">Ready to talk?</h4>
-            <a href="#" class="bg-[#3B0014] bg-opacity-30 hover:bg-opacity-40 text-[#B8C1F8] px-6 py-3 rounded-full flex items-center gap-2 transition inline-block">Book free consultation <i class="fa-solid fa-arrow-right text-sm"></i></a>
+            <h4 class="text-[84px] font-medium leading-[110%] text-[#3B0014] mb-[32px]">{{ $readyToTalk->title ?? 'Ready to talk?' }}</h4>
+            <a href="{{ $readyToTalk->button_link ?? '#' }}" class="bg-[#3B0014] bg-opacity-30 hover:bg-opacity-40 text-[#B8C1F8] px-6 py-3 rounded-full flex items-center gap-2 transition inline-block">{{ $readyToTalk->button_text ?? 'Book free consultation' }} <i class="fa-solid fa-arrow-right text-sm"></i></a>
         </div>
     </div>
 
