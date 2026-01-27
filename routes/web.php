@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CmsController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/our-services', [HomeController::class, 'ourServices'])->name('our-services');
 
 // Authentication Routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

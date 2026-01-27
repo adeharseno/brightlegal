@@ -43,6 +43,25 @@
     }
 }
 
+.header-transition {
+    transition: all 0.3s ease-in-out;
+}
+
+.mobile-menu-enter {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.mobile-menu-enter-active {
+    transform: translateX(0);
+    opacity: 1;
+    transition: all 0.3s ease-out;
+}
+
+[x-cloak] {
+    display: none;
+}
+
 .title {
     font-family: 'Inter_Display', sans-serif;
 }

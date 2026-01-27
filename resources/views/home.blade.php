@@ -4,11 +4,137 @@
 
 @section('content')
 
-    <div class="relative pt-[160px] pb-[120px] mt-[-12px] bg-[#6C342C]">
+    <div class="relative min-h-screen flex items-center overflow-hidden">
+        <!-- Background Split -->
+        <div class="absolute inset-0 flex">
+            <!-- Left side - Dark maroon -->
+            <div class="w-full md:w-2/3 bg-[#3B0014]"></div>
+            <!-- Right side - Image -->
+            <div class="hidden md:block w-2/6 bg-gray-400">
+                <img src="{{ asset('assets/images/banner.jpg') }}" 
+                    alt="Legal consultation" 
+                    class="w-full h-full object-cover">
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-[1240px] mx-auto  px-4 lg:px-8 py-32 w-full">
+            <div class="md:w-2/3">
+                <h1 class="text-[84px] font-medium text-[#B8C1F8] leading-[100%] mb-7">The legal advice you can trust</h1>
+                
+                <p class="text-lg text-[rgba(255,255,255,0.8)] leading-[180%] mb-10 max-w-xl">
+                    Helping you navigate Indonesian law with clarity and confidence,<br>
+                    whether you're dealing with visas, business, or property.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#" class="bg-[#B8C1F8] text-[#3B0014] px-8 py-3.5 rounded-full font-semibold transition shadow-lg">
+                        Talk to us
+                    </a>
+                    <a href="#" class="bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full flex items-center gap-2 transition">
+                        Get to know us <i class="fa-solid fa-arrow-down text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative Pattern -->
+        <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1/2 pointer-events-none hidden md:block">
+            <img src="{{ asset('assets/images/Bright Legal_Icon-07 1.png') }}" class="object-contain" alt="">
+        </div>
+    </div>
+
+    <div 
+        x-data="{
+            count1: 0,
+            count2: 0,
+            count3: 0,
+            count4: 0,
+            hasStarted: false,
+            startCounting() {
+                if (this.hasStarted) return;
+                this.hasStarted = true;
+                
+                const duration = 2500;
+                const targets = { count1: 10, count2: 500, count3: 20, count4: 1000 };
+                const startTime = performance.now();
+                
+                const animate = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easeProgress = 1 - Math.pow(1 - progress, 3);
+                    
+                    this.count1 = targets.count1 * easeProgress;
+                    this.count2 = targets.count2 * easeProgress;
+                    this.count3 = targets.count3 * easeProgress;
+                    this.count4 = targets.count4 * easeProgress;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+                
+                requestAnimationFrame(animate);
+            }
+        }"
+        x-intersect.once="startCounting()"
+        class="bg-[#3B0014] py-[80px]"
+    >
+        <div class="max-w-[1240px] mx-auto  px-4 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Years of Experience -->
+                <div class="text-left border-r border-[rgba(255,255,255,0.1)] last:border-r-0">
+                    <div class="text-white">
+                        <h3 class="text-[#f5f5f5] font-semibold text-[48px] mb-[13px]">
+                            <span x-text="Math.floor(count1)"></span>+
+                        </h3>
+                        <p class="text-[rgba(255,255,255,0.6)] text-lg font-medium">Years of experience</p>
+                    </div>
+                </div>
+
+                <!-- Clients Advised -->
+                <div class="text-left border-r border-[rgba(255,255,255,0.1)] last:border-r-0">
+                    <div class="text-white">
+                        <h3 class="text-[#f5f5f5] font-semibold text-[48px] mb-[13px]">
+                            <span x-text="Math.floor(count2)"></span>+
+                        </h3>
+                        <p class="text-[rgba(255,255,255,0.6)] text-lg font-medium">Clients advised</p>
+                    </div>
+                </div>
+
+                <!-- Nationalities Supported -->
+                <div class="text-left border-r border-[rgba(255,255,255,0.1)] last:border-r-0">
+                    <div class="text-white">
+                        <h3 class="text-[#f5f5f5] font-semibold text-[48px] mb-[13px]">
+                            <span x-text="Math.floor(count3)"></span>+
+                        </h3>
+                        <p class="text-[rgba(255,255,255,0.6)] text-lg font-medium">Nationalities supported</p>
+                    </div>
+                </div>
+
+                <!-- Legal Matters Handled -->
+                <div class="text-left">
+                    <div class="text-white">
+                        <h3 class="text-[#f5f5f5] font-semibold text-[48px] mb-[13px]">
+                            <span x-text="Math.floor(count4)"></span>+
+                        </h3>
+                        <p class="text-[rgba(255,255,255,0.6)] text-lg font-medium">Legal matters handled</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="relative pt-[160px] pb-[120px] mt-[-12px] bg-[#6C342C] rounded-b-[16px] z-[2]">
         <div class="absolute top-0 left-0 bottom-0 right-0 transform rotate-180" style="background: linear-gradient(180deg, #944229 13.02%, rgba(108, 52, 44, 0) 100%), #3B0014;"></div>
-        <div class="relative z-10 container max-w-[1240px] mx-auto">
-            <div class="flex flex-wrap">
-                <div class="basis-full lg:basis-1/2"></div>
+        <div class="relative z-10 container max-w-[1240px] mx-auto  px-4 lg:px-8">
+            <div class="flex flex-wrap items-end mb-[60px]">
+                <div class="basis-full lg:basis-1/2">
+                    <p class="title text-[#F1ECEC] text-base font-medium mb-2">Why work with us</p>
+                    <h2 class="text-[#f5f5f5] text-[52px] font-medium leading-[110%]">Trusted guidance, <br>  from start to finish</h2>
+                </div>
                 <div class="basis-full lg:basis-1/2">
                     <p class="text-white opacity-60 font-medium text-xl leading-[160%]">We combine local expertise, clear communication, and a supportive approach to help you make the right legal decisions in Bali.</p>
                 </div>
@@ -48,9 +174,91 @@
         </div>
     </div>
 
-    <div class="mx-auto bg-[#73302A] rounded-[12px] pt-[140px] pb-[200px] relative z-[2]" x-data="{ activeCard: 6 }">
+    <div class="mt-[-16px] pt-[160px] pb-[80px] bg-[#410014] relative z-[1]">
+        <div class="relative z-10 container max-w-[1240px] mx-auto px-4 lg:px-8">
+            <div class="flex flex-wrap items-end mb-[60px]">
+                <div class="basis-full lg:basis-1/2">
+                    <p class="title text-[#F1ECEC] text-base font-medium mb-2">Our services</p>
+                    <h2 class="text-[#f5f5f5] text-[52px] font-medium leading-[110%]">One stop. <br> <span class="text-[#B8C1FC]">Zero headache.</span></h2>
+                </div>
+                <div class="basis-full lg:basis-1/2 text-right">
+                    <a href="#" class="bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full flex items-center gap-2 transition inline-block">Explore our services <i class="fa-solid fa-arrow-right text-sm"></i></a>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-20">
+                <a href="#" class="group mb-[80px]">
+                    <hr class="border-[#6C342C] mb-5">
+                    <h3 class="mb-5 font-semibold text-[28px] text-[#f5f5f5]">Title section card</h3>
+                    <div class="h-[440px] overflow-hidden rounded-xl mb-6 relative">
+                        <img src="{{ asset('assets/images/arrow.png') }}" class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-45 z-[2] ransition-all duration-500 ease-in-out" alt="">
+                        <img src="https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
+                    </div>
+                    <div>
+                        <p class="text-white text-lg opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
+                    </div>
+                </a>
+                <a href="#" class="group mb-[80px]">
+                    <hr class="border-[#6C342C] mb-5">
+                    <h3 class="mb-5 font-semibold text-[28px] text-[#f5f5f5]">Title section card</h3>
+                    <div class="h-[440px] overflow-hidden rounded-xl mb-6 relative">
+                        <img src="{{ asset('assets/images/arrow.png') }}" class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-45 z-[2] transition-all duration-500 ease-in-out" alt="">
+                        <img src="https://fastly.picsum.photos/id/17/2500/1667.jpg?hmac=HD-JrnNUZjFiP2UZQvWcKrgLoC_pc_ouUSWv8kHsJJY" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
+                    </div>
+                    <div>
+                        <p class="text-white text-lg opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
+                    </div>
+                </a>
+                <a href="#" class="group mb-[80px]">
+                    <hr class="border-[#6C342C] mb-5">
+                    <h3 class="mb-5 font-semibold text-[28px] text-[#f5f5f5]">Title section card</h3>
+                    <div class="h-[440px] overflow-hidden rounded-xl mb-6 relative">
+                        <img src="{{ asset('assets/images/arrow.png') }}" class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-45 z-[2] transition-all duration-500 ease-in-out" alt="">
+                        <img src="https://fastly.picsum.photos/id/27/3264/1836.jpg?hmac=p3BVIgKKQpHhfGRRCbsi2MCAzw8mWBCayBsKxxtWO8g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
+                    </div>
+                    <div>
+                        <p class="text-white text-lg opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
+                    </div>
+                </a>
+                <a href="#" class="group mb-[80px]">
+                    <hr class="border-[#6C342C] mb-5">
+                    <h3 class="mb-5 font-semibold text-[28px] text-[#f5f5f5]">Title section card</h3>
+                    <div class="h-[440px] overflow-hidden rounded-xl mb-6 relative">
+                        <img src="{{ asset('assets/images/arrow.png') }}" class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-45 z-[2] ransition-all duration-500 ease-in-out" alt="">
+                        <img src="https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
+                    </div>
+                    <div>
+                        <p class="text-white text-lg opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
+                    </div>
+                </a>
+                <a href="#" class="group mb-[80px]">
+                    <hr class="border-[#6C342C] mb-5">
+                    <h3 class="mb-5 font-semibold text-[28px] text-[#f5f5f5]">Title section card</h3>
+                    <div class="h-[440px] overflow-hidden rounded-xl mb-6 relative">
+                        <img src="{{ asset('assets/images/arrow.png') }}" class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-45 z-[2] transition-all duration-500 ease-in-out" alt="">
+                        <img src="https://fastly.picsum.photos/id/17/2500/1667.jpg?hmac=HD-JrnNUZjFiP2UZQvWcKrgLoC_pc_ouUSWv8kHsJJY" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
+                    </div>
+                    <div>
+                        <p class="text-white text-lg opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
+                    </div>
+                </a>
+                <a href="#" class="group mb-[80px]">
+                    <hr class="border-[#6C342C] mb-5">
+                    <h3 class="mb-5 font-semibold text-[28px] text-[#f5f5f5]">Title section card</h3>
+                    <div class="h-[440px] overflow-hidden rounded-xl mb-6 relative">
+                        <img src="{{ asset('assets/images/arrow.png') }}" class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-45 z-[2] transition-all duration-500 ease-in-out" alt="">
+                        <img src="https://fastly.picsum.photos/id/27/3264/1836.jpg?hmac=p3BVIgKKQpHhfGRRCbsi2MCAzw8mWBCayBsKxxtWO8g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
+                    </div>
+                    <div>
+                        <p class="text-white text-lg opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mx-auto bg-[#73302A] mt-[-12px] rounded-[12px] pt-[140px] pb-[200px] relative z-[2]" x-data="{ activeCard: 6 }">
         <!-- Header -->
-        <div class="max-w-[1240px] mx-auto">
+        <div class="max-w-[1240px] mx-auto px-4 lg:px-8">
             <div class="flex justify-between items-center mb-[60px]">
                 <div>
                     <p class="title text-[#F1ECEC] text-base font-medium mb-2">What they say</p>
@@ -61,7 +269,7 @@
         </div>
 
         <!-- Testimonial Cards -->
-        <div class="flex gap-0 h-[482px] max-w-[1240px] mx-auto">
+        <div class="flex gap-0 h-[482px] max-w-[1240px] mx-auto px-4 lg:px-8">
 
             <!-- Card 1 -->
             <div @click="activeCard = 1" 
@@ -236,7 +444,7 @@
 
     <div class="relative pt-[180px] pb-[130px] mt-[-12px] bg-[#6C342C]">
         <div class="absolute top-0 left-0 bottom-0 right-0 transform rotate-180" style="background: linear-gradient(180deg, #944229 13.02%, rgba(108, 52, 44, 0) 100%), #3B0014;"></div>
-        <div class="relative z-10 container max-w-[1240px] mx-auto">
+        <div class="relative z-10 container max-w-[1240px] mx-auto px-4 lg:px-8">
             <div class="flex flex-wrap">
                 <div class="basis-full lg:basis-1/4">
                 </div>
