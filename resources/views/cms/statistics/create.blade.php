@@ -12,7 +12,7 @@
 <div class="bg-white rounded-lg shadow-md p-6">
     <h1 class="text-2xl font-bold text-gray-800 mb-6">Tambah Statistik</h1>
 
-    <form action="{{ route('cms.statistics.store') }}" method="POST">
+    <form action="{{ route('cms.statistics.store') }}" novalidate method="POST">
         @csrf
         
         <div class="mb-4">

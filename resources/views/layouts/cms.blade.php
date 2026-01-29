@@ -12,7 +12,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <!-- TinyMCE WYSIWYG Editor -->
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/ai0a1dlndqsihck7zi8qnjmkbs77fr975uotojn0xoio5lr0/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     
     <style>
         .sidebar-link.active {

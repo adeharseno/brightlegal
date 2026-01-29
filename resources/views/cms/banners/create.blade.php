@@ -12,7 +12,7 @@
 <div class="bg-white rounded-lg shadow-md p-6">
     <h1 class="text-2xl font-bold text-gray-800 mb-6">Tambah Banner</h1>
 
-    <form action="{{ route('cms.banners.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('cms.banners.store') }}" novalidate method="POST" enctype="multipart/form-data">
         @csrf
         
         <div class="mb-4">

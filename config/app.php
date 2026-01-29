@@ -123,4 +123,15 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | TinyMCE Configuration
+    |--------------------------------------------------------------------------
+    |
+    | API key for TinyMCE WYSIWYG editor
+    |
+    */
+
+    'tinymce_api_key' => env('TINYMCE_API_KEY', ''),
+
 ];
