@@ -12,8 +12,8 @@ use App\Http\Controllers\Cms\TestimonialController;
 use App\Http\Controllers\Cms\FaqController;
 use App\Http\Controllers\Cms\ReadyToTalkController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/our-services', [HomeController::class, 'ourServices'])->name('our-services');
+Route::get('/staging', [HomeController::class, 'index'])->name('home');
+Route::get('/staging/our-services', [HomeController::class, 'ourServices'])->name('our-services');
 
 // Authentication Routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

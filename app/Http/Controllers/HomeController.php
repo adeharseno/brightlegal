@@ -44,6 +44,8 @@ class HomeController extends Controller
         
         // Ready to Talk
         $readyToTalk = ReadyToTalk::first();
+
+        // dd($statistics);
         
         return view('home', compact(
             'banner',

@@ -9,7 +9,7 @@
 </div>
 
 <div class="bg-white rounded-lg shadow-md p-6">
-    <form action="{{ route('cms.ready-to-talk.update') }}" method="POST">
+    <form action="{{ route('cms.ready-to-talk.update') }}" novalidate method="POST">
         @csrf
         @method('PUT')
         
