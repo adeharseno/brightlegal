@@ -12,7 +12,7 @@
 <div class="bg-white rounded-lg shadow-md p-6">
     <h1 class="text-2xl font-bold text-gray-800 mb-6">Edit FAQ</h1>
 
-    <form action="{{ route('cms.faqs.update', $faq) }}" method="POST">
+    <form action="{{ route('cms.faqs.update', $faq) }}" novalidate method="POST">
         @csrf
         @method('PUT')
         

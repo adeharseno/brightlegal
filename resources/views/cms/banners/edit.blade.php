@@ -12,7 +12,7 @@
 <div class="bg-white rounded-lg shadow-md p-6">
     <h1 class="text-2xl font-bold text-gray-800 mb-6">Edit Banner</h1>
 
-    <form action="{{ route('cms.banners.update', $banner) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('cms.banners.update', $banner) }}" novalidate method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         

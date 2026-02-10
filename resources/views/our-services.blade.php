@@ -188,7 +188,7 @@
                     <!-- CTA Button -->
                     <div class="flex justify-end mt-6">
                         <button @click="requestService(modalData.id)" 
-                                class="bg-[#B8C1F8] text-[#3B0014] cursor-pointer px-6 py-2 rounded-full font-medium transition-colors duration-300">
+                                class="bg-[#B8C1F8] text-[#3B0014] cursor-pointer px-6 py-2 rounded-full font-medium hover:bg-[#A8B1E8] transition-colors duration-300">
                             Consult about this
                         </button>
                     </div>
@@ -216,7 +216,7 @@
                 },
 
                 // Service data from CMS
-                servicesData: @json($categories->flatMap(function($cat) { 
+                servicesData: {!! json_encode($categories->flatMap(function($cat) { 
                     return $cat->services->map(function($s) { 
                         return [
                             'id' => $s->id,
@@ -225,7 +225,7 @@
                             'important_note' => $s->important_note
                         ];
                     }); 
-                })->keyBy('id')),
+                })->keyBy('id')) !!},
 
                 openModal(id, title, image) {
                     this.modalData = { id, title, image };
@@ -275,236 +275,8 @@
                 },
 
                 async requestService(serviceId) {
-                    alert(`Consultation request for "${this.modalData.title}" submitted!\n\nPlease contact us for more information.`);
-                    this.closeModal();
-                }
-            };
-        }
-    </script>
-                        Important notes
-                    </button>
-                </div>
-
-                <!-- Modal Content -->
-                <div class="p-8">
-                    <!-- Loading State -->
-                    <div x-show="modalLoading" 
-                         x-transition:enter="transition ease-out duration-300" 
-                         x-transition:enter-start="opacity-0" 
-                         x-transition:enter-end="opacity-100"
-                         x-transition:leave="transition ease-in duration-200" 
-                         x-transition:leave-start="opacity-100" 
-                         x-transition:leave-end="opacity-0"
-                         class="text-center py-6">
-                        <div class="inline-block animate-spin text-[#FBF4E1] text-2xl mb-2">⟳</div>
-                        <p class="text-[#FBF4E1]">Loading details...</p>
-                    </div>
-
-                    <!-- Benefits Tab -->
-                    <div x-show="!modalLoading && modalTab === 'benefits'" 
-                         x-transition:enter="transition ease-out duration-300" 
-                         x-transition:enter-start="opacity-0" 
-                         x-transition:enter-end="opacity-100"
-                         x-transition:leave="transition ease-in duration-200" 
-                         x-transition:leave-start="opacity-100" 
-                         x-transition:leave-end="opacity-0"
-                         class="space-y-4">
-                        <div x-html="modalContent.benefits" class="text-[#F1ECEC]"></div>
-                    </div>
-
-                    <!-- Documents Tab -->
-                    <div x-show="!modalLoading && modalTab === 'documents'" 
-                         x-transition:enter="transition ease-out duration-300" 
-                         x-transition:enter-start="opacity-0" 
-                         x-transition:enter-end="opacity-100"
-                         x-transition:leave="transition ease-in duration-200" 
-                         x-transition:leave-start="opacity-100" 
-                         x-transition:leave-end="opacity-0"
-                         class="space-y-4">
-                        <div x-html="modalContent.documents" class="text-[#F1ECEC]"></div>
-                    </div>
-
-                    <!-- Notes Tab -->
-                    <div x-show="!modalLoading && modalTab === 'notes'" 
-                         x-transition:enter="transition ease-out duration-300" 
-                         x-transition:enter-start="opacity-0" 
-                         x-transition:enter-end="opacity-100"
-                         x-transition:leave="transition ease-in duration-200" 
-                         x-transition:leave-start="opacity-100" 
-                         x-transition:leave-end="opacity-0"
-                         class="space-y-4">
-                        <div x-html="modalContent.notes" class="text-[#F1ECEC]"></div>
-                    </div>
-
-                    <!-- Service ID (for debugging) -->
-                    <div class="text-xs text-[#888] mt-6 mb-6">
-                        Service ID: <span x-text="modalData.id"></span>
-                    </div>
-
-                    <!-- CTA Button -->
-                    <div class="flex justify-end">
-                        <button @click="requestService(modalData.id)" 
-                                class="bg-[#B8C1F8] text-[#3B0014] cursor-pointer px-6 py-2 rounded-full font-medium transition-colors duration-300">
-                            Consult about this
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Alpine.js Component Script -->
-    <script>
-        function servicesTabs() {
-            return {
-                activeTab: 'visa',
-                modalOpen: false,
-                modalLoading: false,
-                modalContent: {
-                    benefits: '',
-                    documents: '',
-                    notes: ''
-                },
-                modalData: {
-                    id: '',
-                    title: '',
-                    image: ''
-                },
-
-                openModal(id, title, image) {
-                    this.modalData = { id, title, image };
-                    this.modalOpen = true;
-                    this.modalContent = { benefits: '', documents: '', notes: '' };
-                    this.loadServiceDetails(id);
-                },
-
-                closeModal() {
-                    this.modalOpen = false;
-                    this.modalData = { id: '', title: '', image: '' };
-                    this.modalContent = { benefits: '', documents: '', notes: '' };
-                },
-
-                async loadServiceDetails(serviceId) {
-                    this.modalLoading = true;
                     try {
-                        // BACKEND INTEGRATION POINT 1
-                        // Replace this with your actual API endpoint
-                        // Example: 
-                        // const response = await fetch(`/api/services/${serviceId}`);
-                        // const data = await response.json();
-                        // this.modalContent = {
-                        //     benefits: data.benefits_html,
-                        //     documents: data.documents_html,
-                        //     notes: data.notes_html
-                        // };
-
-                        // Mock data for demonstration
-                        await new Promise(resolve => setTimeout(resolve, 800));
-                        
-                        const mockData = {
-                            'visa-1': {
-                                benefits: `
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li>2-years validity</li>
-                                        <li>Multiple entry (travel freely in and out of Indonesia without re-applying)</li>
-                                        <li>Eligible to act as director/commissioners of your company</li>
-                                    </ul>
-                                    <div class="mt-6 pt-6 border-t border-white/10">
-                                        <p class="font-semibold mb-2">Fees:</p>
-                                        <p>IDR 17,000.000 (one-time payment)</p>
-                                        <p class="text-sm opacity-80">Valid for 2 years validity</p>
-                                    </div>
-                                `,
-                                documents: `
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li>Valid passport (minimum 18 months validity)</li>
-                                        <li>Completed visa application form</li>
-                                        <li>Proof of financial capability</li>
-                                        <li>Company registration documents</li>
-                                        <li>Reference letter from employer/sponsor</li>
-                                    </ul>
-                                `,
-                                notes: `
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li>Processing time: 5-7 working days</li>
-                                        <li>Visa can be extended before expiration</li>
-                                        <li>Multiple entries are allowed within validity period</li>
-                                        <li>Visa holder must maintain a valid passport throughout validity</li>
-                                    </ul>
-                                `
-                            },
-                            'visa-2': {
-                                benefits: `
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li>Reduced emissions and environmental impact</li>
-                                        <li>Sustainable business practices</li>
-                                        <li>Cost savings through energy efficiency</li>
-                                    </ul>
-                                    <div class="mt-6 pt-6 border-t border-white/10">
-                                        <p class="font-semibold mb-2">Fees:</p>
-                                        <p>IDR 12,000.000 (one-time payment)</p>
-                                        <p class="text-sm opacity-80">Valid for 1 year</p>
-                                    </div>
-                                `,
-                                documents: `
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li>Environmental impact assessment</li>
-                                        <li>Sustainability certification</li>
-                                        <li>Carbon footprint report</li>
-                                    </ul>
-                                `,
-                                notes: `
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li>Requires annual review</li>
-                                        <li>Compliance with environmental standards mandatory</li>
-                                    </ul>
-                                `
-                            }
-                        };
-
-                        // Use mock data if available, otherwise show generic content
-                        if (mockData[serviceId]) {
-                            this.modalContent = mockData[serviceId];
-                        } else {
-                            this.modalContent = {
-                                benefits: `
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li>Professional consultation</li>
-                                        <li>Expert guidance</li>
-                                        <li>24/7 Support</li>
-                                    </ul>
-                                `,
-                                documents: `
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li>Valid identification</li>
-                                        <li>Required documents as per service</li>
-                                        <li>Support materials</li>
-                                    </ul>
-                                `,
-                                notes: `
-                                    <ul class="list-disc list-inside space-y-2">
-                                        <li>All information kept confidential</li>
-                                        <li>Regular updates provided</li>
-                                        <li>Guaranteed satisfaction</li>
-                                    </ul>
-                                `
-                            };
-                        }
-                    } catch (error) {
-                        console.error('Error loading service details:', error);
-                        this.modalContent = {
-                            benefits: '<p class="text-red-400">Error loading details. Please try again.</p>',
-                            documents: '<p class="text-red-400">Error loading details. Please try again.</p>',
-                            notes: '<p class="text-red-400">Error loading details. Please try again.</p>'
-                        };
-                    } finally {
-                        this.modalLoading = false;
-                    }
-                },
-
-                async requestService(serviceId) {
-                    try {
-                        // BACKEND INTEGRATION POINT 2
+                        // BACKEND INTEGRATION POINT
                         // Replace this with your actual request endpoint
                         // Example:
                         // const response = await fetch('/api/service-requests', {
@@ -515,19 +287,17 @@
                         //     },
                         //     body: JSON.stringify({ 
                         //         service_id: serviceId,
-                        //         user_id: {{ Auth::user()?->id ?? 'null' }},
                         //         requested_at: new Date().toISOString()
                         //     })
                         // });
                         // if (response.ok) {
-                        //     const data = await response.json();
                         //     alert('Service consultation requested successfully!');
                         //     this.closeModal();
                         // } else {
                         //     throw new Error('Request failed');
                         // }
 
-                        alert(`Consultation request for "${this.modalData.title}" (ID: ${serviceId}) submitted!\n\nUpdate the requestService() function to connect with your backend.`);
+                        alert(`Consultation request for "${this.modalData.title}" submitted!\n\nPlease contact us for more information.`);
                         this.closeModal();
                     } catch (error) {
                         console.error('Error requesting service:', error);
@@ -538,7 +308,8 @@
         }
     </script>
 
-    <div class="relative pt-[180px] pb-[130px]  bg-[#6C342C]">
+    <!-- FAQ Section -->
+    <div class="relative pt-[180px] pb-[130px] bg-[#6C342C]">
         <div class="absolute top-0 left-0 bottom-0 right-0 transform rotate-180" style="background: linear-gradient(180deg, #944229 13.02%, rgba(108, 52, 44, 0) 100%), #3B0014;"></div>
         <div class="relative z-10 container max-w-[1240px] mx-auto px-4 lg:px-8">
             <div class="flex flex-wrap">
@@ -612,10 +383,12 @@
         </div>
     </div>
 
+    <!-- Artwork Section -->
     <div class="relative z-[2] mt-[-12px]">
         <img src="{{ asset('assets/images/brightlegal-artwork.png') }}" class="w-full" alt="Bright Legal Artwork">
     </div>
 
+    <!-- CTA Section -->
     <div class="relative mt-[-60px] pt-[254px] pb-[166px] bg-[#CBD4FF] rounded-b-[60px]">
         <div class="absolute left-0 top-0 right-0 bottom-0 bg-left bg-no-repeat bg-contain" style="background-image: url('{{ asset('assets/images/Bright Legal_Icon-06 1.png') }}');"></div>
         <div class="relative z-10 container max-w-[1240px] mx-auto text-center">

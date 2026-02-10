@@ -12,7 +12,7 @@
 <div class="bg-white rounded-lg shadow-md p-6">
     <h1 class="text-2xl font-bold text-gray-800 mb-6">Section Settings - Our Services</h1>
 
-    <form action="{{ route('cms.services.settings.update') }}" method="POST">
+    <form action="{{ route('cms.services.settings.update') }}" novalidate method="POST">
         @csrf
         @method('PUT')
         

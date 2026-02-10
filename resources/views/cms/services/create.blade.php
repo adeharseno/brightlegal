@@ -12,7 +12,7 @@
 <div class="bg-white rounded-lg shadow-md p-6">
     <h1 class="text-2xl font-bold text-gray-800 mb-6">Tambah Service</h1>
 
-    <form action="{{ route('cms.services.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('cms.services.store') }}" novalidate method="POST"  enctype="multipart/form-data">
         @csrf
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">

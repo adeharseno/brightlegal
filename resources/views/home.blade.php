@@ -11,9 +11,12 @@
             <div class="w-full md:w-2/3 bg-[#3B0014]"></div>
             <!-- Right side - Image -->
             <div class="hidden md:block w-2/6 bg-gray-400">
-                <img src="{{ asset('assets/images/banner.jpg') }}" 
-                    alt="Legal consultation" 
-                    class="w-full h-full object-cover">
+                <img 
+                    src="{{ $banner->image ? asset('storage/'.$banner->image) : asset('assets/images/banner.jpg') }}"
+                    alt="Legal consultation"
+                    class="w-full h-full object-cover"
+                />
+
             </div>
         </div>
 
@@ -57,7 +60,7 @@
                 const duration = 2500;
                 const targets = { 
                     @foreach($statistics as $index => $stat)
-                    count{{ $index }}: {{ $stat->number }},
+                    count{{ $index }}: {{ $stat->angka }},
                     @endforeach
                 };
                 const startTime = performance.now();
@@ -388,7 +391,9 @@
                         <span class="label {{ $color['number'] }} text-[14px] mt-6 writing-mode-vertical transform rotate-180">{{ $testimonial->title }}</span>
                     </div>
                     <div class="pl-[53px] flex flex-col justify-between">
-                        <p class="{{ $color['text'] }} text-[32px] pt-10">"{{ $testimonial->testimonial }}"</p>
+                        <div class="{{ $color['text'] }} text-[32px] pt-10">
+                            {!! $testimonial->testimonial !!}
+                        </div>
                         <div class="flex items-center gap-4">
                             @if($testimonial->user_image)
                             <img src="{{ Storage::url($testimonial->user_image) }}" alt="{{ $testimonial->user_name }}" class="w-14 h-14 rounded-full object-cover">

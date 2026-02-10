@@ -12,7 +12,8 @@ class FaqController extends Controller
     public function index()
     {
         $setting = FaqsSetting::first();
-        $faqs = Faq::ordered()->paginate(10);
+        $faqs = Faq::active()::ordered()->paginate(10);
+        
         return view('cms.faqs.index', compact('setting', 'faqs'));
     }
 

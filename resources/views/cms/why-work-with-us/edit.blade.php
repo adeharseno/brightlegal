@@ -12,7 +12,7 @@
 <div class="bg-white rounded-lg shadow-md p-6">
     <h1 class="text-2xl font-bold text-gray-800 mb-6">Edit Card - Why Work With Us</h1>
 
-    <form action="{{ route('cms.why-work-with-us.update', $card) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('cms.why-work-with-us.update', $card) }}" novalidate method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         
