@@ -8,11 +8,14 @@
         <!-- Background Split -->
         <div class="absolute inset-0 flex">
             <!-- Left side - Dark maroon -->
-            <div class="w-full md:w-2/3 bg-[#3B0014]"></div>
+            <div class="w-full md:w-3/5 bg-[#3B0014]"></div>
             <!-- Right side - Image -->
-            <div class="hidden md:block w-2/6 bg-gray-400">
+            <div class="hidden md:block w-2/5 bg-gray-400">
                 <img 
-                    src="{{ $banner->image ? asset('storage/'.$banner->image) : asset('assets/images/banner.jpg') }}"
+                src="{{ $banner?->image 
+                    ? asset('storage/'.$banner->image) 
+                    : asset('assets/images/banner.jpg') }}"
+                    {{-- src="{{ $banner->image ? asset('storage/'.$banner->image) : asset('assets/images/banner.jpg') }}" --}}
                     alt="Legal consultation"
                     class="w-full h-full object-cover"
                 />
@@ -21,9 +24,11 @@
         </div>
 
         <!-- Content -->
-        <div class="relative z-10 max-w-[1240px] mx-auto  px-4 lg:px-8 py-32 w-full">
-            <div class="md:w-2/3">
-                <h1 class="text-[84px] font-medium text-[#B8C1F8] leading-[100%] mb-7">{{ $banner->title ?? 'The legal advice you can trust' }}</h1>
+        <div class="relative z-10 mx-auto px-6 lg:px-20 py-32 w-full">
+            <div class="md:w-3/5">
+                <div class="max-w-3xl">
+                    <h1 class="text-[84px] font-medium text-[#B8C1F8] leading-[100%] mb-7">{{ $banner->title ?? 'The legal advice you can trust' }}</h1>
+                </div>
                 
                 <div class="text-lg text-[rgba(255,255,255,0.8)] leading-[180%] mb-10 max-w-xl">
                     {!! $banner->description ?? 'Helping you navigate Indonesian law with clarity and confidence,<br>whether you\'re dealing with visas, business, or property.' !!}
@@ -85,7 +90,7 @@
         x-intersect.once="startCounting()"
         class="bg-[#3B0014] py-[80px]"
     >
-        <div class="max-w-[1240px] mx-auto  px-4 lg:px-8">
+        <div class="mx-auto px-6 lg:px-20">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-{{ min($statistics->count(), 4) }} gap-8">
                 @foreach($statistics as $index => $stat)
                 <!-- {{ $stat->description }} -->
@@ -138,7 +143,7 @@
         x-intersect.once="startCounting()"
         class="bg-[#3B0014] py-[80px]"
     >
-        <div class="max-w-[1240px] mx-auto  px-4 lg:px-8">
+        <div class="mx-auto px-6 lg:px-20">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 
                 <!-- Years of Experience -->
@@ -188,7 +193,7 @@
 
     <div class="relative pt-[160px] pb-[120px] mt-[-12px] bg-[#6C342C] rounded-b-[16px] z-[2]">
         <div class="absolute top-0 left-0 bottom-0 right-0 transform rotate-180" style="background: linear-gradient(180deg, #944229 13.02%, rgba(108, 52, 44, 0) 100%), #3B0014;"></div>
-        <div class="relative z-10 container max-w-[1240px] mx-auto  px-4 lg:px-8">
+        <div class="relative z-10 mx-auto px-6 lg:px-20">
             <div class="flex flex-wrap items-end mb-[60px]">
                 <div class="basis-full lg:basis-1/2">
                     <p class="title text-[#F1ECEC] text-base font-medium mb-2">{{ $whyWorkSettings->title ?? 'Why work with us' }}</p>
@@ -244,20 +249,20 @@
                 @endforelse
             </div>
             <div class="text-center">
-                <a href="#" class="bg-[rgba(245,245,245,0.3)] inline-block bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full flex items-center gap-2 transition"><span class="gradient-text">Just starting your research? Download our free legal guides to navigate Indonesian law</span> <i class="fa-solid fa-arrow-right text-sm"></i></a>
+                <a href="#" class="bg-[rgba(245,245,245,0.3)] inline-block bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full items-center gap-2 transition"><span class="gradient-text">Just starting your research? Download our free legal guides to navigate Indonesian law</span> <i class="fa-solid fa-arrow-right text-sm"></i></a>
             </div>
         </div>
     </div>
 
     <div class="mt-[-16px] pt-[160px] pb-[80px] bg-[#410014] relative z-[1]">
-        <div class="relative z-10 container max-w-[1240px] mx-auto px-4 lg:px-8">
+        <div class="relative z-10 mx-auto px-6 lg:px-20">
             <div class="flex flex-wrap items-end mb-[60px]">
                 <div class="basis-full lg:basis-1/2">
                     <p class="title text-[#F1ECEC] text-base font-medium mb-2">{{ $servicesSettings->title ?? 'Our services' }}</p>
                     <h2 class="text-[#f5f5f5] text-[52px] font-medium leading-[110%]">{!! $servicesSettings->description ?? 'One stop. <br> <span class="text-[#B8C1FC]">Zero headache.</span>' !!}</h2>
                 </div>
                 <div class="basis-full lg:basis-1/2 text-right">
-                    <a href="{{ route('our-services') }}" class="bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full flex items-center gap-2 transition inline-block">Explore our services <i class="fa-solid fa-arrow-right text-sm"></i></a>
+                    <a href="{{ route('our-services') }}" class="bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full items-center gap-2 transition inline-block">Explore our services <i class="fa-solid fa-arrow-right text-sm"></i></a>
                 </div>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-20">
@@ -361,7 +366,7 @@
     @endphp
     <div class="mx-auto bg-[#73302A] mt-[-12px] rounded-[12px] pt-[140px] pb-[200px] relative z-[2]" x-data="{ activeCard: {{ $testimonials->count() > 0 ? $testimonials->count() : 6 }} }">
         <!-- Header -->
-        <div class="max-w-[1240px] mx-auto px-4 lg:px-8">
+        <div class="mx-auto px-6 lg:px-20">
             <div class="flex justify-between items-center mb-[60px]">
                 <div>
                     <p class="title text-[#F1ECEC] text-base font-medium mb-2">{{ $testimonialsSettings->title ?? 'What they say' }}</p>
@@ -372,7 +377,7 @@
         </div>
 
         <!-- Testimonial Cards -->
-        <div class="flex gap-0 h-[482px] max-w-[1240px] mx-auto px-4 lg:px-8">
+        <div class="flex gap-0 h-[482px] mx-auto px-6 lg:px-20">
 
             @forelse($testimonials as $index => $testimonial)
             @php 
@@ -589,7 +594,7 @@
 
     <div class="relative pt-[180px] pb-[130px] mt-[-12px] bg-[#6C342C]">
         <div class="absolute top-0 left-0 bottom-0 right-0 transform rotate-180" style="background: linear-gradient(180deg, #944229 13.02%, rgba(108, 52, 44, 0) 100%), #3B0014;"></div>
-        <div class="relative z-10 container max-w-[1240px] mx-auto px-4 lg:px-8">
+        <div class="relative z-10 mx-auto px-6 lg:px-20">
             <div class="flex flex-wrap">
                 <div class="basis-full lg:basis-1/4">
                 </div>
@@ -765,9 +770,9 @@
 
     <div class="relative mt-[-60px] pt-[254px] pb-[166px] bg-[#CBD4FF] rounded-b-[60px]">
         <div class="absolute left-0 top-0 right-0 bottom-0 bg-left bg-no-repeat bg-contain" style="background-image: url('{{ asset('assets/images/Bright Legal_Icon-06 1.png') }}');"></div>
-        <div class="relative z-10 container max-w-[1240px] mx-auto text-center">
+        <div class="relative z-10 container mx-auto text-center">
             <h4 class="text-[84px] font-medium leading-[110%] text-[#3B0014] mb-[32px]">{{ $readyToTalk->title ?? 'Ready to talk?' }}</h4>
-            <a href="{{ $readyToTalk->button_link ?? '#' }}" class="bg-[#3B0014] bg-opacity-30 hover:bg-opacity-40 text-[#B8C1F8] px-6 py-3 rounded-full flex items-center gap-2 transition inline-block">{{ $readyToTalk->button_text ?? 'Book free consultation' }} <i class="fa-solid fa-arrow-right text-sm"></i></a>
+            <a href="{{ $readyToTalk->button_link ?? '#' }}" class="bg-[#3B0014] bg-opacity-30 hover:bg-opacity-40 text-[#B8C1F8] px-6 py-3 rounded-full items-center gap-2 transition inline-block">{{ $readyToTalk->button_text ?? 'Book free consultation' }} <i class="fa-solid fa-arrow-right text-sm"></i></a>
         </div>
     </div>
 

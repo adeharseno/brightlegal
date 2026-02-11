@@ -1,5 +1,5 @@
-<footer class="bg-gradient-to-br from-[#4a1a2c] to-[#2d0a1a] text-white mt-[-60px] pt-[160px]">
-    <div class="max-w-[1240px] mx-auto px-6 lg:px-8 pt-16">
+<footer class="bg-[#3B0014] text-white mt-[-60px] pt-[160px]">
+    <div class="mx-auto px-6 lg:px-20 pt-16">
 
         <div class="flex flex-wrap">
             <div class="basis-full lg:basis-1/3">

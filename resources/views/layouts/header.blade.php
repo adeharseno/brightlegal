@@ -9,10 +9,9 @@
 }">
     <!-- Header -->
     <header 
-        :class="scrolled ? 'bg-[#410014] pt-[24px] pb-[54px] rounded-b-[16px]' : 'bg-transparent py-[24px]'"
-        class="fixed top-0 left-0 right-0 z-50 header-transition"
+        class="fixed top-0 left-0 right-0 z-50 header-transition bg-transparent py-[24px]"
     >
-        <nav class="container max-w-[1240px] mx-auto px-4 lg:px-8">
+        <nav class="mx-auto px-6 lg:px-20">
             <div class="flex items-center justify-between">
                 <div class="flex">
                     <!-- Logo -->
@@ -24,8 +23,7 @@
 
                     <!-- Desktop Navigation -->
                     <div class="hidden relative lg:flex items-center space-x-1 ml-[70px] px-6 py-4">
-                        <div :class="scrolled ? 'hidden' : 'block'"
-                             class="absolute left-0 top-0 bottom-0 right-0 rounded-full bg-white/10 transition-all duration-200"></div>
+                        <div class="absolute left-0 top-0 bottom-0 right-0 rounded-full bg-white/10 transition-all duration-200"></div>
                         <div class="relative z-[4]">
                             <a href="#services" class="text-white/90 hover:text-white px-4 py-2 font-medium cursor-pointer">
                                 Our services
@@ -45,7 +43,7 @@
 
                 <!-- Contact Button - Desktop -->
                 <div class="hidden lg:block">
-                    <a href="#contact" class="bg-[#c4b5d8] hover:bg-[#b5a3cc] text-[#4a1c2e] px-6 py-2.5 rounded-full font-semibold transition-all duration-200 inline-block">
+                    <a href="#contact" class="bg-[#B8C1F8] text-[#4a1c2e] px-6 py-2.5 rounded-full font-semibold transition-all duration-200 inline-block">
                         Contact us
                     </a>
                 </div>
