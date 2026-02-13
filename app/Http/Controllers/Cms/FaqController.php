@@ -12,8 +12,8 @@ class FaqController extends Controller
     public function index()
     {
         $setting = FaqsSetting::first();
-        $faqs = Faq::active()::ordered()->paginate(10);
-        
+        $faqs = Faq::ordered()->paginate(10);
+
         return view('cms.faqs.index', compact('setting', 'faqs'));
     }
 
@@ -33,7 +33,8 @@ class FaqController extends Controller
         $setting = FaqsSetting::first();
         if ($setting) {
             $setting->update($validated);
-        } else {
+        }
+        else {
             FaqsSetting::create($validated);
         }
 

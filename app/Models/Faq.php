@@ -31,7 +31,7 @@ class Faq extends Model
         return $query->orderBy('order', 'asc');
     }
 
-    public function scopeForPage($query, $page)
+    public function scopePage($query, $page)
     {
         return $query->where('page', $page);
     }
