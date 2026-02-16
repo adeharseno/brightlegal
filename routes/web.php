@@ -14,6 +14,7 @@ use App\Http\Controllers\Cms\ReadyToTalkController;
 
 Route::get('/staging', [HomeController::class, 'index'])->name('home');
 Route::get('/staging/our-services', [HomeController::class, 'ourServices'])->name('our-services');
+Route::get('/staging/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
 
 // Authentication Routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -23,13 +24,13 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // CMS Routes (Protected)
 Route::middleware(['auth'])->prefix('cms')->name('cms.')->group(function () {
     Route::get('/', [CmsController::class, 'index'])->name('index');
-    
+
     // Banners
     Route::resource('banners', BannerController::class)->except(['show']);
-    
+
     // Statistics (Section 2)
     Route::resource('statistics', StatisticController::class)->except(['show']);
-    
+
     // Why Work With Us
     Route::get('why-work-with-us', [WhyWorkWithUsController::class, 'index'])->name('why-work-with-us.index');
     Route::get('why-work-with-us/settings', [WhyWorkWithUsController::class, 'settingsEdit'])->name('why-work-with-us.settings');
@@ -39,7 +40,7 @@ Route::middleware(['auth'])->prefix('cms')->name('cms.')->group(function () {
     Route::get('why-work-with-us/{card}/edit', [WhyWorkWithUsController::class, 'edit'])->name('why-work-with-us.edit');
     Route::put('why-work-with-us/{card}', [WhyWorkWithUsController::class, 'update'])->name('why-work-with-us.update');
     Route::delete('why-work-with-us/{card}', [WhyWorkWithUsController::class, 'destroy'])->name('why-work-with-us.destroy');
-    
+
     // Services
     Route::get('services', [ServiceController::class, 'index'])->name('services.index');
     Route::get('services/settings', [ServiceController::class, 'settingsEdit'])->name('services.settings');
@@ -49,7 +50,7 @@ Route::middleware(['auth'])->prefix('cms')->name('cms.')->group(function () {
     Route::get('services/{service}/edit', [ServiceController::class, 'edit'])->name('services.edit');
     Route::put('services/{service}', [ServiceController::class, 'update'])->name('services.update');
     Route::delete('services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
-    
+
     // Service Categories
     Route::get('services/categories', [ServiceController::class, 'categoriesIndex'])->name('services.categories.index');
     Route::get('services/categories/create', [ServiceController::class, 'categoriesCreate'])->name('services.categories.create');
@@ -57,7 +58,7 @@ Route::middleware(['auth'])->prefix('cms')->name('cms.')->group(function () {
     Route::get('services/categories/{category}/edit', [ServiceController::class, 'categoriesEdit'])->name('services.categories.edit');
     Route::put('services/categories/{category}', [ServiceController::class, 'categoriesUpdate'])->name('services.categories.update');
     Route::delete('services/categories/{category}', [ServiceController::class, 'categoriesDestroy'])->name('services.categories.destroy');
-    
+
     // Testimonials
     Route::get('testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
     Route::get('testimonials/settings', [TestimonialController::class, 'settingsEdit'])->name('testimonials.settings');
@@ -67,7 +68,7 @@ Route::middleware(['auth'])->prefix('cms')->name('cms.')->group(function () {
     Route::get('testimonials/{testimonial}/edit', [TestimonialController::class, 'edit'])->name('testimonials.edit');
     Route::put('testimonials/{testimonial}', [TestimonialController::class, 'update'])->name('testimonials.update');
     Route::delete('testimonials/{testimonial}', [TestimonialController::class, 'destroy'])->name('testimonials.destroy');
-    
+
     // FAQs
     Route::get('faqs', [FaqController::class, 'index'])->name('faqs.index');
     Route::get('faqs/settings', [FaqController::class, 'settingsEdit'])->name('faqs.settings');
@@ -77,7 +78,7 @@ Route::middleware(['auth'])->prefix('cms')->name('cms.')->group(function () {
     Route::get('faqs/{faq}/edit', [FaqController::class, 'edit'])->name('faqs.edit');
     Route::put('faqs/{faq}', [FaqController::class, 'update'])->name('faqs.update');
     Route::delete('faqs/{faq}', [FaqController::class, 'destroy'])->name('faqs.destroy');
-    
+
     // Ready to Talk
     Route::get('ready-to-talk', [ReadyToTalkController::class, 'index'])->name('ready-to-talk.index');
     Route::put('ready-to-talk', [ReadyToTalkController::class, 'update'])->name('ready-to-talk.update');

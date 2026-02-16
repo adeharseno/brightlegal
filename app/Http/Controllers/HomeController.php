@@ -22,31 +22,31 @@ class HomeController extends Controller
     {
         // Banner
         $banner = Banner::active()->ordered()->first();
-        
+
         // Statistics (Section 2)
         $statistics = Statistic::active()->ordered()->get();
-        
+
         // Why Work With Us
         $whyWorkSettings = WhyWorkWithUsSetting::first();
         $whyWorkCards = WhyWorkWithUsCard::active()->ordered()->get();
-        
+
         // Services (limit untuk homepage)
         $servicesSettings = ServicesSetting::first();
         $services = Service::active()->ordered()->take(6)->get();
-        
+
         // Testimonials
         $testimonialsSettings = TestimonialsSetting::first();
         $testimonials = Testimonial::active()->ordered()->get();
-        
+
         // FAQs
         $faqsSettings = FaqsSetting::first();
         $faqs = Faq::active()->ordered()->get();
-        
+
         // Ready to Talk
         $readyToTalk = ReadyToTalk::first();
 
         // dd($statistics);
-        
+
         return view('home', compact(
             'banner',
             'statistics',
@@ -66,22 +66,35 @@ class HomeController extends Controller
     {
         // Services
         $servicesSettings = ServicesSetting::first();
-        $categories = ServiceCategory::active()->ordered()->with(['services' => function($query) {
-            $query->active()->ordered();
-        }])->get();
-        
+        $categories = ServiceCategory::active()->ordered()->with([
+            'services' => function ($query) {
+                $query->active()->ordered();
+            }
+        ])->get();
+
         // FAQs
         $faqsSettings = FaqsSetting::first();
         $faqs = Faq::active()->ordered()->get();
-        
+
         // Ready to Talk
         $readyToTalk = ReadyToTalk::first();
-        
+
         return view('our-services', compact(
             'servicesSettings',
             'categories',
             'faqsSettings',
             'faqs',
+            'readyToTalk'
+        ));
+    }
+
+    public function aboutUs()
+    {
+
+        // Ready to Talk
+        $readyToTalk = ReadyToTalk::first();
+
+        return view('about-us', compact(
             'readyToTalk'
         ));
     }
