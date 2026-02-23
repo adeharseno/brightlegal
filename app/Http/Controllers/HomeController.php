@@ -15,6 +15,8 @@ use App\Models\Testimonial;
 use App\Models\FaqsSetting;
 use App\Models\Faq;
 use App\Models\ReadyToTalk;
+use App\Models\AboutUsSetting;
+use App\Models\AboutUsTeamMember;
 
 class HomeController extends Controller
 {
@@ -90,11 +92,18 @@ class HomeController extends Controller
 
     public function aboutUs()
     {
+        // About Us Settings
+        $aboutUsSettings = AboutUsSetting::first();
+
+        // Team Members
+        $teamMembers = AboutUsTeamMember::active()->ordered()->get();
 
         // Ready to Talk
         $readyToTalk = ReadyToTalk::first();
 
         return view('about-us', compact(
+            'aboutUsSettings',
+            'teamMembers',
             'readyToTalk'
         ));
     }

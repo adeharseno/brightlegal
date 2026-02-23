@@ -7,14 +7,14 @@
     <div class="pt-[240px] pb-[100px] relative">
         <div class="absolute top-0 left-0 bottom-0 right-0 transform"
             style="background: linear-gradient(180deg, #6C342C 0%, #3B0014 100%);"></div>
-        <div class="relative z-10 container max-w-[1240px] mx-auto px-4 lg:px-8">
+        <div class="relative z-10 mx-auto px-6 lg:px-20">
             <h4 class="text-[84px] font-medium leading-[110%] gradient-text">
                 {!! $servicesSettings->title ?? 'We help you handle <br /> the legal side of Bali life' !!}</h4>
         </div>
     </div>
 
     <div class="bg-[#3B0014]" x-data="servicesTabs()">
-        <div class="relative z-10 container max-w-[1240px] mx-auto px-4 lg:px-8">
+        <div class="relative z-10 mx-auto px-6 lg:px-20">
             <div class="flex flex-wrap">
                 <!-- Sidebar Navigation -->
                 <div class="basis-full lg:basis-1/4">
@@ -311,7 +311,7 @@
     <div class="relative pt-[180px] pb-[130px] bg-[#6C342C]">
         <div class="absolute top-0 left-0 bottom-0 right-0 transform rotate-180"
             style="background: linear-gradient(180deg, #944229 13.02%, rgba(108, 52, 44, 0) 100%), #3B0014;"></div>
-        <div class="relative z-10 container max-w-[1240px] mx-auto px-4 lg:px-8">
+        <div class="relative z-10 mx-auto px-6 lg:px-20">
             <div class="flex flex-wrap">
                 <div class="basis-full lg:basis-1/4"></div>
                 <div class="basis-full lg:basis-3/4">
@@ -384,7 +384,7 @@
     <div class="relative mt-[-60px] pt-[254px] pb-[166px] bg-[#CBD4FF] rounded-b-[60px]">
         <div class="absolute left-0 top-0 right-0 bottom-0 bg-left bg-no-repeat bg-contain"
             style="background-image: url('{{ asset('assets/images/Bright Legal_Icon-06 1.png') }}');"></div>
-        <div class="relative z-10 container max-w-[1240px] mx-auto text-center">
+        <div class="relative z-10 mx-auto text-center">
             <h4 class="text-[84px] font-medium leading-[110%] text-[#3B0014] mb-[32px]">
                 {{ $readyToTalk->title ?? 'Ready to talk?' }}</h4>
             <a href="{{ $readyToTalk->button_link ?? '#' }}"

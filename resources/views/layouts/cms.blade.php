@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,10 +11,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
+
     <!-- TinyMCE WYSIWYG Editor -->
-    <script src="https://cdn.tiny.cloud/1/ai0a1dlndqsihck7zi8qnjmkbs77fr975uotojn0xoio5lr0/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    
+    <script src="https://cdn.tiny.cloud/1/ai0a1dlndqsihck7zi8qnjmkbs77fr975uotojn0xoio5lr0/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
     <style>
         .sidebar-link.active {
             background-color: rgba(184, 193, 248, 0.2);
@@ -21,10 +23,12 @@
         }
     </style>
 </head>
+
 <body class="font-sans antialiased bg-gray-100">
     <div class="flex min-h-screen" x-data="{ sidebarOpen: true }">
         <!-- Sidebar -->
-        <aside :class="sidebarOpen ? 'w-64' : 'w-20'" class="bg-[#3B0014] text-white transition-all duration-300 flex flex-col">
+        <aside :class="sidebarOpen ? 'w-64' : 'w-20'"
+            class="bg-[#3B0014] text-white transition-all duration-300 flex flex-col">
             <!-- Logo -->
             <div class="p-4 border-b border-[#6C342C]">
                 <a href="{{ route('cms.index') }}" class="flex items-center">
@@ -37,49 +41,64 @@
             <nav class="flex-1 py-4 overflow-y-auto">
                 <ul class="space-y-1">
                     <li>
-                        <a href="{{ route('cms.index') }}" class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.index') ? 'active' : '' }}">
+                        <a href="{{ route('cms.index') }}"
+                            class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.index') ? 'active' : '' }}">
                             <i class="fas fa-home w-6"></i>
                             <span x-show="sidebarOpen" class="ml-3">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('cms.banners.index') }}" class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.banners.*') ? 'active' : '' }}">
+                        <a href="{{ route('cms.banners.index') }}"
+                            class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.banners.*') ? 'active' : '' }}">
                             <i class="fas fa-image w-6"></i>
                             <span x-show="sidebarOpen" class="ml-3">Banner</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('cms.statistics.index') }}" class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.statistics.*') ? 'active' : '' }}">
+                        <a href="{{ route('cms.statistics.index') }}"
+                            class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.statistics.*') ? 'active' : '' }}">
                             <i class="fas fa-chart-bar w-6"></i>
                             <span x-show="sidebarOpen" class="ml-3">Statistik</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('cms.why-work-with-us.index') }}" class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.why-work-with-us.*') ? 'active' : '' }}">
+                        <a href="{{ route('cms.why-work-with-us.index') }}"
+                            class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.why-work-with-us.*') ? 'active' : '' }}">
                             <i class="fas fa-handshake w-6"></i>
                             <span x-show="sidebarOpen" class="ml-3">Why Work With Us</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('cms.services.index') }}" class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.services.*') ? 'active' : '' }}">
+                        <a href="{{ route('cms.services.index') }}"
+                            class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.services.*') ? 'active' : '' }}">
                             <i class="fas fa-briefcase w-6"></i>
                             <span x-show="sidebarOpen" class="ml-3">Services</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('cms.testimonials.index') }}" class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.testimonials.*') ? 'active' : '' }}">
+                        <a href="{{ route('cms.testimonials.index') }}"
+                            class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.testimonials.*') ? 'active' : '' }}">
                             <i class="fas fa-quote-right w-6"></i>
                             <span x-show="sidebarOpen" class="ml-3">Testimonials</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('cms.faqs.index') }}" class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.faqs.*') ? 'active' : '' }}">
+                        <a href="{{ route('cms.faqs.index') }}"
+                            class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.faqs.*') ? 'active' : '' }}">
                             <i class="fas fa-question-circle w-6"></i>
                             <span x-show="sidebarOpen" class="ml-3">FAQ</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('cms.ready-to-talk.index') }}" class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.ready-to-talk.*') ? 'active' : '' }}">
+                        <a href="{{ route('cms.about-us.index') }}"
+                            class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.about-us.*') ? 'active' : '' }}">
+                            <i class="fas fa-info-circle w-6"></i>
+                            <span x-show="sidebarOpen" class="ml-3">About Us</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('cms.ready-to-talk.index') }}"
+                            class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.ready-to-talk.*') ? 'active' : '' }}">
                             <i class="fas fa-phone w-6"></i>
                             <span x-show="sidebarOpen" class="ml-3">Ready to Talk</span>
                         </a>
@@ -90,7 +109,8 @@
             <!-- User Info -->
             <div class="p-4 border-t border-[#6C342C]">
                 <div class="flex items-center">
-                    <div class="w-10 h-10 bg-[#B8C1F8] rounded-full flex items-center justify-center text-[#3B0014] font-semibold">
+                    <div
+                        class="w-10 h-10 bg-[#B8C1F8] rounded-full flex items-center justify-center text-[#3B0014] font-semibold">
                         {{ substr(Auth::user()->name, 0, 1) }}
                     </div>
                     <div x-show="sidebarOpen" class="ml-3">
@@ -122,8 +142,9 @@
             <main class="flex-1 p-6 overflow-y-auto">
                 <!-- Flash Messages -->
                 @if(session('success'))
-                    <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)" 
-                         class="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)"
+                        class="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+                        role="alert">
                         <span class="block sm:inline">{{ session('success') }}</span>
                         <button @click="show = false" class="absolute top-0 bottom-0 right-0 px-4 py-3">
                             <i class="fas fa-times"></i>
@@ -133,7 +154,7 @@
 
                 @if(session('error'))
                     <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)"
-                         class="mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        class="mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                         <span class="block sm:inline">{{ session('error') }}</span>
                         <button @click="show = false" class="absolute top-0 bottom-0 right-0 px-4 py-3">
                             <i class="fas fa-times"></i>
@@ -157,10 +178,10 @@
     </div>
 
     @stack('scripts')
-    
+
     <script>
         // Initialize TinyMCE for all textareas with class 'wysiwyg'
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             if (typeof tinymce !== 'undefined') {
                 tinymce.init({
                     selector: 'textarea.wysiwyg',
@@ -178,4 +199,5 @@
         });
     </script>
 </body>
+
 </html>

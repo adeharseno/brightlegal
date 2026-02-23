@@ -11,6 +11,7 @@ use App\Http\Controllers\Cms\ServiceController;
 use App\Http\Controllers\Cms\TestimonialController;
 use App\Http\Controllers\Cms\FaqController;
 use App\Http\Controllers\Cms\ReadyToTalkController;
+use App\Http\Controllers\Cms\AboutUsController;
 
 Route::get('/staging', [HomeController::class, 'index'])->name('home');
 Route::get('/staging/our-services', [HomeController::class, 'ourServices'])->name('our-services');
@@ -82,4 +83,14 @@ Route::middleware(['auth'])->prefix('cms')->name('cms.')->group(function () {
     // Ready to Talk
     Route::get('ready-to-talk', [ReadyToTalkController::class, 'index'])->name('ready-to-talk.index');
     Route::put('ready-to-talk', [ReadyToTalkController::class, 'update'])->name('ready-to-talk.update');
+
+    // About Us
+    Route::get('about-us', [AboutUsController::class, 'index'])->name('about-us.index');
+    Route::get('about-us/settings', [AboutUsController::class, 'settingsEdit'])->name('about-us.settings');
+    Route::put('about-us/settings', [AboutUsController::class, 'settingsUpdate'])->name('about-us.settings.update');
+    Route::get('about-us/create', [AboutUsController::class, 'create'])->name('about-us.create');
+    Route::post('about-us', [AboutUsController::class, 'store'])->name('about-us.store');
+    Route::get('about-us/{member}/edit', [AboutUsController::class, 'edit'])->name('about-us.edit');
+    Route::put('about-us/{member}', [AboutUsController::class, 'update'])->name('about-us.update');
+    Route::delete('about-us/{member}', [AboutUsController::class, 'destroy'])->name('about-us.destroy');
 });
