@@ -5,43 +5,28 @@
 @section('content')
 
     <!-- Hero Section -->
-    <div class="relative pt-[240px] pb-[160px]">
+    <div class="relative pt-[240px]">
         <div class="absolute top-0 left-0 bottom-0 right-0 transform z-[1]"
             style="background: linear-gradient(180deg, #6C342C 0%, #3B0014 100%);"></div>
-        <div class="absolute z-[2] top-0 pointer-events-none hidden md:block opacity-30">
-            <img src="{{ asset('assets/images/Bright Legal_Icon-07 1.png') }}" class="object-contain" alt="">
-        </div>
-
-        <section class="w-full px-6 lg:px-20 pb-[60px] text-center relative z-[2]">
-            <div class="mb-[60px]">
-                <h1 class="text-[84px] font-medium leading-[110%] text-white animate-fade-up">
-                    {{ $guideSettings->page_title ?? 'Legal Guide.' }}
-                </h1>
-                <h2 class="text-[84px] font-medium leading-[110%] text-[#B8C1F8] animate-fade-up animate-delay-1">
-                    {{ $guideSettings->page_subtitle ?? 'Made simple.' }}
-                </h2>
-            </div>
-        </section>
     </div>
 
     <!-- Video Guide Section -->
     <div class="bg-[#3B0014] pb-[140px]">
         <section class="px-6 lg:px-20 py-16 md:py-24">
-            <div class="mx-auto max-w-[1240px]">
+            <div class="mx-auto">
 
                 <!-- Section Header -->
                 <div class="flex flex-wrap items-end mb-[60px]">
-                    <div class="basis-full lg:basis-1/2">
-                        <p class="text-[#B8C1F8] text-base font-medium mb-2 animate-on-scroll">Video guides</p>
-                        <h2 class="text-[#D9D9D9] text-[52px] font-medium leading-[110%] animate-on-scroll">
-                            Quick answers,<br>clear explanations
+                    <div class="basis-full lg:basis-2/3">
+                        <h1 class="text-[84px] font-medium leading-[110%] text-white animate-fade-up">
+                            {{ $guideSettings->page_title ?? 'Your Legal Guide.' }}
+                        </h1>
+                        <h2 class="text-[84px] font-medium leading-[110%] text-[#B8C1F8] animate-fade-up animate-delay-1">
+                            {{ $guideSettings->page_subtitle ?? 'to life in Bali' }}
                         </h2>
                     </div>
-                    <div class="basis-full lg:basis-1/2 text-right">
-                        <p class="text-white/60 text-base leading-relaxed animate-on-scroll">
-                            Short videos that break down common legal topics<br>
-                            so you can understand your options fast.
-                        </p>
+                    <div class="basis-full lg:basis-1/3 text-right">
+                        <a href="#" class="bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full items-center gap-2 transition inline-block">Follow us on Youtube <i class="fa-brands fa-youtube text-sm"></i></a>
                     </div>
                 </div>
 
@@ -50,56 +35,63 @@
                     $regularItems = $guideItems->where('is_featured', false)->values();
                 @endphp
 
-                <!-- Featured Grid: 1 large + 2 small -->
+                <!-- Featured Grid: 1 large + 2 small (side by side) -->
                 @if($featured || $regularItems->count() > 0)
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-[20px] mb-[80px]">
 
                         <!-- Featured Large Card -->
                         @if($featured)
                             <div class="lg:col-span-2 animate-on-scroll">
-                                <div class="video-card group relative rounded-[16px] overflow-hidden cursor-pointer"
-                                    style="height: 420px;"
+                                <div class="featured-card-wrapper cursor-pointer"
                                     onclick="openVideoPopup('{{ $featured->video_url }}', '{{ addslashes($featured->title) }}')">
-                                    @if($featured->thumbnail)
-                                        <img src="{{ Storage::url($featured->thumbnail) }}" alt="{{ $featured->title }}"
-                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                    @else
-                                        <div
-                                            class="w-full h-full bg-gradient-to-br from-[#6C342C] to-[#3B0014] flex items-center justify-center">
-                                            <i class="fas fa-play-circle text-white/20 text-[120px]"></i>
+                                    <!-- Video Box with labels -->
+                                    <div class="video-card bg-[#6C342C] group relative rounded-[16px] overflow-hidden"
+                                        style="height: 420px;">
+                                        @if($featured->thumbnail)
+                                            <img src="{{ Storage::url($featured->thumbnail) }}" alt="{{ $featured->title }}"
+                                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                        @else
+                                            <div
+                                                class="w-full h-full bg-gradient-to-br from-[#6C342C] to-[#3B0014] flex items-center justify-center">
+                                                <i class="fas fa-play-circle text-white/20 text-[120px]"></i>
+                                            </div>
+                                        @endif
+                                        <!-- Top Labels: About (left) / Bright Legal (right) -->
+                                        <div class="absolute top-0 left-0 right-0 flex justify-between items-start p-5 z-10">
+                                            <span class="text-white/80 text-sm font-light italic">About</span>
+                                            <span class="text-white/80 text-sm font-light italic">Bright Legal</span>
                                         </div>
-                                    @endif
-                                    <!-- Overlay -->
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                                    <!-- Play Button -->
-                                    <div class="absolute inset-0 flex items-center justify-center">
-                                        <div
-                                            class="play-btn w-[72px] h-[72px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-                                            <i class="fas fa-play text-white text-2xl ml-1"></i>
+                                        <!-- Overlay -->
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30 top h-[375px]"></div>
+                                        <!-- Play Button -->
+                                        <div class="absolute inset-0 flex items-center justify-center h-[375px]">
+                                            <div
+                                                class="play-btn w-[72px] h-[72px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
+                                                <i class="fas fa-play text-white text-2xl ml-1"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                    <!-- Title -->
-                                    <div class="absolute bottom-0 left-0 right-0 p-8">
-                                        <span
-                                            class="inline-block bg-[#F1AE43] text-[#3B0014] text-xs font-semibold px-3 py-1 rounded-full mb-3">⭐
-                                            Featured</span>
-                                        <h3 class="text-white text-2xl font-semibold leading-tight mb-2">{{ $featured->title }}</h3>
+                                    <!-- Description Outside Video Box -->
+                                    <div class="rounded-b-[16px] p-6 mt-[-8px]">
                                         @if($featured->description)
-                                            <p class="text-white/70 text-sm line-clamp-2">{{ $featured->description }}</p>
+                                            <p class="text-white/90 text-lg leading-relaxed">{{ $featured->description }}</p>
+                                        @else
+                                            <p class="text-white/90 text-lg leading-relaxed">Senectus ullamcorper lectus leo sit. Hendrerit sollicitudin quisque massa luctus sed egestas.</p>
                                         @endif
                                     </div>
                                 </div>
                             </div>
                         @endif
 
-                        <!-- Two Small Cards on the Right -->
+                        <!-- Two Small Cards on the Right (side by side in remaining 2 cols) -->
                         @if($regularItems->count() > 0)
-                            <div class="flex flex-col gap-6">
-                                @foreach($regularItems->take(2) as $index => $item)
-                                    <div class="animate-on-scroll" style="animation-delay: {{ ($index + 1) * 0.15 }}s">
-                                        <div class="video-card group relative rounded-[16px] overflow-hidden cursor-pointer"
-                                            style="height: 198px;"
-                                            onclick="openVideoPopup('{{ $item->video_url }}', '{{ addslashes($item->title) }}')">
+                            @foreach($regularItems->take(2) as $index => $item)
+                                <div class="animate-on-scroll" style="animation-delay: {{ ($index + 1) * 0.15 }}s">
+                                    <div class="guide-card-wrapper cursor-pointer"
+                                        onclick="openVideoPopup('{{ $item->video_url }}', '{{ addslashes($item->title) }}')">
+                                        <!-- Video Thumbnail Box -->
+                                        <div class="video-card group relative rounded-[16px] overflow-hidden"
+                                            style="height: 420px;">
                                             @if($item->thumbnail)
                                                 <img src="{{ Storage::url($item->thumbnail) }}" alt="{{ $item->title }}"
                                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -109,21 +101,25 @@
                                                     <i class="fas fa-play-circle text-white/20 text-[60px]"></i>
                                                 </div>
                                             @endif
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent">
-                                            </div>
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                                            <!-- Play Button -->
                                             <div class="absolute inset-0 flex items-center justify-center">
                                                 <div
                                                     class="play-btn w-[48px] h-[48px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
                                                     <i class="fas fa-play text-white text-sm ml-0.5"></i>
                                                 </div>
                                             </div>
-                                            <div class="absolute bottom-0 left-0 right-0 p-5">
-                                                <h3 class="text-white text-base font-semibold leading-tight">{{ $item->title }}</h3>
-                                            </div>
+                                        </div>
+                                        <!-- Title & Description Outside Video Box -->
+                                        <div class="pt-4">
+                                            <h3 class="text-white text-base font-semibold leading-tight mb-2">{{ $item->title }}</h3>
+                                            @if($item->description)
+                                                <p class="text-white/50 text-sm leading-relaxed line-clamp-2">{{ $item->description }}</p>
+                                            @endif
                                         </div>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         @endif
 
                     </div>
@@ -131,147 +127,181 @@
 
                 <!-- Remaining Cards Grid (4 per row) -->
                 @if($regularItems->count() > 2)
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        @foreach($regularItems->slice(2) as $index => $item)
-                            <div class="animate-on-scroll" style="animation-delay: {{ ($index % 4) * 0.1 }}s">
-                                <div class="video-card group relative rounded-[16px] overflow-hidden cursor-pointer"
-                                    style="height: 240px;"
-                                    onclick="openVideoPopup('{{ $item->video_url }}', '{{ addslashes($item->title) }}')">
-                                    @if($item->thumbnail)
-                                        <img src="{{ Storage::url($item->thumbnail) }}" alt="{{ $item->title }}"
-                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                    @else
-                                        <div
-                                            class="w-full h-full bg-gradient-to-br from-[#73302A] to-[#4A1A2E] flex items-center justify-center">
-                                            <i class="fas fa-play-circle text-white/20 text-[60px]"></i>
+                    @php
+                        $remainingItems = $regularItems->slice(2);
+                        $chunkedItems = $remainingItems->chunk(4);
+                    @endphp
+                    @foreach($chunkedItems as $row)
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[20px] mb-[80px]">
+                            @foreach($row as $index => $item)
+                                <div class="animate-on-scroll" style="animation-delay: {{ ($index % 4) * 0.1 }}s">
+                                    <div class="guide-card-wrapper cursor-pointer"
+                                        onclick="openVideoPopup('{{ $item->video_url }}', '{{ addslashes($item->title) }}')">
+                                        <!-- Video Thumbnail Box -->
+                                        <div class="video-card group relative rounded-[16px] overflow-hidden"
+                                            style="height: 420px;">
+                                            @if($item->thumbnail)
+                                                <img src="{{ Storage::url($item->thumbnail) }}" alt="{{ $item->title }}"
+                                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                            @else
+                                                <div
+                                                    class="w-full h-full bg-gradient-to-br from-[#73302A] to-[#4A1A2E] flex items-center justify-center">
+                                                    <i class="fas fa-play-circle text-white/20 text-[60px]"></i>
+                                                </div>
+                                            @endif
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                                            <!-- Play Button -->
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div
+                                                    class="play-btn w-[48px] h-[48px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
+                                                    <i class="fas fa-play text-white text-sm ml-0.5"></i>
+                                                </div>
+                                            </div>
                                         </div>
-                                    @endif
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-                                    <div class="absolute inset-0 flex items-center justify-center">
-                                        <div
-                                            class="play-btn w-[48px] h-[48px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-                                            <i class="fas fa-play text-white text-sm ml-0.5"></i>
+                                        <!-- Title & Description Outside Video Box -->
+                                        <div class="pt-4">
+                                            <h3 class="text-white text-base font-semibold leading-tight mb-2">{{ $item->title }}</h3>
+                                            @if($item->description)
+                                                <p class="text-white/50 text-sm leading-relaxed line-clamp-2">{{ $item->description }}</p>
+                                            @endif
                                         </div>
-                                    </div>
-                                    <div class="absolute bottom-0 left-0 right-0 p-5">
-                                        <h3 class="text-white text-sm font-semibold leading-tight">{{ $item->title }}</h3>
-                                        @if($item->description)
-                                            <p class="text-white/60 text-xs mt-1 line-clamp-2">{{ $item->description }}</p>
-                                        @endif
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    </div>
+                            @endforeach
+                        </div>
+                    @endforeach
                 @endif
 
                 <!-- Fallback: No Items -->
                 @if($guideItems->count() === 0)
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-[20px] mb-[80px]">
                         <!-- Static Featured Card -->
                         <div class="lg:col-span-2 animate-on-scroll">
-                            <div class="video-card group relative rounded-[16px] overflow-hidden cursor-pointer"
-                                style="height: 420px;" onclick="openVideoPopup('', 'Tourist visa vs business visa')">
-                                <div
-                                    class="w-full h-full bg-gradient-to-br from-[#6C342C] to-[#3B0014] flex items-center justify-center">
-                                    <i class="fas fa-play-circle text-white/20 text-[120px]"></i>
+                            <div class="bg-[#6C342C] rounded-lg featured-card-wrapper cursor-pointer p-5"
+                                onclick="openVideoPopup('', 'Tourist visa vs business visa')">
+                                <div class="absolute top-0 left-0 right-0 flex justify-between items-start p-5 z-10">
+                                    <span class="text-white/80 text-sm font-medium">About</span>
+                                    <span class="text-white/80 text-sm font-medium">Bright Legal</span>
                                 </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <div
-                                        class="play-btn w-[72px] h-[72px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-                                        <i class="fas fa-play text-white text-2xl ml-1"></i>
+                                <div class="p-[100px] pb-[50px]">
+                                    <!-- Video Box -->
+                                    <div class="video-card group relative rounded-[16px] overflow-hidden max-w-[420px] h-[375px] mx-auto">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30"></div>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <div
+                                                class="play-btn w-[72px] h-[72px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
+                                                <i class="fas fa-play text-white text-2xl ml-1"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="absolute bottom-0 left-0 right-0 p-8">
-                                    <span
-                                        class="inline-block bg-[#F1AE43] text-[#3B0014] text-xs font-semibold px-3 py-1 rounded-full mb-3">⭐
-                                        Featured</span>
-                                    <h3 class="text-white text-2xl font-semibold leading-tight mb-2">Tourist visa vs business
-                                        visa: what's the difference?</h3>
-                                    <p class="text-white/70 text-sm">Clear explanations to help you choose the right path.</p>
+                                <!-- Description Outside -->
+                                <div class="rounded-b-[16px] p-6 mt-[-8px]">
+                                    <p class="text-[#F5F5F5] text-[32px] leading-relaxed">Senectus ullamcorper lectus leo sit. Hendrerit sollicitudin quisque massa luctus sed egestas.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex flex-col gap-6">
-                            <div class="animate-on-scroll" style="animation-delay: 0.15s">
-                                <div class="video-card group relative rounded-[16px] overflow-hidden cursor-pointer"
-                                    style="height: 198px;" onclick="openVideoPopup('', 'Setting up a PT PMA')">
+                        <!-- Two small cards side by side -->
+                        <div class="animate-on-scroll" style="animation-delay: 0.15s">
+                            <div class="guide-card-wrapper cursor-pointer"
+                                onclick="openVideoPopup('', 'Setting up a PT PMA')">
+                                <div class="video-card group relative rounded-[16px] overflow-hidden"
+                                    style="height: 420px;">
                                     <div
                                         class="w-full h-full bg-gradient-to-br from-[#73302A] to-[#4A1A2E] flex items-center justify-center">
                                         <i class="fas fa-play-circle text-white/20 text-[60px]"></i>
                                     </div>
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent">
-                                    </div>
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                                     <div class="absolute inset-0 flex items-center justify-center">
                                         <div
                                             class="play-btn w-[48px] h-[48px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
                                             <i class="fas fa-play text-white text-sm ml-0.5"></i>
                                         </div>
-                                    </div>
-                                    <div class="absolute bottom-0 left-0 right-0 p-5">
-                                        <h3 class="text-white text-base font-semibold leading-tight">Setting up a PT PMA in Bali
-                                        </h3>
                                     </div>
                                 </div>
+                                <div class="pt-4">
+                                    <h3 class="text-white text-[20px] font-semibold leading-tight mb-2">Tourist visa vs business visa: what's the difference?</h3>
+                                    <hr class="border-[rgba(255,255,255,0.1)] my-5">
+                                    <p class="text-white/50 text-sm leading-relaxed">Clear explanations to help you choose the right path.</p>
+                                </div>
                             </div>
-                            <div class="animate-on-scroll" style="animation-delay: 0.3s">
-                                <div class="video-card group relative rounded-[16px] overflow-hidden cursor-pointer"
-                                    style="height: 198px;" onclick="openVideoPopup('', 'Property ownership')">
+                        </div>
+                        <div class="animate-on-scroll" style="animation-delay: 0.3s">
+                            <div class="guide-card-wrapper cursor-pointer"
+                                onclick="openVideoPopup('', 'Property ownership')">
+                                <div class="video-card group relative rounded-[16px] overflow-hidden"
+                                    style="height: 420px;">
                                     <div
                                         class="w-full h-full bg-gradient-to-br from-[#73302A] to-[#4A1A2E] flex items-center justify-center">
                                         <i class="fas fa-play-circle text-white/20 text-[60px]"></i>
                                     </div>
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent">
-                                    </div>
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                                     <div class="absolute inset-0 flex items-center justify-center">
                                         <div
                                             class="play-btn w-[48px] h-[48px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
                                             <i class="fas fa-play text-white text-sm ml-0.5"></i>
                                         </div>
                                     </div>
-                                    <div class="absolute bottom-0 left-0 right-0 p-5">
-                                        <h3 class="text-white text-base font-semibold leading-tight">Property ownership for
-                                            foreigners</h3>
-                                    </div>
+                                </div>
+                                <div class="pt-4">
+                                    <h3 class="text-white text-[20px] font-semibold leading-tight mb-2">Which visa do you actually need for Bali?</h3>
+                                    <hr class="border-[rgba(255,255,255,0.1)] my-5">
+                                    <p class="text-white/50 text-sm leading-relaxed">An honest look at what's permitted and what crosses the line.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Fallback 4-col row -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        @php
-                            $fallbackCards = [
-                                'Work permit essentials',
-                                'Prenuptial agreements in Indonesia',
-                                'How to extend your KITAS',
-                                'Starting a CV in Bali'
-                            ];
-                        @endphp
-                        @foreach($fallbackCards as $idx => $card)
-                            <div class="animate-on-scroll" style="animation-delay: {{ $idx * 0.1 }}s">
-                                <div class="video-card group relative rounded-[16px] overflow-hidden cursor-pointer"
-                                    style="height: 240px;" onclick="openVideoPopup('', '{{ $card }}')">
-                                    <div
-                                        class="w-full h-full bg-gradient-to-br from-[#73302A] to-[#4A1A2E] flex items-center justify-center">
-                                        <i class="fas fa-play-circle text-white/20 text-[60px]"></i>
-                                    </div>
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-                                    <div class="absolute inset-0 flex items-center justify-center">
-                                        <div
-                                            class="play-btn w-[48px] h-[48px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-                                            <i class="fas fa-play text-white text-sm ml-0.5"></i>
+                    <!-- Fallback 4-col rows -->
+                    @php
+                        $fallbackCards = [
+                            ['title' => 'Tourist visa vs business visa: what\'s the difference?', 'desc' => 'Clear explanations to help you choose the right path.'],
+                            ['title' => 'What "working legally" in Bali really means', 'desc' => 'Clear explanations to help you choose the right path.'],
+                            ['title' => 'How long can you legally stay in Bali?', 'desc' => 'Clear explanations to help you choose the right path.'],
+                            ['title' => 'Business licenses in Bali: what you actually need', 'desc' => 'Clear explanations to help you choose the right path.'],
+                        ];
+                        $fallbackCards2 = [
+                            ['title' => 'Tourist visa vs business visa: what\'s the difference?', 'desc' => 'Clear explanations to help you choose the right path.'],
+                            ['title' => 'What "working legally" in Bali really means', 'desc' => 'Clear explanations to help you choose the right path.'],
+                            ['title' => 'How long can you legally stay in Bali?', 'desc' => 'Clear explanations to help you choose the right path.'],
+                            ['title' => 'Business licenses in Bali: what you actually need', 'desc' => 'Clear explanations to help you choose the right path.'],
+                        ];
+                    @endphp
+                    @foreach([$fallbackCards, $fallbackCards2] as $rowCards)
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[20px] mb-[80px]">
+                            @foreach($rowCards as $idx => $card)
+                                <div class="animate-on-scroll" style="animation-delay: {{ $idx * 0.1 }}s">
+                                    <div class="guide-card-wrapper cursor-pointer"
+                                        onclick="openVideoPopup('', '{{ $card['title'] }}')">
+                                        <div class="video-card group relative rounded-[16px] overflow-hidden"
+                                            style="height: 420px;">
+                                            <div
+                                                class="w-full h-full bg-gradient-to-br from-[#73302A] to-[#4A1A2E] flex items-center justify-center">
+                                                <i class="fas fa-play-circle text-white/20 text-[60px]"></i>
+                                            </div>
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div
+                                                    class="play-btn w-[48px] h-[48px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
+                                                    <i class="fas fa-play text-white text-sm ml-0.5"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pt-4">
+                                            <h3 class="text-white text-[20px] font-semibold leading-tight mb-2">{{ $card['title'] }}</h3>
+                                            <hr class="border-[rgba(255,255,255,0.1)] my-5">
+                                            <p class="text-white/50 text-sm leading-relaxed">{{ $card['desc'] }}</p>
                                         </div>
                                     </div>
-                                    <div class="absolute bottom-0 left-0 right-0 p-5">
-                                        <h3 class="text-white text-sm font-semibold leading-tight">{{ $card }}</h3>
-                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    </div>
+                            @endforeach
+                        </div>
+                    @endforeach
                 @endif
+
+                <div class="text-center">
+                    <a href="#" class="bg-[rgba(245,245,245,0.3)] inline-block bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full items-center gap-2 transition"><span class="gradient-text">Need more legal guides? We can help you. Contact us</span> <i class="fa-solid fa-arrow-right text-sm"></i></a>
+                </div>
 
             </div>
         </section>
