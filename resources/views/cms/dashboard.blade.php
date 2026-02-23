@@ -70,6 +70,17 @@
                 </div>
             </div>
         </div>
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm font-medium">Legal Guide Videos</p>
+                    <p class="text-3xl font-bold text-gray-800 mt-2">{{ \App\Models\LegalGuideItem::count() }}</p>
+                </div>
+                <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-book text-teal-600"></i>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -95,6 +106,11 @@
                     class="flex items-center justify-center p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition">
                     <i class="fas fa-plus text-gray-600 mr-2"></i>
                     <span class="font-medium text-gray-700">Add FAQ</span>
+                </a>
+                <a href="{{ route('cms.legal-guide.create') }}"
+                    class="flex items-center justify-center p-4 border-2 border-gray-200 rounded-lg hover:border-teal-500 hover:bg-teal-50 transition">
+                    <i class="fas fa-plus text-gray-600 mr-2"></i>
+                    <span class="font-medium text-gray-700">Add Video Guide</span>
                 </a>
             </div>
         </div>

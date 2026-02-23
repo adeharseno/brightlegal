@@ -97,6 +97,13 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('cms.legal-guide.index') }}"
+                            class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.legal-guide.*') ? 'active' : '' }}">
+                            <i class="fas fa-book w-6"></i>
+                            <span x-show="sidebarOpen" class="ml-3">Legal Guide</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('cms.ready-to-talk.index') }}"
                             class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.ready-to-talk.*') ? 'active' : '' }}">
                             <i class="fas fa-phone w-6"></i>
@@ -181,7 +188,7 @@
 
     <script>
         // Initialize TinyMCE for all textareas with class 'wysiwyg'
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', f unction () {
             if (typeof tinymce !== 'undefined') {
                 tinymce.init({
                     selector: 'textarea.wysiwyg',
@@ -196,7 +203,7 @@
                     content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; }'
                 });
             }
-        });
+    });
     </script>
 </body>
 

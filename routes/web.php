@@ -12,10 +12,12 @@ use App\Http\Controllers\Cms\TestimonialController;
 use App\Http\Controllers\Cms\FaqController;
 use App\Http\Controllers\Cms\ReadyToTalkController;
 use App\Http\Controllers\Cms\AboutUsController;
+use App\Http\Controllers\Cms\LegalGuideController;
 
 Route::get('/staging', [HomeController::class, 'index'])->name('home');
 Route::get('/staging/our-services', [HomeController::class, 'ourServices'])->name('our-services');
 Route::get('/staging/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
+Route::get('/staging/legal-guide', [HomeController::class, 'legalGuide'])->name('legal-guide');
 
 // Authentication Routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -93,4 +95,14 @@ Route::middleware(['auth'])->prefix('cms')->name('cms.')->group(function () {
     Route::get('about-us/{member}/edit', [AboutUsController::class, 'edit'])->name('about-us.edit');
     Route::put('about-us/{member}', [AboutUsController::class, 'update'])->name('about-us.update');
     Route::delete('about-us/{member}', [AboutUsController::class, 'destroy'])->name('about-us.destroy');
+
+    // Legal Guide
+    Route::get('legal-guide', [LegalGuideController::class, 'index'])->name('legal-guide.index');
+    Route::get('legal-guide/settings', [LegalGuideController::class, 'settingsEdit'])->name('legal-guide.settings');
+    Route::put('legal-guide/settings', [LegalGuideController::class, 'settingsUpdate'])->name('legal-guide.settings.update');
+    Route::get('legal-guide/create', [LegalGuideController::class, 'create'])->name('legal-guide.create');
+    Route::post('legal-guide', [LegalGuideController::class, 'store'])->name('legal-guide.store');
+    Route::get('legal-guide/{item}/edit', [LegalGuideController::class, 'edit'])->name('legal-guide.edit');
+    Route::put('legal-guide/{item}', [LegalGuideController::class, 'update'])->name('legal-guide.update');
+    Route::delete('legal-guide/{item}', [LegalGuideController::class, 'destroy'])->name('legal-guide.destroy');
 });

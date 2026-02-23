@@ -17,6 +17,8 @@ use App\Models\Faq;
 use App\Models\ReadyToTalk;
 use App\Models\AboutUsSetting;
 use App\Models\AboutUsTeamMember;
+use App\Models\LegalGuideSetting;
+use App\Models\LegalGuideItem;
 
 class HomeController extends Controller
 {
@@ -104,6 +106,24 @@ class HomeController extends Controller
         return view('about-us', compact(
             'aboutUsSettings',
             'teamMembers',
+            'readyToTalk'
+        ));
+    }
+
+    public function legalGuide()
+    {
+        // Legal Guide Settings
+        $guideSettings = LegalGuideSetting::first();
+
+        // Legal Guide Video Items
+        $guideItems = LegalGuideItem::active()->ordered()->get();
+
+        // Ready to Talk
+        $readyToTalk = ReadyToTalk::first();
+
+        return view('legal-guide', compact(
+            'guideSettings',
+            'guideItems',
             'readyToTalk'
         ));
     }
