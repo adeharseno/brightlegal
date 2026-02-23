@@ -4,7 +4,6 @@
 
 @section('content')
 
-<<<<<<< HEAD
     <div class="relative pt-[240px] pb-[160px]">
         <div class="absolute top-0 left-0 bottom-0 right-0 transform z-[1]"
             style="background: linear-gradient(180deg, #6C342C 0%, #3B0014 100%);"></div>
@@ -127,105 +126,6 @@
 
         <section class="md:px-12 py-16 md:py-24">
             <div class="mx-auto px-6 lg:px-20">
-=======
-    <div class="pt-[240px] pb-[100px] relative">
-        <div class="absolute top-0 left-0 bottom-0 right-0 transform"
-            style="background: linear-gradient(180deg, #6C342C 0%, #3B0014 100%);"></div>
-        <div class="relative z-10 container max-w-[1240px] mx-auto px-4 lg:px-8 text-center">
-            <h4 class="text-[84px] font-medium leading-[110%] text-white">Born in Bali.</h4>
-            <h4 class="text-[84px] font-medium leading-[110%] text-[#B8C1F8]">Built for real people.</h4>
-        </div>
-
-        <div class="relative max-w-7xl mx-auto px-6">
-            <!-- Image collage -->
-            <div class="relative flex justify-center mb-20">
-            <!-- Left small image -->
-            <img
-                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
-                class="absolute left-0 top-16 w-28 h-28 object-cover rounded-xl"
-                alt=""
-            />
-
-            <!-- Main image -->
-            <img
-                src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429"
-                class="w-[420px] h-[520px] object-cover rounded-2xl shadow-2xl"
-                alt=""
-            />
-
-            <!-- Right small image -->
-            <img
-                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
-                class="absolute right-0 top-32 w-28 h-28 object-cover rounded-xl"
-                alt=""
-            />
-            </div>
-
-            <!-- Text content -->
-            <div class="max-w-3xl mx-auto text-center mb-20">
-            <p class="text-sm uppercase tracking-widest opacity-70 mb-4">
-                Our mission
-            </p>
-
-            <h2 class="text-4xl md:text-5xl font-light leading-tight">
-                Bright Legal started with one simple belief;
-                <span class="text-[#f2b94b]">
-                legal help doesn’t have to feel intimidating.
-                </span>
-            </h2>
-            </div>
-
-            <!-- Cards -->
-            <div class="grid md:grid-cols-3 gap-10">
-            <!-- Card 1 -->
-            <div>
-                <img
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
-                class="rounded-xl mb-6"
-                alt=""
-                />
-                <p class="text-sm opacity-70 leading-relaxed">
-                Born in Bali, we’re a small but mighty team of legal professionals who
-                believe in clear answers, practical solutions, and treating clients
-                like people — not case numbers.
-                </p>
-            </div>
-
-            <!-- Card 2 -->
-            <div>
-                <img
-                src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70"
-                class="rounded-xl mb-6"
-                alt=""
-                />
-                <p class="text-sm opacity-70 leading-relaxed">
-                Whether you're here to build your dream business or just sort out your
-                visa, we’re here to make it easier, not scarier.
-                </p>
-            </div>
-
-            <!-- Card 3 -->
-            <div>
-                <img
-                src="https://images.unsplash.com/photo-1511632765486-a01980e01a18"
-                class="rounded-xl mb-6"
-                alt=""
-                />
-                <p class="text-sm opacity-70 leading-relaxed">
-                We know that dealing with legal stuff in a foreign country can feel
-                overwhelming. That’s why we guide you step by step, clearly and
-                patiently.
-                </p>
-            </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="bg-[#73302A] py-[140px]">
-
-        <section class="px-6 md:px-12 lg:px-20 pb-16 md:pb-24">
-            <div class="max-w-7xl mx-auto">
->>>>>>> b8babd5fee8555bec7d8978076fcc4918b2ea917
 
                 <div class="flex flex-wrap items-end mb-[60px]">
                     <div class="basis-full lg:basis-1/2">
@@ -333,7 +233,6 @@
             <div class="max-w-7xl mx-auto">
 
                 <!-- Testimonial Text -->
-<<<<<<< HEAD
                 <h3 class="text-[rgba(217,217,217,0.6)] text-[40px] font-medium mb-12 md:mb-[60px] leading-relaxed">
                     @if($aboutUsSettings && $aboutUsSettings->clients_text)
                         {!! $aboutUsSettings->clients_text !!}
@@ -341,11 +240,6 @@
                         Trusted by expats, entrepreneurs, and<br>
                         small business owners across Bali.
                     @endif
-=======
-                <h3 class="text-[rgba(217,217,217,0.6)] text-[40px] font-medium mb-12 md:mb-[60px] leading-[120%]">
-                    Trusted by expats, entrepreneurs, and<br>
-                    small business owners across Bali.
->>>>>>> b8babd5fee8555bec7d8978076fcc4918b2ea917
                 </h3>
 
                 <!-- Client Logos -->
