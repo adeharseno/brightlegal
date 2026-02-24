@@ -15,7 +15,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex">
                     <!-- Logo -->
-                    <a href="{{ url('/') }}" class="flex items-center space-x-2 flex-shrink-0">
+                    <a href="{{ route('home') }}" class="flex items-center space-x-2 flex-shrink-0">
                         <div class="flex items-center">
                             <img src="{{ asset('assets/images/Logo.png') }}" class="h-[44px]" alt="">
                         </div>
@@ -25,16 +25,16 @@
                     <div class="hidden relative lg:flex items-center space-x-1 ml-[70px] px-6 py-4">
                         <div class="absolute left-0 top-0 bottom-0 right-0 rounded-full bg-white/10 transition-all duration-200"></div>
                         <div class="relative z-[4]">
-                            <a href="#services" class="text-white/90 hover:text-white px-4 py-2 font-medium cursor-pointer">
+                            <a href="{{ route('our-services') }}" class="text-white/90 hover:text-white px-4 py-2 font-medium cursor-pointer">
                                 Our services
                             </a>
-                            <a href="#about" class="text-white/90 hover:text-white px-4 py-2 font-medium cursor-pointer">
+                            <a href="{{ route('about-us') }}" class="text-white/90 hover:text-white px-4 py-2 font-medium cursor-pointer">
                                 Who we are
                             </a>
-                            <a href="#journey" class="text-white/90 hover:text-white px-4 py-2 font-medium cursor-pointer">
+                            <a href="{{ route('client-journey') }}" class="text-white/90 hover:text-white px-4 py-2 font-medium cursor-pointer">
                                 Client journey
                             </a>
-                            <a href="#legal" class="text-white/90 hover:text-white px-4 py-2 font-medium cursor-pointer">
+                            <a href="{{ route('legal-guide') }}" class="text-white/90 hover:text-white px-4 py-2 font-medium cursor-pointer">
                                 Legal guide
                             </a>
                         </div>

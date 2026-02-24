@@ -81,6 +81,17 @@
                 </div>
             </div>
         </div>
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm font-medium">Client Journey</p>
+                    <p class="text-3xl font-bold text-gray-800 mt-2">{{ \App\Models\ClientJourneyItem::count() }}</p>
+                </div>
+                <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-route text-orange-600"></i>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -111,6 +122,11 @@
                     class="flex items-center justify-center p-4 border-2 border-gray-200 rounded-lg hover:border-teal-500 hover:bg-teal-50 transition">
                     <i class="fas fa-plus text-gray-600 mr-2"></i>
                     <span class="font-medium text-gray-700">Add Video Guide</span>
+                </a>
+                <a href="{{ route('cms.client-journey.create') }}"
+                    class="flex items-center justify-center p-4 border-2 border-gray-200 rounded-lg hover:border-orange-500 hover:bg-orange-50 transition">
+                    <i class="fas fa-plus text-gray-600 mr-2"></i>
+                    <span class="font-medium text-gray-700">Add Case Study</span>
                 </a>
             </div>
         </div>
@@ -156,6 +172,11 @@
                 <a href="{{ route('cms.about-us.index') }}"
                     class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
                     <span class="font-medium text-gray-700">About Us</span>
+                    <i class="fas fa-arrow-right text-gray-400"></i>
+                </a>
+                <a href="{{ route('cms.client-journey.index') }}"
+                    class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                    <span class="font-medium text-gray-700">Client Journey</span>
                     <i class="fas fa-arrow-right text-gray-400"></i>
                 </a>
             </div>

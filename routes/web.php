@@ -13,11 +13,13 @@ use App\Http\Controllers\Cms\FaqController;
 use App\Http\Controllers\Cms\ReadyToTalkController;
 use App\Http\Controllers\Cms\AboutUsController;
 use App\Http\Controllers\Cms\LegalGuideController;
+use App\Http\Controllers\Cms\ClientJourneyController;
 
 Route::get('/staging', [HomeController::class, 'index'])->name('home');
 Route::get('/staging/our-services', [HomeController::class, 'ourServices'])->name('our-services');
 Route::get('/staging/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
 Route::get('/staging/legal-guide', [HomeController::class, 'legalGuide'])->name('legal-guide');
+Route::get('/staging/client-journey', [HomeController::class, 'clientJourney'])->name('client-journey');
 
 // Authentication Routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -105,4 +107,17 @@ Route::middleware(['auth'])->prefix('cms')->name('cms.')->group(function () {
     Route::get('legal-guide/{item}/edit', [LegalGuideController::class, 'edit'])->name('legal-guide.edit');
     Route::put('legal-guide/{item}', [LegalGuideController::class, 'update'])->name('legal-guide.update');
     Route::delete('legal-guide/{item}', [LegalGuideController::class, 'destroy'])->name('legal-guide.destroy');
+
+    // Client Journey
+    Route::get('client-journey', [ClientJourneyController::class, 'index'])->name('client-journey.index');
+    Route::get('client-journey/categories/create', [ClientJourneyController::class, 'createCategory'])->name('client-journey.categories.create');
+    Route::post('client-journey/categories', [ClientJourneyController::class, 'storeCategory'])->name('client-journey.categories.store');
+    Route::get('client-journey/categories/{category}/edit', [ClientJourneyController::class, 'editCategory'])->name('client-journey.categories.edit');
+    Route::put('client-journey/categories/{category}', [ClientJourneyController::class, 'updateCategory'])->name('client-journey.categories.update');
+    Route::delete('client-journey/categories/{category}', [ClientJourneyController::class, 'destroyCategory'])->name('client-journey.categories.destroy');
+    Route::get('client-journey/create', [ClientJourneyController::class, 'create'])->name('client-journey.create');
+    Route::post('client-journey', [ClientJourneyController::class, 'store'])->name('client-journey.store');
+    Route::get('client-journey/{item}/edit', [ClientJourneyController::class, 'edit'])->name('client-journey.edit');
+    Route::put('client-journey/{item}', [ClientJourneyController::class, 'update'])->name('client-journey.update');
+    Route::delete('client-journey/{item}', [ClientJourneyController::class, 'destroy'])->name('client-journey.destroy');
 });

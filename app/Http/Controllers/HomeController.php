@@ -127,4 +127,21 @@ class HomeController extends Controller
             'readyToTalk'
         ));
     }
+
+    public function clientJourney()
+    {
+        // Client Journey Categories with Items
+        $categories = \App\Models\ClientJourneyCategory::active()->ordered()
+            ->with(['items' => function ($query) {
+                $query->active()->ordered();
+            }])->get();
+
+        // Ready to Talk
+        $readyToTalk = ReadyToTalk::first();
+
+        return view('client-journey', compact(
+            'categories',
+            'readyToTalk'
+        ));
+    }
 }

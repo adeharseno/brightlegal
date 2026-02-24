@@ -104,6 +104,13 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('cms.client-journey.index') }}"
+                            class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.client-journey.*') ? 'active' : '' }}">
+                            <i class="fas fa-route w-6"></i>
+                            <span x-show="sidebarOpen" class="ml-3">Client Journey</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('cms.ready-to-talk.index') }}"
                             class="sidebar-link flex items-center px-4 py-3 hover:bg-[#6C342C] transition {{ request()->routeIs('cms.ready-to-talk.*') ? 'active' : '' }}">
                             <i class="fas fa-phone w-6"></i>
