@@ -17,6 +17,7 @@ class Service extends Model
         'key_benefits',
         'required_documents',
         'important_notes',
+        'consult_link',
         'is_active',
         'order',
     ];

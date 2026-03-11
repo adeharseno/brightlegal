@@ -195,7 +195,7 @@
 
     <script>
         // Initialize TinyMCE for all textareas with class 'wysiwyg'
-        document.addEventListener('DOMContentLoaded', f unction () {
+        document.addEventListener('DOMContentLoaded', function () {
             if (typeof tinymce !== 'undefined') {
                 tinymce.init({
                     selector: 'textarea.wysiwyg',

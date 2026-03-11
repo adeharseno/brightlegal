@@ -65,6 +65,13 @@
             <textarea name="important_notes" id="important_notes" rows="4" class="wysiwyg w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B0014] focus:border-transparent">{{ old('important_notes', $service->important_notes) }}</textarea>
         </div>
 
+        <div class="mb-4">
+            <label for="consult_link" class="block text-sm font-medium text-gray-700 mb-2">Consult Link</label>
+            <input type="url" name="consult_link" id="consult_link" value="{{ old('consult_link', $service->consult_link) }}" placeholder="https://example.com/consultation"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B0014] focus:border-transparent">
+            <p class="text-sm text-gray-500 mt-1">URL untuk tombol "Consult about this". Jika kosong, tombol tidak akan ditampilkan.</p>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
                 <label for="order" class="block text-sm font-medium text-gray-700 mb-2">Order</label>

@@ -123,6 +123,7 @@ class ServiceController extends Controller
             'key_benefits' => 'nullable|string',
             'required_documents' => 'nullable|string',
             'important_notes' => 'nullable|string',
+            'consult_link' => 'nullable|url|max:500',
             'is_active' => 'boolean',
             'order' => 'nullable|integer',
         ]);
@@ -156,6 +157,7 @@ class ServiceController extends Controller
             'key_benefits' => 'nullable|string',
             'required_documents' => 'nullable|string',
             'important_notes' => 'nullable|string',
+            'consult_link' => 'nullable|url|max:500',
             'is_active' => 'boolean',
             'order' => 'nullable|integer',
         ]);

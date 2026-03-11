@@ -160,36 +160,51 @@
                         <p class="text-[#FBF4E1]">Loading details...</p>
                     </div>
 
-                    <!-- Benefits Tab -->
-                    <div x-show="!modalLoading && modalTab === 'benefits'"
-                        x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
-                        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
-                        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="space-y-4">
-                        <div x-html="modalContent.benefits" class="text-[#F1ECEC] prose prose-invert max-w-none"></div>
+                    <!-- Tab Content Container -->
+                    <div x-show="!modalLoading" class="relative">
+                        <!-- Benefits Tab -->
+                        <div x-show="modalTab === 'benefits'"
+                            x-transition:enter="transition ease-in-out duration-300"
+                            x-transition:enter-start="opacity-0 translate-x-2"
+                            x-transition:enter-end="opacity-100 translate-x-0"
+                            x-transition:leave="transition ease-in-out duration-150"
+                            x-transition:leave-start="opacity-100"
+                            x-transition:leave-end="opacity-0"
+                            class="space-y-4">
+                            <div x-html="modalContent.benefits" class="text-[#F1ECEC] prose prose-invert max-w-none"></div>
+                        </div>
+
+                        <!-- Documents Tab -->
+                        <div x-show="modalTab === 'documents'"
+                            x-transition:enter="transition ease-in-out duration-300"
+                            x-transition:enter-start="opacity-0 translate-x-2"
+                            x-transition:enter-end="opacity-100 translate-x-0"
+                            x-transition:leave="transition ease-in-out duration-150"
+                            x-transition:leave-start="opacity-100"
+                            x-transition:leave-end="opacity-0"
+                            class="space-y-4">
+                            <div x-html="modalContent.documents" class="text-[#F1ECEC] prose prose-invert max-w-none"></div>
+                        </div>
+
+                        <!-- Notes Tab -->
+                        <div x-show="modalTab === 'notes'"
+                            x-transition:enter="transition ease-in-out duration-300"
+                            x-transition:enter-start="opacity-0 translate-x-2"
+                            x-transition:enter-end="opacity-100 translate-x-0"
+                            x-transition:leave="transition ease-in-out duration-150"
+                            x-transition:leave-start="opacity-100"
+                            x-transition:leave-end="opacity-0"
+                            class="space-y-4">
+                            <div x-html="modalContent.notes" class="text-[#F1ECEC] prose prose-invert max-w-none"></div>
+                        </div>
                     </div>
 
-                    <!-- Documents Tab -->
-                    <div x-show="!modalLoading && modalTab === 'documents'"
-                        x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
-                        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
-                        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="space-y-4">
-                        <div x-html="modalContent.documents" class="text-[#F1ECEC] prose prose-invert max-w-none"></div>
-                    </div>
-
-                    <!-- Notes Tab -->
-                    <div x-show="!modalLoading && modalTab === 'notes'"
-                        x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
-                        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
-                        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="space-y-4">
-                        <div x-html="modalContent.notes" class="text-[#F1ECEC] prose prose-invert max-w-none"></div>
-                    </div>
-
-                    <!-- CTA Button -->
-                    <div class="flex justify-end mt-6">
-                        <button @click="requestService(modalData.id)"
-                            class="bg-[#B8C1F8] text-[#3B0014] cursor-pointer px-6 py-2 rounded-full font-medium hover:bg-[#A8B1E8] transition-colors duration-300">
+                    <!-- CTA Button (only shown when consult_link is set) -->
+                    <div x-show="modalData.consult_link" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" class="flex justify-end mt-6">
+                        <a :href="modalData.consult_link" target="_blank" rel="noopener noreferrer"
+                            class="bg-[#B8C1F8] text-[#3B0014] cursor-pointer px-6 py-2 rounded-full font-medium hover:bg-[#A8B1E8] transition-colors duration-300 inline-block">
                             Consult about this
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -211,7 +226,8 @@
                 modalData: {
                     id: '',
                     title: '',
-                    image: ''
+                    image: '',
+                    consult_link: ''
                 },
 
                 // Service data from CMS
@@ -219,15 +235,22 @@
         return $cat->services->map(function ($s) {
             return [
                 'id' => $s->id,
-                'key_benefit' => $s->key_benefit,
-                'required_document' => $s->required_document,
-                'important_note' => $s->important_note
+                'key_benefits' => $s->key_benefits,
+                'required_documents' => $s->required_documents,
+                'important_notes' => $s->important_notes,
+                'consult_link' => $s->consult_link
             ];
         });
     })->keyBy('id')) !!},
 
                 openModal(id, title, image) {
-                    this.modalData = { id, title, image };
+                    const serviceData = this.servicesData[id];
+                    this.modalData = {
+                        id,
+                        title,
+                        image,
+                        consult_link: serviceData ? (serviceData.consult_link || '') : ''
+                    };
                     this.modalOpen = true;
                     this.modalContent = { benefits: '', documents: '', notes: '' };
                     this.loadServiceDetails(id);
@@ -235,7 +258,7 @@
 
                 closeModal() {
                     this.modalOpen = false;
-                    this.modalData = { id: '', title: '', image: '' };
+                    this.modalData = { id: '', title: '', image: '', consult_link: '' };
                     this.modalContent = { benefits: '', documents: '', notes: '' };
                 },
 
@@ -250,9 +273,9 @@
 
                         if (serviceData) {
                             this.modalContent = {
-                                benefits: serviceData.key_benefit || '<p class="opacity-60">No key benefits specified.</p>',
-                                documents: serviceData.required_document || '<p class="opacity-60">No required documents specified.</p>',
-                                notes: serviceData.important_note || '<p class="opacity-60">No important notes specified.</p>'
+                                benefits: serviceData.key_benefits || '<p class="opacity-60">No key benefits specified.</p>',
+                                documents: serviceData.required_documents || '<p class="opacity-60">No required documents specified.</p>',
+                                notes: serviceData.important_notes || '<p class="opacity-60">No important notes specified.</p>'
                             };
                         } else {
                             this.modalContent = {
