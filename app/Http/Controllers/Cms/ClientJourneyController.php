@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cms;
 use App\Http\Controllers\Controller;
 use App\Models\ClientJourneyCategory;
 use App\Models\ClientJourneyItem;
+use App\Models\ClientJourneySetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -15,7 +16,43 @@ class ClientJourneyController extends Controller
     {
         $categories = ClientJourneyCategory::ordered()->get();
         $items = ClientJourneyItem::with('category')->ordered()->paginate(10);
-        return view('cms.client-journey.index', compact('categories', 'items'));
+        $setting = ClientJourneySetting::first();
+        return view('cms.client-journey.index', compact('categories', 'items', 'setting'));
+    }
+
+    // ========== SETTINGS ==========
+
+    public function settingsEdit()
+    {
+        $setting = ClientJourneySetting::first();
+        return view('cms.client-journey.settings', compact('setting'));
+    }
+
+    public function settingsUpdate(Request $request)
+    {
+        $validated = $request->validate([
+            // CTA 1
+            'cta1_title' => 'nullable|string|max:255',
+            'cta1_description' => 'nullable|string',
+            'cta1_button_text' => 'nullable|string|max:255',
+            'cta1_button_link' => 'nullable|string|max:255',
+            // CTA 2
+            'cta2_title' => 'nullable|string|max:255',
+            'cta2_description' => 'nullable|string',
+            'cta2_button_text' => 'nullable|string|max:255',
+            'cta2_button_link' => 'nullable|string|max:255',
+        ]);
+
+        $setting = ClientJourneySetting::first();
+
+        if ($setting) {
+            $setting->update($validated);
+        } else {
+            ClientJourneySetting::create($validated);
+        }
+
+        return redirect()->route('cms.client-journey.index')
+            ->with('success', 'Pengaturan CTA Client Journey berhasil diperbarui!');
     }
 
     // ========== CATEGORIES ==========
@@ -169,3 +206,4 @@ class ClientJourneyController extends Controller
             ->with('success', 'Client journey item berhasil dihapus!');
     }
 }
+

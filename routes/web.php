@@ -98,6 +98,13 @@ Route::middleware(['auth'])->prefix('cms')->name('cms.')->group(function () {
     Route::put('about-us/{member}', [AboutUsController::class, 'update'])->name('about-us.update');
     Route::delete('about-us/{member}', [AboutUsController::class, 'destroy'])->name('about-us.destroy');
 
+    // About Us - Client Logos
+    Route::get('about-us/logos/create', [AboutUsController::class, 'createLogo'])->name('about-us.logos.create');
+    Route::post('about-us/logos', [AboutUsController::class, 'storeLogo'])->name('about-us.logos.store');
+    Route::get('about-us/logos/{logo}/edit', [AboutUsController::class, 'editLogo'])->name('about-us.logos.edit');
+    Route::put('about-us/logos/{logo}', [AboutUsController::class, 'updateLogo'])->name('about-us.logos.update');
+    Route::delete('about-us/logos/{logo}', [AboutUsController::class, 'destroyLogo'])->name('about-us.logos.destroy');
+
     // Legal Guide
     Route::get('legal-guide', [LegalGuideController::class, 'index'])->name('legal-guide.index');
     Route::get('legal-guide/settings', [LegalGuideController::class, 'settingsEdit'])->name('legal-guide.settings');
@@ -110,6 +117,8 @@ Route::middleware(['auth'])->prefix('cms')->name('cms.')->group(function () {
 
     // Client Journey
     Route::get('client-journey', [ClientJourneyController::class, 'index'])->name('client-journey.index');
+    Route::get('client-journey/settings', [ClientJourneyController::class, 'settingsEdit'])->name('client-journey.settings');
+    Route::put('client-journey/settings', [ClientJourneyController::class, 'settingsUpdate'])->name('client-journey.settings.update');
     Route::get('client-journey/categories/create', [ClientJourneyController::class, 'createCategory'])->name('client-journey.categories.create');
     Route::post('client-journey/categories', [ClientJourneyController::class, 'storeCategory'])->name('client-journey.categories.store');
     Route::get('client-journey/categories/{category}/edit', [ClientJourneyController::class, 'editCategory'])->name('client-journey.categories.edit');

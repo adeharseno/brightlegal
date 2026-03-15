@@ -17,6 +17,7 @@ use App\Models\Faq;
 use App\Models\ReadyToTalk;
 use App\Models\AboutUsSetting;
 use App\Models\AboutUsTeamMember;
+use App\Models\AboutUsClientLogo;
 use App\Models\LegalGuideSetting;
 use App\Models\LegalGuideItem;
 
@@ -100,12 +101,16 @@ class HomeController extends Controller
         // Team Members
         $teamMembers = AboutUsTeamMember::active()->ordered()->get();
 
+        // Client Logos
+        $clientLogos = AboutUsClientLogo::active()->ordered()->get();
+
         // Ready to Talk
         $readyToTalk = ReadyToTalk::first();
 
         return view('about-us', compact(
             'aboutUsSettings',
             'teamMembers',
+            'clientLogos',
             'readyToTalk'
         ));
     }
@@ -136,11 +141,15 @@ class HomeController extends Controller
                 $query->active()->ordered();
             }])->get();
 
+        // CTA Settings
+        $ctaSettings = \App\Models\ClientJourneySetting::first();
+
         // Ready to Talk
         $readyToTalk = ReadyToTalk::first();
 
         return view('client-journey', compact(
             'categories',
+            'ctaSettings',
             'readyToTalk'
         ));
     }

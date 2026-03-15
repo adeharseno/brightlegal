@@ -9,6 +9,10 @@
             <p class="text-gray-600">Kelola kategori dan case study client journey</p>
         </div>
         <div class="space-x-2">
+            <a href="{{ route('cms.client-journey.settings') }}"
+                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                <i class="fas fa-cog mr-2"></i> Pengaturan CTA
+            </a>
             <a href="{{ route('cms.client-journey.categories.create') }}"
                 class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">
                 <i class="fas fa-folder-plus mr-2"></i> Tambah Kategori
@@ -139,5 +143,45 @@
 
     <div class="mt-4">
         {{ $items->links() }}
+    </div>
+
+    <!-- CTA Preview -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden mt-6">
+        <div class="px-6 py-4 bg-gray-50 border-b flex justify-between items-center">
+            <div>
+                <h2 class="text-lg font-semibold text-gray-800">Preview CTA Section</h2>
+                <p class="text-sm text-gray-500">2 kartu CTA yang tampil di bawah halaman Client Journey</p>
+            </div>
+            <a href="{{ route('cms.client-journey.settings') }}"
+                class="text-blue-600 hover:text-blue-900 text-sm font-medium">
+                <i class="fas fa-edit mr-1"></i> Edit CTA
+            </a>
+        </div>
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- CTA 1 Preview -->
+                <div class="rounded-lg p-5 border border-gray-200 bg-gray-50">
+                    <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">CTA 1</span>
+                    <h3 class="text-lg font-semibold text-gray-800 mt-2">{{ $setting->cta1_title ?? 'Not seeing your exact case?' }}</h3>
+                    <p class="text-sm text-gray-600 mt-1">{{ $setting->cta1_description ?? 'Every situation is different. If you have questions or want guidance specific to your case, we\'re here to help you understand your options.' }}</p>
+                    <div class="mt-3">
+                        <span class="inline-block bg-gray-200 text-gray-700 text-xs px-3 py-1 rounded-full">
+                            {{ $setting->cta1_button_text ?? 'Talk to a legal advisor' }} → {{ $setting->cta1_button_link ?? '#' }}
+                        </span>
+                    </div>
+                </div>
+                <!-- CTA 2 Preview -->
+                <div class="rounded-lg p-5 border border-gray-200 bg-gray-50">
+                    <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">CTA 2</span>
+                    <h3 class="text-lg font-semibold text-gray-800 mt-2">{{ $setting->cta2_title ?? 'Just starting your research?' }}</h3>
+                    <p class="text-sm text-gray-600 mt-1">{{ $setting->cta2_description ?? 'Download our free guide for expats on land ownership, visas and business structures in Indonesia.' }}</p>
+                    <div class="mt-3">
+                        <span class="inline-block bg-gray-200 text-gray-700 text-xs px-3 py-1 rounded-full">
+                            {{ $setting->cta2_button_text ?? 'Get free legal guide' }} → {{ $setting->cta2_button_link ?? '#' }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

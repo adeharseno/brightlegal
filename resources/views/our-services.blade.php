@@ -75,7 +75,7 @@
                                         <h3 class="mb-5 font-semibold text-[28px] opacity-80 text-[#f5f5f5]">{{ $service->title }}
                                         </h3>
                                         <hr class="border-[#6C342C] my-5">
-                                        <div class="text-[#F1ECEC] text-lg opacity-60 font-medium">
+                                        <div class="text-[#F1ECEC] text-base opacity-60 font-medium">
                                             {!! Str::limit(strip_tags($service->description), 100) !!}</div>
                                     </button>
                                 @empty

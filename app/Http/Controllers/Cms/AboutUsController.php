@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cms;
 use App\Http\Controllers\Controller;
 use App\Models\AboutUsSetting;
 use App\Models\AboutUsTeamMember;
+use App\Models\AboutUsClientLogo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,7 +15,8 @@ class AboutUsController extends Controller
     {
         $setting = AboutUsSetting::first();
         $teamMembers = AboutUsTeamMember::ordered()->paginate(10);
-        return view('cms.about-us.index', compact('setting', 'teamMembers'));
+        $clientLogos = AboutUsClientLogo::ordered()->get();
+        return view('cms.about-us.index', compact('setting', 'teamMembers', 'clientLogos'));
     }
 
     // ========== SETTINGS ==========
@@ -163,5 +165,77 @@ class AboutUsController extends Controller
 
         return redirect()->route('cms.about-us.index')
             ->with('success', 'Team member berhasil dihapus!');
+    }
+
+    // ========== CLIENT LOGOS ==========
+
+    public function createLogo()
+    {
+        return view('cms.about-us.create-logo');
+    }
+
+    public function storeLogo(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'nullable|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
+            'link' => 'nullable|string|max:255',
+            'is_active' => 'boolean',
+            'order' => 'nullable|integer',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('about-us/logos', 'public');
+        }
+
+        $validated['is_active'] = $request->has('is_active');
+        $validated['order'] = $validated['order'] ?? 0;
+
+        AboutUsClientLogo::create($validated);
+
+        return redirect()->route('cms.about-us.index')
+            ->with('success', 'Client logo berhasil ditambahkan!');
+    }
+
+    public function editLogo(AboutUsClientLogo $logo)
+    {
+        return view('cms.about-us.edit-logo', compact('logo'));
+    }
+
+    public function updateLogo(Request $request, AboutUsClientLogo $logo)
+    {
+        $validated = $request->validate([
+            'name' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
+            'link' => 'nullable|string|max:255',
+            'is_active' => 'boolean',
+            'order' => 'nullable|integer',
+        ]);
+
+        if ($request->hasFile('image')) {
+            if ($logo->image) {
+                Storage::disk('public')->delete($logo->image);
+            }
+            $validated['image'] = $request->file('image')->store('about-us/logos', 'public');
+        }
+
+        $validated['is_active'] = $request->has('is_active');
+
+        $logo->update($validated);
+
+        return redirect()->route('cms.about-us.index')
+            ->with('success', 'Client logo berhasil diperbarui!');
+    }
+
+    public function destroyLogo(AboutUsClientLogo $logo)
+    {
+        if ($logo->image) {
+            Storage::disk('public')->delete($logo->image);
+        }
+
+        $logo->delete();
+
+        return redirect()->route('cms.about-us.index')
+            ->with('success', 'Client logo berhasil dihapus!');
     }
 }
