@@ -17,10 +17,10 @@
         <div class="relative z-10 mx-auto px-6 lg:px-20">
             <div class="flex flex-wrap">
                 <!-- Sidebar Navigation -->
-                <div class="basis-full lg:basis-1/4">
-                    <ul>
+                <div class="basis-full lg:basis-1/4 overflow-hidden mb-5 md:mb-0">
+                    <ul class="flex md:block overflow-x-auto md:overflow-visible gap-4 md:gap-0 whitespace-nowrap md:whitespace-normal pb-2">
                         @foreach($categories as $category)
-                            <li class="block mb-[20px] md:mb-[50px]">
+                            <li class="inline-block md:block mb-[20px] md:mb-[50px]">
                                 <button @click="activeTab = 'category-{{ $category->id }}'"
                                     :class="activeTab === 'category-{{ $category->id }}' ? 'text-[#d9d9d9] opacity-100' : 'text-[#d9d9d9] opacity-50'"
                                     class="text-[18px] md:text-[20px] font-semibold leading-[130%] transition-opacity duration-300 cursor-pointer">{{ $category->name }}</button>

@@ -27,10 +27,10 @@
         <div class="relative z-10 mx-auto px-6 lg:px-20 py-12 md:py-32 w-full bg-[#3B0014] md:bg-transparent">
             <div class="md:w-3/5">
                 <div class="max-w-3xl">
-                    <h1 class="animate-fade-up text-[62px] md:text-[84px] font-medium text-[#B8C1F8] leading-[100%] mb-7">{{ $banner->title ?? 'The legal advice you can trust' }}</h1>
+                    <h1 class="animate-fade-up text-[44px] md:text-[84px] font-medium text-[#B8C1F8] leading-[100%] mb-7">{{ $banner->title ?? 'The legal advice you can trust' }}</h1>
                 </div>
                 
-                <div class="animate-fade-up animate-delay-1 text-lg text-[rgba(255,255,255,0.8)] leading-[180%] mb-10 max-w-xl">
+                <div class="animate-fade-up animate-delay-1 text-base md:text-lg text-[rgba(255,255,255,0.8)] leading-normal md:leading-[180%] mb-10 max-w-xl">
                     {!! $banner->description ?? 'Helping you navigate Indonesian law with clarity and confidence,<br>whether you\'re dealing with visas, business, or property.' !!}
                 </div>
                 
