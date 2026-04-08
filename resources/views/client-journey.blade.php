@@ -4,68 +4,41 @@
 
 @section('content')
 
-    <div class="relative pt-[240px] pb-[160px]">
+    <div class="relative pt-[120px] md:pt-[240px] pb-[80px] md:pb-[160px]">
         <div class="absolute top-0 left-0 bottom-0 right-0 transform z-[1]"
             style="background: linear-gradient(180deg, #6C342C 0%, #3B0014 100%);"></div>
-        <div class="absolute z-[2] top-0 pointer-events-none hidden md:block opacity-30">
-            {{-- <img src="{{ asset('assets/images/Bright Legal_Icon-07 1.png') }}" class="object-contain" alt=""> --}}
-        </div>
 
         <!-- Hero -->
-        <section class="relative z-[2] w-full px-6 lg:px-20 mb-[60px]">
-            <h1 class="text-[64px] md:text-[84px] font-medium leading-[110%] text-white">See how people navigate</h1>
-            <h2 class="text-[64px] md:text-[84px] font-medium leading-[110%] text-[#B8C1F8]">legal matters in Bali with us</h2>
+        <section class="relative z-[2] w-full px-6 lg:px-20 mb-[30px] md:mb-[60px]">
+            <h1 class="text-[32px] md:text-[84px] font-medium leading-[110%] text-white">See how people navigate</h1>
+            <h2 class="text-[32px] md:text-[84px] font-medium leading-[110%] text-[#B8C1F8]">legal matters in Bali with us</h2>
         </section>
 
         <!-- Tab Navigation + Content -->
         <section class="relative z-[2] w-full px-6 lg:px-20" x-data="{ activeTab: '{{ $categories->first()->slug ?? 'visa-support' }}' }">
 
             <!-- Tabs -->
-            <div class="flex items-center gap-8 mb-[60px] border-b border-white/10 pb-4">
-                @forelse($categories as $index => $category)
+            <div class="flex md:flex-wrap overflow-y-hidden overflow-x-auto md:overflow-visible flex-nowrap gap-4 md:gap-8 mb-[24px] md:mb-[60px] border-b border-white/10 pb-4">
+                @foreach($categories as $index => $category)
                     <button
                         @click="activeTab = '{{ $category->slug }}'"
                         :class="activeTab === '{{ $category->slug }}'
                             ? 'text-white font-medium'
                             : 'text-white/50 hover:text-white/80'"
-                        class="relative text-base transition-colors duration-200 whitespace-nowrap pb-2 cursor-pointer">
+                        class="relative text-sm md:text-base transition-colors duration-200 whitespace-nowrap pb-2 cursor-pointer shrink-0">
+                        
                         <span class="flex items-center gap-2">
                             <span x-show="activeTab === '{{ $category->slug }}'" class="w-2 h-2 rounded-full bg-[#F1AE43] inline-block"></span>
                             {{ $category->name }}
                         </span>
+
                         <span
                             x-show="activeTab === '{{ $category->slug }}'"
                             class="absolute bottom-[-17px] left-0 right-0 h-[2px] bg-[#F1AE43]"
-                            x-transition></span>
+                            x-transition>
+                        </span>
                     </button>
-                @empty
-                    <!-- Fallback tabs when no CMS data -->
-                    @php
-                        $fallbackTabs = [
-                            ['slug' => 'visa-support', 'name' => 'Visa support'],
-                            ['slug' => 'digital-nomad', 'name' => 'Digital nomad / remote work'],
-                            ['slug' => 'business-setup', 'name' => 'Business setup'],
-                            ['slug' => 'property-investment', 'name' => 'Property & investment'],
-                        ];
-                    @endphp
-                    @foreach($fallbackTabs as $index => $tab)
-                        <button
-                            @click="activeTab = '{{ $tab['slug'] }}'"
-                            :class="activeTab === '{{ $tab['slug'] }}'
-                                ? 'text-white font-medium'
-                                : 'text-white/50 hover:text-white/80'"
-                            class="relative text-base transition-colors duration-200 whitespace-nowrap pb-2 cursor-pointer">
-                            <span class="flex items-center gap-2">
-                                <span x-show="activeTab === '{{ $tab['slug'] }}'" class="w-2 h-2 rounded-full bg-[#F1AE43] inline-block"></span>
-                                {{ $tab['name'] }}
-                            </span>
-                            <span
-                                x-show="activeTab === '{{ $tab['slug'] }}'"
-                                class="absolute bottom-[-17px] left-0 right-0 h-[2px] bg-white/40"
-                                x-transition></span>
-                        </button>
-                    @endforeach
-                @endforelse
+                @endforeach
             </div>
 
             <!-- Tab Content -->
@@ -74,11 +47,11 @@
                     @forelse($category->items as $item)
                         <!-- Case Study Card -->
                         <div class="bg-[#73302A] rounded-[20px] overflow-hidden">
-                            <div class="p-8 md:p-10">
+                            <div class="p-5 md:p-10">
                                 <!-- Header: Number + Tags -->
-                                <div class="flex items-center gap-4 mb-4">
+                                <div class="flex items-center gap-4 mb-2 md:mb-4">
                                     <span class="text-[#F1ECEC] text-lg font-medium">{{ $item->number }}</span>
-                                    <div class="flex items-center gap-2 text-[#F1ECEC] font-medium text-lg ml-6">
+                                    <div class="flex items-center gap-2 text-[#F1ECEC] font-medium text-sm md:text-lg ml-6">
                                         @if($item->client_type)
                                             <span>{{ $item->client_type }}</span>
                                         @endif
@@ -92,13 +65,13 @@
                                 </div>
 
                                 <!-- Title -->
-                                <h3 class="text-white text-[28px] md:text-[44px] font-medium leading-[120%] ml-11">{{ $item->title }}</h3>
+                                <h3 class="text-white text-[20px] md:text-[44px] font-medium leading-[120%] ml-11">{{ $item->title }}</h3>
                             </div>
 
                             <!-- Content: Image left, text sections right -->
                             <div class="flex flex-col md:flex-row gap-0">
                                 <!-- Client Image (tall, spans full height) -->
-                                <div class="p-10 md:w-[460px] md:flex-shrink-0 overflow-hidden border border-b-0 border-l-0 border-white/10" style="min-height: 420px;">
+                                <div class="p-5 md:p-10 md:w-[460px] md:flex-shrink-0 overflow-hidden border border-b-0 border-l-0 border-white/10" style="min-height: 420px;">
                                     @if($item->image)
                                         <img src="{{ Storage::url($item->image) }}" alt="{{ $item->title }}"
                                             class="w-full h-full object-cover">
@@ -205,9 +178,9 @@
             @endforelse
 
             <!-- Bottom CTA Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-[80px]">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-[40px] md:mt-[80px]">
                 <!-- CTA 1: Not seeing your exact case? -->
-                <div class="rounded-[20px] p-8 md:p-10 relative overflow-hidden !bg-cover !bg-center !bg-no-repeat" style="background-image: url({{ asset('assets/images/bgs.png') }}); border-radius: 8px;">
+                <div class="rounded-[20px] p-5 md:p-10 relative overflow-hidden !bg-cover !bg-center !bg-no-repeat" style="background-image: url({{ asset('assets/images/bgs.png') }}); border-radius: 8px;">
                     <div class="relative z-10 flex flex-col md:flex-row md:items-start gap-6">
                         <div class="flex-shrink-0 max-w-[250px]">
                             <h4 class="text-white text-[28px] md:text-[32px] font-medium leading-[120%]">{!! nl2br(e($ctaSettings->cta1_title ?? 'Not seeing your exact case?')) !!}</h4>
@@ -222,7 +195,7 @@
                 </div>
 
                 <!-- CTA 2: Just starting your research? -->
-                <div class="rounded-[20px] p-8 md:p-10 relative overflow-hidden !bg-cover !bg-center !bg-no-repeat" style="background-image: url({{ asset('assets/images/bg.png') }}); border-radius: 8px;">
+                <div class="rounded-[20px] p-5 md:p-10 relative overflow-hidden !bg-cover !bg-center !bg-no-repeat" style="background-image: url({{ asset('assets/images/bg.png') }}); border-radius: 8px;">
                     <div class="relative z-10 flex flex-col md:flex-row md:items-start gap-6">
                         <div class="flex-shrink-0 max-w-[250px]">
                             <h4 class="text-white text-[28px] md:text-[32px] font-medium leading-[120%]">{!! nl2br(e($ctaSettings->cta2_title ?? 'Just starting your research?')) !!}</h4>
@@ -240,22 +213,15 @@
         </section>
     </div>
 
-    <!-- Artwork Section -->
-    <div class="relative z-[2] mt-[-12px]">
+    <div class="relative z-[2]">
         <img src="{{ asset('assets/images/brightlegal-artwork.png') }}" class="w-full" alt="Bright Legal Artwork">
     </div>
 
-    <!-- CTA Section -->
-    <div class="relative mt-[-60px] pt-[254px] pb-[166px] bg-[#CBD4FF] rounded-b-[60px]">
-        <div class="absolute left-0 top-0 right-0 bottom-0 bg-left bg-no-repeat bg-contain"
-            style="background-image: url('{{ asset('assets/images/Bright Legal_Icon-06 1.png') }}');"></div>
-        <div class="relative z-10 container max-w-[1240px] mx-auto text-center">
-            <h4 class="text-[84px] font-medium leading-[110%] text-[#3B0014] mb-[32px]">
-                {{ $readyToTalk->title ?? 'Ready to talk?' }}
-            </h4>
-            <a href="{{ $readyToTalk->button_link ?? '#' }}"
-                class="bg-[#3B0014] bg-opacity-30 hover:bg-opacity-40 text-[#B8C1F8] px-6 py-3 rounded-full transition inline-block">{{ $readyToTalk->button_text ?? 'Book free consultation' }}
-                <i class="fa-solid fa-arrow-right text-sm"></i></a>
+    <div class="relative mt-[-60px] pt-[180px] md:pt-[254px] pb-[140px] md:pb-[166px] bg-[#CBD4FF] rounded-b-[60px]">
+        <div class="absolute left-0 top-0 right-0 bottom-0 bg-left bg-no-repeat bg-contain" style="background-image: url('{{ asset('assets/images/Bright Legal_Icon-06 1.png') }}');"></div>
+        <div class="relative z-10 container mx-auto text-center">
+            <h4 class="text-[44px] md:text-[84px] font-medium leading-[110%] text-[#3B0014] mb-[32px]">{{ $readyToTalk->title ?? 'Ready to talk?' }}</h4>
+            <a href="{{ $readyToTalk->button_link ?? '#' }}" class="bg-[#3B0014] bg-opacity-30 hover:bg-opacity-40 text-[#B8C1F8] px-6 py-3 rounded-full items-center gap-2 transition inline-block">{{ $readyToTalk->button_text ?? 'Book free consultation' }} <i class="fa-solid fa-arrow-right text-sm"></i></a>
         </div>
     </div>
 

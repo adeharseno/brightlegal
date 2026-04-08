@@ -1,11 +1,11 @@
-<footer class="bg-[#3B0014] text-white mt-[-60px] pt-[160px]">
-    <div class="mx-auto px-6 lg:px-20 pt-16">
+<footer class="bg-[#3B0014] text-white mt-[-60px] pt-[120px] md:pt-[160px]">
+    <div class="mx-auto px-6 lg:px-20 md:pt-16">
 
         <div class="flex flex-wrap">
             <div class="basis-full lg:basis-1/3">
                 <!-- Brand Section -->
                 <div class="lg:col-span-1">
-                    <h2 class="text-[#B8C1F8] text-[42px] font-medium leading-tight mb-20 title">
+                    <h2 class="text-[#B8C1F8] text-[32px] md:text-[42px] font-medium leading-tight mb-5 md:mb-20 title">
                         Your legal partner<br>in paradise.
                     </h2>
                     <a href="#" class="bg-[#B8C1F8] text-[#3B0014] font-semibold px-6 py-2.5 rounded-full transition-colors duration-300">
@@ -13,7 +13,7 @@
                     </a>
                 </div>
             </div>
-            <div class="basis-full lg:basis-2/3 pl-[125px]">
+            <div class="basis-full lg:basis-2/3 md:pl-[125px] mt-10 md:mt-0">
                 <!-- Main Footer Content -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
                     
@@ -83,11 +83,11 @@
         </div>
         
         <!-- Copyright -->
-        <div class="mt-[130px] pt-8 border-t border-[rgba(245,245,245,0.05)]">
+        <div class="mt-[24px] md:mt-[130px] pt-8 border-t border-[rgba(245,245,245,0.05)]">
             <p class="text-[rgba(245,245,245,0.6)] text-sm font-medium">© <?php echo date('Y'); ?> Right Legal. All Rights Reserved.</p>
         </div>
 
-        <div class="mt-[200px]">
+        <div class="mt-[50px] md:mt-[200px]">
             <img src="{{ asset('assets/images/logo-footer.png') }}" class="w-full" alt="">
         </div>
     </div>

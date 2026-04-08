@@ -88,20 +88,14 @@
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="translate-x-0"
         x-transition:leave-end="-translate-x-full"
-        class="fixed top-0 left-0 bottom-0 w-80 max-w-[85vw] bg-[#4a1c2e] z-50 shadow-2xl lg:hidden overflow-y-auto"
+        class="fixed top-0 left-0 bottom-0 w-full bg-[#4a1c2e] z-50 shadow-2xl lg:hidden overflow-y-auto"
         x-cloak
     >
         <div class="flex flex-col h-full">
             <!-- Mobile Menu Header -->
             <div class="flex items-center justify-between p-6 border-b border-white/10">
                 <a href="#" class="flex items-center space-x-2">
-                    <svg class="w-8 h-8 text-white" viewBox="0 0 40 40" fill="currentColor">
-                        <path d="M10 5 L10 35 L15 35 L15 22 L25 22 C30 22 33 19 33 14 C33 9 30 5 25 5 Z M15 10 L24 10 C26 10 28 11 28 14 C28 17 26 18 24 18 L15 18 Z"/>
-                    </svg>
-                    <div>
-                        <div class="text-white font-bold text-xl leading-none">bright</div>
-                        <div class="text-white font-bold text-xl leading-none">legal</div>
-                    </div>
+                    <img src="{{ asset('assets/images/Logo.png') }}" class="h-[44px]" alt="">
                 </a>
                 <button 
                     @click="mobileMenuOpen = false"
@@ -117,28 +111,28 @@
             <nav class="flex-1 px-6 py-8">
                 <div class="space-y-2">
                     <a 
-                        href="#services" 
+                        href="{{ route('our-services') }}" 
                         @click="mobileMenuOpen = false"
                         class="block text-white/90 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
                     >
                         Our services
                     </a>
                     <a 
-                        href="#about" 
+                        href="{{ route('about-us') }}" 
                         @click="mobileMenuOpen = false"
                         class="block text-white/90 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
                     >
                         Who we are
                     </a>
                     <a 
-                        href="#journey" 
+                        href="{{ route('client-journey') }}" 
                         @click="mobileMenuOpen = false"
                         class="block text-white/90 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
                     >
                         Client journey
                     </a>
                     <a 
-                        href="#legal" 
+                        href="{{ route('legal-guide') }}" 
                         @click="mobileMenuOpen = false"
                         class="block text-white/90 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition-all duration-200 font-medium"
                     >

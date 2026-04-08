@@ -5,28 +5,28 @@
 @section('content')
 
     <!-- Hero Section -->
-    <div class="relative pt-[240px]">
+    <div class="relative pt-[50px] md:pt-[240px]">
         <div class="absolute top-0 left-0 bottom-0 right-0 transform z-[1]"
             style="background: linear-gradient(180deg, #6C342C 0%, #3B0014 100%);"></div>
     </div>
 
     <!-- Video Guide Section -->
-    <div class="bg-[#3B0014] pb-[140px]">
+    <div class="bg-[#3B0014] pb-[50px] md:pb-[140px]">
         <section class="px-6 lg:px-20 py-16 md:py-24">
             <div class="mx-auto">
 
                 <!-- Section Header -->
                 <div class="flex flex-wrap items-end mb-[60px]">
                     <div class="basis-full lg:basis-2/3">
-                        <h1 class="text-[84px] font-medium leading-[110%] text-white animate-fade-up">
+                        <h1 class="text-[44px] md:text-[84px] font-medium leading-[110%] text-white animate-fade-up">
                             {{ $guideSettings->page_title ?? 'Your Legal Guide.' }}
                         </h1>
-                        <h2 class="text-[84px] font-medium leading-[110%] text-[#B8C1F8] animate-fade-up animate-delay-1">
+                        <h2 class="text-[44px] md:text-[84px] font-medium leading-[110%] text-[#B8C1F8] animate-fade-up animate-delay-1">
                             {{ $guideSettings->page_subtitle ?? 'to life in Bali' }}
                         </h2>
                     </div>
-                    <div class="basis-full lg:basis-1/3 text-right">
-                        <a href="#" class="bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full items-center gap-2 transition inline-block">Follow us on Youtube <i class="fa-brands fa-youtube text-sm"></i></a>
+                    <div class="basis-full lg:basis-1/3 text-left md:text-right mt-5 md:mt-0">
+                        <a href="#" class="animate-fade-up animate-delay-1 bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full items-center gap-2 transition inline-block">Follow us on Youtube <i class="fa-brands fa-youtube text-sm"></i></a>
                     </div>
                 </div>
 
@@ -45,8 +45,7 @@
                                 <div class="featured-card-wrapper cursor-pointer"
                                     onclick="openVideoPopup('{{ $featured->video_url }}', '{{ addslashes($featured->title) }}')">
                                     <!-- Video Box with labels -->
-                                    <div class="video-card bg-[#6C342C] group relative rounded-[16px] overflow-hidden"
-                                        style="height: 420px;">
+                                    <div class="video-card bg-[#6C342C] group relative rounded-[16px] overflow-hidden h-[320px] md:h-[420px]">
                                         @if($featured->thumbnail)
                                             <img src="{{ Storage::url($featured->thumbnail) }}" alt="{{ $featured->title }}"
                                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -62,11 +61,11 @@
                                             <span class="text-white/80 text-sm font-light italic">Bright Legal</span>
                                         </div>
                                         <!-- Overlay -->
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30 top h-[375px]"></div>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30 top h-[320px] md:h-[375px]"></div>
                                         <!-- Play Button -->
-                                        <div class="absolute inset-0 flex items-center justify-center h-[375px]">
+                                        <div class="absolute inset-0 flex items-center justify-center h-[320px] md:h-[375px]">
                                             <div
-                                                class="play-btn w-[72px] h-[72px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
+                                                class="play-btn w-[44px] md:w-[72px] h-[44px] md:h-[72px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
                                                 <i class="fas fa-play text-white text-2xl ml-1"></i>
                                             </div>
                                         </div>
@@ -90,8 +89,7 @@
                                     <div class="guide-card-wrapper cursor-pointer"
                                         onclick="openVideoPopup('{{ $item->video_url }}', '{{ addslashes($item->title) }}')">
                                         <!-- Video Thumbnail Box -->
-                                        <div class="video-card group relative rounded-[16px] overflow-hidden"
-                                            style="height: 420px;">
+                                        <div class="video-card group relative rounded-[16px] overflow-hidden h-[320px] md:h-[420px]">
                                             @if($item->thumbnail)
                                                 <img src="{{ Storage::url($item->thumbnail) }}" alt="{{ $item->title }}"
                                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -138,8 +136,7 @@
                                     <div class="guide-card-wrapper cursor-pointer"
                                         onclick="openVideoPopup('{{ $item->video_url }}', '{{ addslashes($item->title) }}')">
                                         <!-- Video Thumbnail Box -->
-                                        <div class="video-card group relative rounded-[16px] overflow-hidden"
-                                            style="height: 420px;">
+                                        <div class="video-card group relative rounded-[16px] overflow-hidden h-[320px] md:h-[420px]">
                                             @if($item->thumbnail)
                                                 <img src="{{ Storage::url($item->thumbnail) }}" alt="{{ $item->title }}"
                                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -185,11 +182,11 @@
                                 </div>
                                 <div class="p-[100px] pb-[50px]">
                                     <!-- Video Box -->
-                                    <div class="video-card group relative rounded-[16px] overflow-hidden max-w-[420px] h-[375px] mx-auto">
+                                    <div class="video-card group relative rounded-[16px] overflow-hidden max-w-[420px] h-[320px] md:h-[375px] mx-auto">
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30"></div>
                                         <div class="absolute inset-0 flex items-center justify-center">
                                             <div
-                                                class="play-btn w-[72px] h-[72px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
+                                                class="play-btn w-[44px] md:w-[72px] h-[44px] md:h-[72px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
                                                 <i class="fas fa-play text-white text-2xl ml-1"></i>
                                             </div>
                                         </div>
@@ -205,8 +202,7 @@
                         <div class="animate-on-scroll" style="animation-delay: 0.15s">
                             <div class="guide-card-wrapper cursor-pointer"
                                 onclick="openVideoPopup('', 'Setting up a PT PMA')">
-                                <div class="video-card group relative rounded-[16px] overflow-hidden"
-                                    style="height: 420px;">
+                                <div class="video-card group relative rounded-[16px] overflow-hidden h-[320px] md:h-[420px]">
                                     <div
                                         class="w-full h-full bg-gradient-to-br from-[#73302A] to-[#4A1A2E] flex items-center justify-center">
                                         <i class="fas fa-play-circle text-white/20 text-[60px]"></i>
@@ -229,8 +225,7 @@
                         <div class="animate-on-scroll" style="animation-delay: 0.3s">
                             <div class="guide-card-wrapper cursor-pointer"
                                 onclick="openVideoPopup('', 'Property ownership')">
-                                <div class="video-card group relative rounded-[16px] overflow-hidden"
-                                    style="height: 420px;">
+                                <div class="video-card group relative rounded-[16px] overflow-hidden h-[320px] md:h-[420px]">
                                     <div
                                         class="w-full h-full bg-gradient-to-br from-[#73302A] to-[#4A1A2E] flex items-center justify-center">
                                         <i class="fas fa-play-circle text-white/20 text-[60px]"></i>
@@ -273,8 +268,7 @@
                                 <div class="animate-on-scroll" style="animation-delay: {{ $idx * 0.1 }}s">
                                     <div class="guide-card-wrapper cursor-pointer"
                                         onclick="openVideoPopup('', '{{ $card['title'] }}')">
-                                        <div class="video-card group relative rounded-[16px] overflow-hidden"
-                                            style="height: 420px;">
+                                        <div class="video-card group relative rounded-[16px] overflow-hidden h-[320px] md:h-[420px]">
                                             <div
                                                 class="w-full h-full bg-gradient-to-br from-[#73302A] to-[#4A1A2E] flex items-center justify-center">
                                                 <i class="fas fa-play-circle text-white/20 text-[60px]"></i>
@@ -307,30 +301,15 @@
         </section>
     </div>
 
-    <!-- Artwork Section -->
-    <div class="relative z-[2] mt-[-12px]">
+    <div class="relative z-[2]">
         <img src="{{ asset('assets/images/brightlegal-artwork.png') }}" class="w-full" alt="Bright Legal Artwork">
     </div>
 
-    <!-- CTA Section -->
-    <div class="relative mt-[-60px] pt-[254px] pb-[166px] bg-[#CBD4FF] rounded-b-[60px]">
-        <div class="absolute left-0 top-0 right-0 bottom-0 bg-left bg-no-repeat bg-contain"
-            style="background-image: url('{{ asset('assets/images/Bright Legal_Icon-06 1.png') }}');"></div>
-        <div class="relative z-10 container max-w-[1240px] mx-auto text-center">
-            <h4 class="text-[84px] font-medium leading-[110%] text-[#3B0014] mb-[32px] animate-on-scroll">
-                @if($guideSettings && $guideSettings->cta_text)
-                    {{ $guideSettings->cta_text }}
-                @else
-                    {{ $readyToTalk->title ?? 'Ready to talk?' }}
-                @endif
-            </h4>
-            @php
-                $ctaLink = ($guideSettings && $guideSettings->cta_button_link) ? $guideSettings->cta_button_link : ($readyToTalk->button_link ?? '#');
-                $ctaText = ($guideSettings && $guideSettings->cta_button_text) ? $guideSettings->cta_button_text : ($readyToTalk->button_text ?? 'Book free consultation');
-            @endphp
-            <a href="{{ $ctaLink }}"
-                class="bg-[#3B0014] bg-opacity-30 hover:bg-opacity-40 text-[#B8C1F8] px-6 py-3 rounded-full transition inline-block animate-on-scroll">{{ $ctaText }}
-                <i class="fa-solid fa-arrow-right text-sm"></i></a>
+    <div class="relative mt-[-60px] pt-[180px] md:pt-[254px] pb-[140px] md:pb-[166px] bg-[#CBD4FF] rounded-b-[60px]">
+        <div class="absolute left-0 top-0 right-0 bottom-0 bg-left bg-no-repeat bg-contain" style="background-image: url('{{ asset('assets/images/Bright Legal_Icon-06 1.png') }}');"></div>
+        <div class="relative z-10 container mx-auto text-center">
+            <h4 class="text-[44px] md:text-[84px] font-medium leading-[110%] text-[#3B0014] mb-[32px]">{{ $readyToTalk->title ?? 'Ready to talk?' }}</h4>
+            <a href="{{ $readyToTalk->button_link ?? '#' }}" class="bg-[#3B0014] bg-opacity-30 hover:bg-opacity-40 text-[#B8C1F8] px-6 py-3 rounded-full items-center gap-2 transition inline-block">{{ $readyToTalk->button_text ?? 'Book free consultation' }} <i class="fa-solid fa-arrow-right text-sm"></i></a>
         </div>
     </div>
 
@@ -360,78 +339,7 @@
             </div>
         </div>
     </div>
-
-    <style>
-        /* Animations */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fade-up {
-            animation: fadeUp 0.8s ease-out forwards;
-        }
-
-        .animate-delay-1 {
-            animation-delay: 0.2s;
-            opacity: 0;
-        }
-
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Video Card Hover Effects */
-        .video-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .video-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .play-btn {
-            transition: all 0.3s ease;
-        }
-
-        .video-card:hover .play-btn {
-            box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.1);
-        }
-
-        /* Popup Transition */
-        #videoPopup {
-            transition: opacity 0.3s ease;
-        }
-
-        #videoPopup.show {
-            display: flex !important;
-            opacity: 1;
-        }
-
-        /* Line Clamp */
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-    </style>
-
+    
     <script>
         // Scroll Animation Observer
         document.addEventListener('DOMContentLoaded', function () {

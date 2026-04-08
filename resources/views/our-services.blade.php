@@ -4,11 +4,11 @@
 
 @section('content')
 
-    <div class="pt-[240px] pb-[100px] relative">
+    <div class="pt-[140px] md:pt-[240px] pb-[40px] md:pb-[100px] relative">
         <div class="absolute top-0 left-0 bottom-0 right-0 transform"
             style="background: linear-gradient(180deg, #6C342C 0%, #3B0014 100%);"></div>
         <div class="relative z-10 mx-auto px-6 lg:px-20">
-            <h4 class="text-[84px] font-medium leading-[110%] gradient-text">
+            <h4 class="text-[44px] md:text-[84px] font-medium leading-[110%] gradient-text">
                 {!! $servicesSettings->title ?? 'We help you handle <br /> the legal side of Bali life' !!}</h4>
         </div>
     </div>
@@ -19,31 +19,13 @@
                 <!-- Sidebar Navigation -->
                 <div class="basis-full lg:basis-1/4">
                     <ul>
-                        @forelse($categories as $category)
-                            <li class="block mb-[50px]">
+                        @foreach($categories as $category)
+                            <li class="block mb-[20px] md:mb-[50px]">
                                 <button @click="activeTab = 'category-{{ $category->id }}'"
                                     :class="activeTab === 'category-{{ $category->id }}' ? 'text-[#d9d9d9] opacity-100' : 'text-[#d9d9d9] opacity-50'"
-                                    class="text-[20px] font-semibold leading-[130%] transition-opacity duration-300 cursor-pointer">{{ $category->name }}</button>
+                                    class="text-[18px] md:text-[20px] font-semibold leading-[130%] transition-opacity duration-300 cursor-pointer">{{ $category->name }}</button>
                             </li>
-                        @empty
-                            <li class="block mb-[50px]">
-                                <button @click="activeTab = 'visa'"
-                                    :class="activeTab === 'visa' ? 'text-[#d9d9d9] opacity-100' : 'text-[#d9d9d9] opacity-50'"
-                                    class="text-[20px] font-semibold leading-[130%] transition-opacity duration-300 cursor-pointer">Visa</button>
-                            </li>
-                            <li class="block mb-[50px]">
-                                <button @click="activeTab = 'company-setup'"
-                                    :class="activeTab === 'company-setup' ? 'text-[#d9d9d9] opacity-100' : 'text-[#d9d9d9] opacity-50'"
-                                    class="text-[20px] font-semibold leading-[130%] transition-opacity duration-300 cursor-pointer">Company
-                                    set up</button>
-                            </li>
-                            <li class="block mb-[50px]">
-                                <button @click="activeTab = 'agreements-contracts'"
-                                    :class="activeTab === 'agreements-contracts' ? 'text-[#d9d9d9] opacity-100' : 'text-[#d9d9d9] opacity-50'"
-                                    class="text-[20px] font-semibold leading-[130%] transition-opacity duration-300 cursor-pointer">Agreements
-                                    & contracts</button>
-                            </li>
-                        @endforelse
+                        @endforeach
                     </ul>
                 </div>
 
@@ -57,7 +39,7 @@
                                     <button
                                         @click="openModal('{{ $service->id }}', '{{ addslashes($service->title) }}', '{{ $service->image ? Storage::url($service->image) : 'https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g' }}')"
                                         class="group mb-[72px] text-left w-full hover:opacity-80 transition-opacity">
-                                        <div class="h-[440px] overflow-hidden rounded-xl mb-6 relative">
+                                        <div class="h-[320px] md:h-[440px] overflow-hidden rounded-xl mb-6 relative">
                                             <div
                                                 class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-90 z-[2] transition-all duration-500 ease-in-out flex items-center justify-center rounded-full bg-[rgba(251,244,225,0.2)]">
                                                 <img src="{{ asset('assets/images/plus.png') }}" class="" alt="">
@@ -72,7 +54,7 @@
                                                     alt="{{ $service->title }}">
                                             @endif
                                         </div>
-                                        <h3 class="mb-5 font-semibold text-[28px] opacity-80 text-[#f5f5f5]">{{ $service->title }}
+                                        <h3 class="mb-5 font-semibold text-[22px] md:text-[28px] opacity-80 text-[#f5f5f5]">{{ $service->title }}
                                         </h3>
                                         <hr class="border-[#6C342C] my-5">
                                         <div class="text-[#F1ECEC] text-base opacity-60 font-medium">
@@ -298,26 +280,6 @@
 
                 async requestService(serviceId) {
                     try {
-                        // BACKEND INTEGRATION POINT
-                        // Replace this with your actual request endpoint
-                        // Example:
-                        // const response = await fetch('/api/service-requests', {
-                        //     method: 'POST',
-                        //     headers: { 
-                        //         'Content-Type': 'application/json',
-                        //         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                        //     },
-                        //     body: JSON.stringify({ 
-                        //         service_id: serviceId,
-                        //         requested_at: new Date().toISOString()
-                        //     })
-                        // });
-                        // if (response.ok) {
-                        //     alert('Service consultation requested successfully!');
-                        //     this.closeModal();
-                        // } else {
-                        //     throw new Error('Request failed');
-                        // }
 
                         alert(`Consultation request for "${this.modalData.title}" submitted!\n\nPlease contact us for more information.`);
                         this.closeModal();
@@ -331,7 +293,7 @@
     </script>
 
     <!-- FAQ Section -->
-    <div class="relative pt-[180px] pb-[130px] bg-[#6C342C]">
+    <div class="relative pt-[60px] md:pt-[180px] pb-[60px] md:pb-[130px] bg-[#6C342C]">
         <div class="absolute top-0 left-0 bottom-0 right-0 transform rotate-180"
             style="background: linear-gradient(180deg, #944229 13.02%, rgba(108, 52, 44, 0) 100%), #3B0014;"></div>
         <div class="relative z-10 mx-auto px-6 lg:px-20">
@@ -340,21 +302,21 @@
                 <div class="basis-full lg:basis-3/4">
                     <div class="space-y-2" x-data="{ active: null }">
                         <div class="mb-[40px]">
-                            <p class="text-[#FBF4E1] text-base font-medium mb-9">
+                            <p class="text-[#FBF4E1] text-base font-medium mb-5 md:mb-9">
                                 {{ $faqsSettings->title ?? 'Visa questions' }}</p>
                             @if($faqsSettings && $faqsSettings->description)
-                                <div class="text-[#FBF4E1] text-[52px] leading-[120%] font-medium">
+                                <div class="text-[#FBF4E1] text-[36px] md:text-[52px] leading-[120%] font-medium">
                                     {!! $faqsSettings->description !!}</div>
                             @else
-                                <h3 class="text-[#FBF4E1] text-[52px] leading-[120%] font-medium">Frequently asked questions
+                                <h3 class="text-[#FBF4E1] text-[36px] md:text-[52px] leading-[120%] font-medium">Frequently asked questions
                                 </h3>
                             @endif
                         </div>
-                        @forelse($faqs as $index => $faq)
+                        @foreach($faqs as $index => $faq)
                             <!-- Question {{ $index + 1 }} -->
                             <div class="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden transition-all duration-300">
                                 <button @click="active = active === {{ $index + 1 }} ? null : {{ $index + 1 }}"
-                                    class="w-full px-6 py-5 flex items-center justify-between text-left text-white hover:bg-white/5 transition-colors">
+                                    class="w-full px-5 md:px-6 py-4 md:py-5 flex items-center justify-between text-left text-white hover:bg-white/5 transition-colors">
                                     <span class="text-base lg:text-lg font-light">{{ $faq->title }}</span>
                                     <span class="text-2xl font-light transition-transform duration-300"
                                         :class="active === {{ $index + 1 }} ? 'rotate-45' : ''">+</span>
@@ -370,49 +332,22 @@
                                     </div>
                                 </div>
                             </div>
-                        @empty
-                            <!-- Question 1 -->
-                            <div class="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden transition-all duration-300">
-                                <button @click="active = active === 1 ? null : 1"
-                                    class="w-full px-6 py-5 flex items-center justify-between text-left text-white hover:bg-white/5 transition-colors">
-                                    <span class="text-base lg:text-lg font-light">How much does legal support cost?</span>
-                                    <span class="text-2xl font-light transition-transform duration-300"
-                                        :class="active === 1 ? 'rotate-45' : ''">+</span>
-                                </button>
-                                <div x-show="active === 1" x-transition:enter="transition-all ease-out duration-500"
-                                    x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-96"
-                                    x-transition:leave="transition-all ease-in duration-300"
-                                    x-transition:leave-start="opacity-100 max-h-96" x-transition:leave-end="opacity-0 max-h-0"
-                                    class="overflow-hidden" style="display: none;">
-                                    <div class="px-6 py-5 text-white/90 text-sm lg:text-base leading-relaxed">
-                                        Legal support costs vary depending on the complexity of your needs. We offer transparent
-                                        pricing with packages starting from competitive rates. Contact us for a detailed quote
-                                        tailored to your specific requirements.
-                                    </div>
-                                </div>
-                            </div>
-                        @endforelse
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Artwork Section -->
-    <div class="relative z-[2] mt-[-12px]">
+    <div class="relative z-[2]">
         <img src="{{ asset('assets/images/brightlegal-artwork.png') }}" class="w-full" alt="Bright Legal Artwork">
     </div>
 
-    <!-- CTA Section -->
-    <div class="relative mt-[-60px] pt-[254px] pb-[166px] bg-[#CBD4FF] rounded-b-[60px]">
-        <div class="absolute left-0 top-0 right-0 bottom-0 bg-left bg-no-repeat bg-contain"
-            style="background-image: url('{{ asset('assets/images/Bright Legal_Icon-06 1.png') }}');"></div>
-        <div class="relative z-10 mx-auto text-center">
-            <h4 class="text-[84px] font-medium leading-[110%] text-[#3B0014] mb-[32px]">
-                {{ $readyToTalk->title ?? 'Ready to talk?' }}</h4>
-            <a href="{{ $readyToTalk->button_link ?? '#' }}"
-                class="bg-[#3B0014] bg-opacity-30 hover:bg-opacity-40 text-[#B8C1F8] px-6 py-3 rounded-full transition inline-block">{{ $readyToTalk->button_text ?? 'Book free consultation' }}
-                <i class="fa-solid fa-arrow-right text-sm"></i></a>
+    <div class="relative mt-[-60px] pt-[180px] md:pt-[254px] pb-[140px] md:pb-[166px] bg-[#CBD4FF] rounded-b-[60px]">
+        <div class="absolute left-0 top-0 right-0 bottom-0 bg-left bg-no-repeat bg-contain" style="background-image: url('{{ asset('assets/images/Bright Legal_Icon-06 1.png') }}');"></div>
+        <div class="relative z-10 container mx-auto text-center">
+            <h4 class="text-[44px] md:text-[84px] font-medium leading-[110%] text-[#3B0014] mb-[32px]">{{ $readyToTalk->title ?? 'Ready to talk?' }}</h4>
+            <a href="{{ $readyToTalk->button_link ?? '#' }}" class="bg-[#3B0014] bg-opacity-30 hover:bg-opacity-40 text-[#B8C1F8] px-6 py-3 rounded-full items-center gap-2 transition inline-block">{{ $readyToTalk->button_text ?? 'Book free consultation' }} <i class="fa-solid fa-arrow-right text-sm"></i></a>
         </div>
     </div>
 
