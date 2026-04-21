@@ -37,12 +37,20 @@
                 <p class="text-sm text-gray-500 mt-1">Max 2MB. Format: JPEG, PNG, JPG, GIF, WebP</p>
             </div>
             <div>
-                <label for="video_url" class="block text-sm font-medium text-gray-700 mb-2">Video URL</label>
+                <label for="video_url" class="block text-sm font-medium text-gray-700 mb-2">YouTube URL</label>
                 <input type="text" name="video_url" id="video_url" value="{{ old('video_url') }}"
-                       placeholder="e.g. https://www.youtube.com/embed/xxxxx or https://vimeo.com/xxxxx"
+                       placeholder="e.g. https://www.youtube.com/watch?v=xxxxx"
                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B0014] focus:border-transparent">
-                <p class="text-sm text-gray-500 mt-1">Paste YouTube embed URL atau URL video lainnya</p>
+                <p class="text-sm text-gray-500 mt-1">Paste YouTube URL (watch, youtu.be, atau embed)</p>
             </div>
+        </div>
+
+        <div class="mb-4">
+            <label for="instagram_url" class="block text-sm font-medium text-gray-700 mb-2">Instagram URL</label>
+            <input type="text" name="instagram_url" id="instagram_url" value="{{ old('instagram_url') }}"
+                   placeholder="e.g. https://www.instagram.com/p/DUQBHJbiS6E/"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B0014] focus:border-transparent">
+            <p class="text-sm text-gray-500 mt-1">Paste URL post/reel Instagram. Bisa diisi bersamaan dengan YouTube.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">

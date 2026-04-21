@@ -43,7 +43,7 @@
 
                 <!-- Contact Button - Desktop -->
                 <div class="hidden lg:block">
-                    <a href="#contact" class="bg-[#B8C1F8] text-[#4a1c2e] px-6 py-2.5 rounded-full font-semibold transition-all duration-200 inline-block">
+                    <a href="https://api.whatsapp.com/send/?phone=%2B6282298892643&text&type=phone_number&app_absent=0" class="bg-[#B8C1F8] text-[#4a1c2e] px-6 py-2.5 rounded-full font-semibold transition-all duration-200 inline-block">
                         Contact us
                     </a>
                 </div>
@@ -144,8 +144,7 @@
             <!-- Mobile Menu Footer with Contact Button -->
             <div class="p-6 border-t border-white/10">
                 <a 
-                    href="#contact" 
-                    @click="mobileMenuOpen = false"
+                    href="https://api.whatsapp.com/send/?phone=%2B6282298892643&text&type=phone_number&app_absent=0" 
                     class="block w-full bg-[#c4b5d8] hover:bg-[#b5a3cc] text-[#4a1c2e] px-6 py-3 rounded-full font-semibold transition-all duration-200 text-center"
                 >
                     Contact us

@@ -13,6 +13,10 @@
         </div>
     </div>
 
+    @php
+        $categorySlugMap = $categories->mapWithKeys(fn($cat) => [\Illuminate\Support\Str::slug($cat->name) => 'category-' . $cat->id]);
+    @endphp
+
     <div class="bg-[#3B0014]" x-data="servicesTabs()">
         <div class="relative z-10 mx-auto px-6 lg:px-20">
             <div class="flex flex-wrap">
@@ -198,6 +202,15 @@
         function servicesTabs() {
             return {
                 activeTab: '{{ $categories->first() ? "category-" . $categories->first()->id : "visa" }}',
+                categorySlugMap: @json($categorySlugMap),
+
+                init() {
+                    const hash = window.location.hash.replace('#', '');
+                    if (hash && this.categorySlugMap[hash]) {
+                        this.activeTab = this.categorySlugMap[hash];
+                    }
+                },
+
                 modalOpen: false,
                 modalLoading: false,
                 modalContent: {
@@ -303,7 +316,7 @@
                     <div class="space-y-2" x-data="{ active: null }">
                         <div class="mb-[40px]">
                             <p class="text-[#FBF4E1] text-base font-medium mb-5 md:mb-9">
-                                {{ $faqsSettings->title ?? 'Visa questions' }}</p>
+                                {{ $faqsSettings->title ?? 'YOUR QUESTIONS, ANSWERED' }}</p>
                             @if($faqsSettings && $faqsSettings->description)
                                 <div class="text-[#FBF4E1] text-[36px] md:text-[52px] leading-[120%] font-medium">
                                     {!! $faqsSettings->description !!}</div>
@@ -347,7 +360,7 @@
         <div class="absolute left-0 top-0 right-0 bottom-0 bg-left bg-no-repeat bg-contain" style="background-image: url('{{ asset('assets/images/Bright Legal_Icon-06 1.png') }}');"></div>
         <div class="relative z-10 container mx-auto text-center">
             <h4 class="text-[44px] md:text-[84px] font-medium leading-[110%] text-[#3B0014] mb-[32px]">{{ $readyToTalk->title ?? 'Ready to talk?' }}</h4>
-            <a href="{{ $readyToTalk->button_link ?? '#' }}" class="bg-[#3B0014] bg-opacity-30 hover:bg-opacity-40 text-[#B8C1F8] px-6 py-3 rounded-full items-center gap-2 transition inline-block">{{ $readyToTalk->button_text ?? 'Book free consultation' }} <i class="fa-solid fa-arrow-right text-sm"></i></a>
+            <a href="{{ $readyToTalk->button_link ?? '#' }}" class="bg-[#3B0014] hover:bg-opacity-70 text-[#B8C1F8] px-6 py-3 rounded-full items-center gap-2 transition inline-block font-normal">{{ $readyToTalk->button_text ?? 'Book free consultation' }} <i class="fa-solid fa-arrow-right text-sm"></i></a>
         </div>
     </div>
 

@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="relative min-h-screen block md:flex items-center overflow-hidden">
+    <div class="relative min-h-screen block md:flex items-end overflow-hidden">
         <!-- Background Split -->
         <div class="relative md:absolute inset-0 flex">
             <!-- Left side - Dark maroon -->
@@ -38,7 +38,7 @@
                     <a href="{{ $banner->button_link ?? '#' }}" class="bg-[#B8C1F8] text-[#3B0014] px-5 md:px-8 py-3.5 rounded-full font-semibold transition shadow-lg">
                         {{ $banner->button_text ?? 'Talk to us' }}
                     </a>
-                    <a href="#" class="bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-5 md:px-6 py-3 rounded-full flex items-center gap-2 transition">
+                    <a href="#about" class="border-[0.5px] border-white/25 backdrop-blur-md bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-5 md:px-6 py-3 rounded-full flex items-center gap-2 transition">
                         Get to know us <i class="fa-solid fa-arrow-down text-sm"></i>
                     </a>
                 </div>
@@ -103,6 +103,7 @@
             }
         }"
         x-intersect.once="startCounting()"
+        id="about"
         class="bg-[#3B0014] py-[80px]"
     >
         <div class="mx-auto px-6 lg:px-20">
@@ -139,8 +140,8 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-5 md:mb-20">
-                @forelse($whyWorkCards as $card)
-                <a href="#" class="group">
+                @foreach($whyWorkCards as $card)
+                <div class="group">
                     <div class="h-[380px] md:h-[500px] overflow-hidden rounded-xl mb-5">
                         @if($card->image)
                         <img src="{{ Storage::url($card->image) }}" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="{{ $card->title }}">
@@ -152,39 +153,11 @@
                         <h4 class="mb-4 title font-semibold text-2xl text-[#D9D9D9]">{{ $card->title }}</h4>
                         <div class="text-white opacity-60 font-medium">{!! $card->description !!}</div>
                     </div>
-                </a>
-                @empty
-                <a href="#" class="group">
-                    <div class="h-[380px] md:h-[500px] overflow-hidden rounded-xl mb-5">
-                        <img src="https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
-                    </div>
-                    <div>
-                        <h4 class="mb-4 title font-semibold text-2xl text-[#D9D9D9]">Clear, step-by-step guidance</h4>
-                        <p class="text-white opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
-                    </div>
-                </a>
-                <a href="#" class="group">
-                    <div class="h-[380px] md:h-[500px] overflow-hidden rounded-xl mb-5">
-                        <img src="https://fastly.picsum.photos/id/17/2500/1667.jpg?hmac=HD-JrnNUZjFiP2UZQvWcKrgLoC_pc_ouUSWv8kHsJJY" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
-                    </div>
-                    <div>
-                        <h4 class="mb-4 title font-semibold text-2xl text-[#D9D9D9]">Clear, step-by-step guidance</h4>
-                        <p class="text-white opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
-                    </div>
-                </a>
-                <a href="#" class="group">
-                    <div class="h-[380px] md:h-[500px] overflow-hidden rounded-xl mb-5">
-                        <img src="https://fastly.picsum.photos/id/27/3264/1836.jpg?hmac=p3BVIgKKQpHhfGRRCbsi2MCAzw8mWBCayBsKxxtWO8g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
-                    </div>
-                    <div>
-                        <h4 class="mb-4 title font-semibold text-2xl text-[#D9D9D9]">Clear, step-by-step guidance</h4>
-                        <p class="text-white opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
-                    </div>
-                </a>
-                @endforelse
+                </div>
+                @endforeach
             </div>
             <div class="text-center">
-                <a href="#" class="bg-[rgba(245,245,245,0.3)] inline-block bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full items-center gap-2 transition"><span class="gradient-text">Just starting your research? Download our free legal guides to navigate Indonesian law</span> <i class="fa-solid fa-arrow-right text-sm"></i></a>
+                <a href="{{ route('legal-guide') }}" class="border-[0.5px] border-white/25 backdrop-blur-md bg-[rgba(245,245,245,0.1)] inline-block bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full items-center gap-2 transition"><span class="gradient-text">Just starting your research? Download our free legal guides to navigate Indonesian law</span> <i class="fa-solid fa-arrow-right text-sm"></i></a>
             </div>
         </div>
     </div>
@@ -197,94 +170,27 @@
                     <h2 class="text-[#f5f5f5] text-[36px] md:text-[52px] font-medium leading-[110%]">{!! $servicesSettings->description ?? 'One stop. <br> <span class="text-[#B8C1FC]">Zero headache.</span>' !!}</h2>
                 </div>
                 <div class="basis-full lg:basis-1/2 text-left md:text-right mt-5 md:mt-0">
-                    <a href="{{ route('our-services') }}" class="bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full items-center gap-2 transition inline-block">Explore our services <i class="fa-solid fa-arrow-right text-sm"></i></a>
+                    <a href="{{ route('our-services') }}" class="border-[0.5px] border-white/25 backdrop-blur-md bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full items-center gap-2 transition inline-block">Explore our services <i class="fa-solid fa-arrow-right text-sm"></i></a>
                 </div>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-5 md:mb-20">
-                @forelse($services as $service)
-                <a href="{{ route('our-services') }}" class="group mb-5 md:mb-[80px]">
-                    <hr class="border-[#6C342C] mb-5">
-                    <h3 class="mb-5 font-semibold text-[28px] text-[#f5f5f5]">{{ $service->title }}</h3>
-                    <div class="h-[360px] md:h-[440px] overflow-hidden rounded-xl mb-6 relative">
-                        <img src="{{ asset('assets/images/arrow.png') }}" class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-45 z-[2] transition-all duration-500 ease-in-out" alt="">
-                        @if($service->image)
-                        <img src="{{ Storage::url($service->image) }}" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="{{ $service->title }}">
-                        @else
-                        <img src="https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="{{ $service->title }}">
-                        @endif
-                    </div>
-                    <div>
-                        <div class="text-white text-lg opacity-60 font-medium">{!! Str::limit(strip_tags($service->description), 150) !!}</div>
-                    </div>
-                </a>
-                @empty
-                <a href="#" class="group mb-5 md:mb-[80px]">
-                    <hr class="border-[#6C342C] mb-5">
-                    <h3 class="mb-5 font-semibold text-[28px] text-[#f5f5f5]">Title section card</h3>
-                    <div class="h-[360px] md:h-[440px] overflow-hidden rounded-xl mb-6 relative">
-                        <img src="{{ asset('assets/images/arrow.png') }}" class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-45 z-[2] ransition-all duration-500 ease-in-out" alt="">
-                        <img src="https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
-                    </div>
-                    <div>
-                        <p class="text-white text-lg opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
-                    </div>
-                </a>
-                <a href="#" class="group mb-5 md:mb-[80px]">
-                    <hr class="border-[#6C342C] mb-5">
-                    <h3 class="mb-5 font-semibold text-[28px] text-[#f5f5f5]">Title section card</h3>
-                    <div class="h-[360px] md:h-[440px] overflow-hidden rounded-xl mb-6 relative">
-                        <img src="{{ asset('assets/images/arrow.png') }}" class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-45 z-[2] transition-all duration-500 ease-in-out" alt="">
-                        <img src="https://fastly.picsum.photos/id/17/2500/1667.jpg?hmac=HD-JrnNUZjFiP2UZQvWcKrgLoC_pc_ouUSWv8kHsJJY" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
-                    </div>
-                    <div>
-                        <p class="text-white text-lg opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
-                    </div>
-                </a>
-                <a href="#" class="group mb-5 md:mb-[80px]">
-                    <hr class="border-[#6C342C] mb-5">
-                    <h3 class="mb-5 font-semibold text-[28px] text-[#f5f5f5]">Title section card</h3>
-                    <div class="h-[360px] md:h-[440px] overflow-hidden rounded-xl mb-6 relative">
-                        <img src="{{ asset('assets/images/arrow.png') }}" class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-45 z-[2] transition-all duration-500 ease-in-out" alt="">
-                        <img src="https://fastly.picsum.photos/id/27/3264/1836.jpg?hmac=p3BVIgKKQpHhfGRRCbsi2MCAzw8mWBCayBsKxxtWO8g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
-                    </div>
-                    <div>
-                        <p class="text-white text-lg opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
-                    </div>
-                </a>
-                <a href="#" class="group mb-5 md:mb-[80px]">
-                    <hr class="border-[#6C342C] mb-5">
-                    <h3 class="mb-5 font-semibold text-[28px] text-[#f5f5f5]">Title section card</h3>
-                    <div class="h-[360px] md:h-[440px] overflow-hidden rounded-xl mb-6 relative">
-                        <img src="{{ asset('assets/images/arrow.png') }}" class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-45 z-[2] ransition-all duration-500 ease-in-out" alt="">
-                        <img src="https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
-                    </div>
-                    <div>
-                        <p class="text-white text-lg opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
-                    </div>
-                </a>
-                <a href="#" class="group mb-5 md:mb-[80px]">
-                    <hr class="border-[#6C342C] mb-5">
-                    <h3 class="mb-5 font-semibold text-[28px] text-[#f5f5f5]">Title section card</h3>
-                    <div class="h-[360px] md:h-[440px] overflow-hidden rounded-xl mb-6 relative">
-                        <img src="{{ asset('assets/images/arrow.png') }}" class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-45 z-[2] transition-all duration-500 ease-in-out" alt="">
-                        <img src="https://fastly.picsum.photos/id/17/2500/1667.jpg?hmac=HD-JrnNUZjFiP2UZQvWcKrgLoC_pc_ouUSWv8kHsJJY" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
-                    </div>
-                    <div>
-                        <p class="text-white text-lg opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
-                    </div>
-                </a>
-                <a href="#" class="group mb-5 md:mb-[80px]">
-                    <hr class="border-[#6C342C] mb-5">
-                    <h3 class="mb-5 font-semibold text-[28px] text-[#f5f5f5]">Title section card</h3>
-                    <div class="h-[360px] md:h-[440px] overflow-hidden rounded-xl mb-6 relative">
-                        <img src="{{ asset('assets/images/arrow.png') }}" class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-45 z-[2] transition-all duration-500 ease-in-out" alt="">
-                        <img src="https://fastly.picsum.photos/id/27/3264/1836.jpg?hmac=p3BVIgKKQpHhfGRRCbsi2MCAzw8mWBCayBsKxxtWO8g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="">
-                    </div>
-                    <div>
-                        <p class="text-white text-lg opacity-60 font-medium">Plain-language explanations that guide you through each step, so you understand your options before deciding.</p>
-                    </div>
-                </a>
-                @endforelse
+                @foreach($services as $service)
+                <a href="{{ route('our-services') }}{{ $service->category ? '#' . \Illuminate\Support\Str::slug($service->category->name) : '' }}" class="group mb-5 md:mb-[80px]">
+                        <hr class="border-[#6C342C] mb-5">
+                        <h3 class="mb-5 font-semibold text-[28px] text-[#f5f5f5]">{{ $service->title }}</h3>
+                        <div class="h-[360px] md:h-[440px] overflow-hidden rounded-xl mb-6 relative">
+                            <img src="{{ asset('assets/images/arrow.png') }}" class="absolute right-5 top-5 w-11 h-11 group-hover:rotate-45 z-[2] transition-all duration-500 ease-in-out" alt="">
+                            @if($service->image)
+                            <img src="{{ Storage::url($service->image) }}" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="{{ $service->title }}">
+                            @else
+                            <img src="https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g" class="h-full object-cover object-center transition-all duration-500 ease-in-out w-full group-hover:scale-105" alt="{{ $service->title }}">
+                            @endif
+                        </div>
+                        <div>
+                            <div class="text-white text-lg opacity-60 font-medium">{!! Str::limit(strip_tags($service->description), 150) !!}</div>
+                        </div>
+                    </a>
+                @endforeach
             </div>
         </div>
     </div>
@@ -299,21 +205,30 @@
             ['bg' => 'bg-[#B8C1F8]', 'text' => 'text-gray-900', 'subtext' => 'text-gray-700', 'number' => 'text-indigo-800', 'line' => 'bg-indigo-800'],
         ];
     @endphp
-    <div class="mx-auto bg-[#73302A] mt-[-12px] rounded-[12px] pt-[60px] md:pt-[140px] pb-[80px] md:pb-[200px] relative z-[2]" x-data="{ activeCard: {{ $testimonials->count() > 0 ? $testimonials->count() : 6 }} }">
-        <!-- Header -->
+
+    <div 
+        class="mx-auto bg-[#73302A] mt-[-12px] rounded-[12px] pt-[60px] md:pt-[140px] pb-[80px] md:pb-[200px] relative z-[2]"
+        x-data="{ activeCard: 1 }"
+    >
         <div class="mx-auto px-6 lg:px-20">
             <div class="block md:flex justify-between items-center mb-[60px]">
                 <div class="mb-5 md:mb-0">
-                    <p class="title text-[#F1ECEC] text-base font-medium mb-2">{{ $testimonialsSettings->title ?? 'What they say' }}</p>
-                    <h2 class="text-[#D9D9D9] text-[36px] md:text-[52px] font-medium">{!! $testimonialsSettings->description ?? 'Our clients say it best...' !!}</h2>
+                    <p class="title text-[#F1ECEC] text-base font-medium mb-2">
+                        {{ $testimonialsSettings->title ?? 'What they say' }}
+                    </p>
+                    <h2 class="text-[#D9D9D9] text-[36px] md:text-[52px] font-medium">
+                        {!! $testimonialsSettings->description ?? 'Our clients say it best...' !!}
+                    </h2>
                 </div>
-                <a href="{{ $testimonialsSettings->button_link ?? '#' }}" class="bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full inline-block md:flex items-center gap-2 transition">{{ $testimonialsSettings->button_text ?? 'View more testimonials' }} <i class="fa-solid fa-arrow-right text-sm"></i></a>
+
+                <a href="{{ $testimonialsSettings->button_link ?? '#' }}"
+                class="border-[0.5px] border-white/25 backdrop-blur-md bg-[rgba(245,245,245,0.3)] hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full inline-block md:flex items-center gap-2 transition">
+                    {{ $testimonialsSettings->button_text ?? 'View more testimonials' }}
+                    <i class="fa-solid fa-arrow-right text-sm"></i>
+                </a>
             </div>
         </div>
-
-        <!-- Testimonial Cards -->
-        <div class="flex gap-0 h-[482px] mx-auto px-6 lg:px-20">
-
+        <div class="flex flex-col md:flex-row gap-0 h-auto md:h-[482px] mx-auto px-6 lg:px-20">
             @foreach($testimonials as $index => $testimonial)
                 @php 
                     $colorIndex = $index % count($testimonialColors);
@@ -321,15 +236,29 @@
                     $isLast = $loop->last;
                 @endphp
 
-                <div @click="activeCard = {{ $index + 1 }}" 
-                    :class="activeCard === {{ $index + 1 }} ? 'flex-[2] min-w-[400px]' : 'flex-[0_0_80px] min-w-[120px]'"
-                    class="testimonial-card {{ $color['bg'] }} cursor-pointer {{ $isLast ? 'rounded-[20px]' : 'rounded-l-[20px] mr-[-20px]' }} transition-all duration-500 overflow-hidden relative">
+                <div 
+                    @click="activeCard = {{ $index + 1 }}"
+                    :class="activeCard === {{ $index + 1 }} 
+                        ? 'h-auto md:flex-[2] min-w-fit md:min-w-[400px]' 
+                        : 'max-h-[90px] md:max-h-none overflow-hidden md:flex-[0_0_80px] md:min-w-[120px]'"
 
-                    <!-- Active -->
-                    <div x-show="activeCard === {{ $index + 1 }}" class="content h-full flex py-[20px] md:py-[52px] px-[18px] md:px-[48px]">
+                    class="testimonial-card {{ $color['bg'] }} cursor-pointer 
+                        {{ $isLast 
+                                ? 'rounded-[20px]' 
+                                : 'rounded-t-[20px] md:rounded-l-[20px] md:mr-[-20px]' }} 
+                        transition-all duration-500 ease-in-out overflow-hidden relative w-full"
+                >
+
+                    <div x-show="activeCard === {{ $index + 1 }}" 
+                        class="content h-full flex py-[20px] md:py-[52px] px-[18px] md:px-[48px]">
+
                         <div class="flex flex-col items-center opacity-40">
-                            <span class="number {{ $color['number'] }} text-[28px] font-light mb-6">{{ $index + 1 }}</span>
+                            <span class="number {{ $color['number'] }} text-[28px] font-light mb-6">
+                                {{ $index + 1 }}
+                            </span>
+
                             <div class="flex-1 w-px {{ $color['line'] }} bg-opacity-20"></div>
+
                             <span class="label {{ $color['number'] }} text-[14px] mt-6 writing-mode-vertical transform rotate-180">
                                 {{ $testimonial->title }}
                             </span>
@@ -342,13 +271,17 @@
 
                             <div class="flex items-center gap-4">
                                 @if($testimonial->user_image)
-                                    <img src="{{ Storage::url($testimonial->user_image) }}" alt="{{ $testimonial->user_name }}" class="w-14 h-14 rounded-full object-cover">
+                                    <img src="{{ Storage::url($testimonial->user_image) }}"
+                                        class="w-14 h-14 rounded-full object-cover">
                                 @else
-                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($testimonial->user_name) }}&background=random" alt="{{ $testimonial->user_name }}" class="w-14 h-14 rounded-full">
+                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($testimonial->user_name) }}&background=random"
+                                        class="w-14 h-14 rounded-full">
                                 @endif
 
                                 <div>
-                                    <p class="{{ $color['text'] }} font-semibold text-lg">{{ $testimonial->user_name }}</p>
+                                    <p class="{{ $color['text'] }} font-semibold text-lg">
+                                        {{ $testimonial->user_name }}
+                                    </p>
                                     <p class="{{ $color['subtext'] }} text-sm">
                                         {{ $testimonial->user_title }} | {{ $testimonial->user_country }}
                                     </p>
@@ -357,17 +290,22 @@
                         </div>
                     </div>
 
-                    <!-- Collapsed -->
-                    <div x-show="activeCard !== {{ $index + 1 }}" class="collapsed-view py-[52px] {{ $isLast ? 'px-6' : 'pl-[52px] pr-[72px]' }} h-full flex flex-col items-center opacity-40">
-                        <span class="number {{ $color['number'] }} text-[28px] font-light mb-6">{{ $index + 1 }}</span>
-                        <div class="flex-1 w-px {{ $color['line'] }} bg-opacity-20"></div>
-                        <span class="label {{ $color['number'] }} text-[14px] mt-6 writing-mode-vertical transform rotate-180">
+                    <div x-show="activeCard !== {{ $index + 1 }}" 
+                        class="collapsed-view py-[20px] md:py-[52px] px-4 md:px-0 h-full flex flex-row-reverse md:flex-col items-center justify-between md:justify-center opacity-40">
+
+                        <span class="number {{ $color['number'] }} text-[20px] md:text-[28px] font-light mb-0 md:mb-6">
+                            {{ $index + 1 }}
+                        </span>
+
+                        <div class="hidden md:block flex-1 w-px {{ $color['line'] }} bg-opacity-20"></div>
+
+                        <span class="label {{ $color['number'] }} text-[12px] md:text-[14px] mt-0 md:mt-6 md:writing-mode-vertical transform md:-rotate-90 text-center">
                             {{ $testimonial->title }}
                         </span>
                     </div>
+
                 </div>
             @endforeach
-
         </div>
     </div>
 
@@ -551,7 +489,7 @@
         <div class="absolute left-0 top-0 right-0 bottom-0 bg-left bg-no-repeat bg-contain" style="background-image: url('{{ asset('assets/images/Bright Legal_Icon-06 1.png') }}');"></div>
         <div class="relative z-10 container mx-auto text-center">
             <h4 class="text-[44px] md:text-[84px] font-medium leading-[110%] text-[#3B0014] mb-[32px]">{{ $readyToTalk->title ?? 'Ready to talk?' }}</h4>
-            <a href="{{ $readyToTalk->button_link ?? '#' }}" class="bg-[#3B0014] bg-opacity-30 hover:bg-opacity-40 text-[#B8C1F8] px-6 py-3 rounded-full items-center gap-2 transition inline-block">{{ $readyToTalk->button_text ?? 'Book free consultation' }} <i class="fa-solid fa-arrow-right text-sm"></i></a>
+            <a href="{{ $readyToTalk->button_link ?? '#' }}" class="bg-[#3B0014] hover:bg-opacity-70 text-[#B8C1F8] px-6 py-3 rounded-full items-center gap-2 transition inline-block font-normal">{{ $readyToTalk->button_text ?? 'Book free consultation' }} <i class="fa-solid fa-arrow-right text-sm"></i></a>
         </div>
     </div>
 

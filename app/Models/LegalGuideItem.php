@@ -16,6 +16,7 @@ class LegalGuideItem extends Model
         'description',
         'thumbnail',
         'video_url',
+        'instagram_url',
         'is_featured',
         'is_active',
         'order',

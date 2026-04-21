@@ -89,10 +89,6 @@
                     </div>
                 </form>
             </div>
-
-            <div class="mt-6 text-center text-sm text-gray-600">
-                <p>Demo credentials: admin@admin.com / admin123</p>
-            </div>
         </div>
     </div>
 </body>

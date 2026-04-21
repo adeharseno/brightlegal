@@ -37,7 +37,7 @@ class HomeController extends Controller
 
         // Services (limit untuk homepage)
         $servicesSettings = ServicesSetting::first();
-        $services = Service::active()->ordered()->take(6)->get();
+        $services = Service::active()->ordered()->with('category')->take(6)->get();
 
         // Testimonials
         $testimonialsSettings = TestimonialsSetting::first();
@@ -119,7 +119,7 @@ class HomeController extends Controller
     {
         // Legal Guide Settings
         $guideSettings = LegalGuideSetting::first();
-
+        
         // Legal Guide Video Items
         $guideItems = LegalGuideItem::active()->ordered()->get();
 

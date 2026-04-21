@@ -25,9 +25,9 @@
                             {{ $guideSettings->page_subtitle ?? 'to life in Bali' }}
                         </h2>
                     </div>
-                    <div class="basis-full lg:basis-1/3 text-left md:text-right mt-5 md:mt-0">
+                    {{-- <div class="basis-full lg:basis-1/3 text-left md:text-right mt-5 md:mt-0">
                         <a href="#" class="animate-fade-up animate-delay-1 bg-[rgba(245,245,245,0.3)] bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full items-center gap-2 transition inline-block">Follow us on Youtube <i class="fa-brands fa-youtube text-sm"></i></a>
-                    </div>
+                    </div> --}}
                 </div>
 
                 @php
@@ -42,8 +42,8 @@
                         <!-- Featured Large Card -->
                         @if($featured)
                             <div class="lg:col-span-2 animate-on-scroll">
-                                <div class="featured-card-wrapper cursor-pointer"
-                                    onclick="openVideoPopup('{{ $featured->video_url }}', '{{ addslashes($featured->title) }}')">
+                                <div class="featured-card-wrapper cursor-pointer mb-10"
+                                    onclick="openVideoPopup('{{ $featured->video_url }}', '{{ addslashes($featured->title) }}', '{{ $featured->instagram_url }}')">
                                     <!-- Video Box with labels -->
                                     <div class="video-card bg-[#6C342C] group relative rounded-[16px] overflow-hidden h-[320px] md:h-[420px]">
                                         @if($featured->thumbnail)
@@ -84,11 +84,10 @@
 
                         <!-- Two Small Cards on the Right (side by side in remaining 2 cols) -->
                         @if($regularItems->count() > 0)
-                            @foreach($regularItems->take(2) as $index => $item)
+                            @foreach($regularItems as $index => $item)
                                 <div class="animate-on-scroll" style="animation-delay: {{ ($index + 1) * 0.15 }}s">
-                                    <div class="guide-card-wrapper cursor-pointer"
-                                        onclick="openVideoPopup('{{ $item->video_url }}', '{{ addslashes($item->title) }}')">
-                                        <!-- Video Thumbnail Box -->
+                                    <div class="guide-card-wrapper cursor-pointer mb-10"
+                                        onclick="openVideoPopup('{{ $item->video_url }}', '{{ addslashes($item->title) }}', '{{ $item->instagram_url }}')">                                        <!-- Video Thumbnail Box -->
                                         <div class="video-card group relative rounded-[16px] overflow-hidden h-[320px] md:h-[420px]">
                                             @if($item->thumbnail)
                                                 <img src="{{ Storage::url($item->thumbnail) }}" alt="{{ $item->title }}"
@@ -122,179 +121,9 @@
 
                     </div>
                 @endif
-
-                <!-- Remaining Cards Grid (4 per row) -->
-                @if($regularItems->count() > 2)
-                    @php
-                        $remainingItems = $regularItems->slice(2);
-                        $chunkedItems = $remainingItems->chunk(4);
-                    @endphp
-                    @foreach($chunkedItems as $row)
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[20px] mb-[80px]">
-                            @foreach($row as $index => $item)
-                                <div class="animate-on-scroll" style="animation-delay: {{ ($index % 4) * 0.1 }}s">
-                                    <div class="guide-card-wrapper cursor-pointer"
-                                        onclick="openVideoPopup('{{ $item->video_url }}', '{{ addslashes($item->title) }}')">
-                                        <!-- Video Thumbnail Box -->
-                                        <div class="video-card group relative rounded-[16px] overflow-hidden h-[320px] md:h-[420px]">
-                                            @if($item->thumbnail)
-                                                <img src="{{ Storage::url($item->thumbnail) }}" alt="{{ $item->title }}"
-                                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                            @else
-                                                <div
-                                                    class="w-full h-full bg-gradient-to-br from-[#73302A] to-[#4A1A2E] flex items-center justify-center">
-                                                    <i class="fas fa-play-circle text-white/20 text-[60px]"></i>
-                                                </div>
-                                            @endif
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                                            <!-- Play Button -->
-                                            <div class="absolute inset-0 flex items-center justify-center">
-                                                <div
-                                                    class="play-btn w-[48px] h-[48px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-                                                    <i class="fas fa-play text-white text-sm ml-0.5"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Title & Description Outside Video Box -->
-                                        <div class="pt-4">
-                                            <h3 class="text-white text-base font-semibold leading-tight mb-2">{{ $item->title }}</h3>
-                                            @if($item->description)
-                                                <p class="text-white/50 text-sm leading-relaxed line-clamp-2">{{ $item->description }}</p>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    @endforeach
-                @endif
-
-                <!-- Fallback: No Items -->
-                @if($guideItems->count() === 0)
-                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-[20px] mb-[80px]">
-                        <!-- Static Featured Card -->
-                        <div class="lg:col-span-2 animate-on-scroll">
-                            <div class="bg-[#6C342C] rounded-lg featured-card-wrapper cursor-pointer p-5"
-                                onclick="openVideoPopup('', 'Tourist visa vs business visa')">
-                                <div class="absolute top-0 left-0 right-0 flex justify-between items-start p-5 z-10">
-                                    <span class="text-white/80 text-sm font-medium">About</span>
-                                    <span class="text-white/80 text-sm font-medium">Bright Legal</span>
-                                </div>
-                                <div class="p-[100px] pb-[50px]">
-                                    <!-- Video Box -->
-                                    <div class="video-card group relative rounded-[16px] overflow-hidden max-w-[420px] h-[320px] md:h-[375px] mx-auto">
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30"></div>
-                                        <div class="absolute inset-0 flex items-center justify-center">
-                                            <div
-                                                class="play-btn w-[44px] md:w-[72px] h-[44px] md:h-[72px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-                                                <i class="fas fa-play text-white text-2xl ml-1"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Description Outside -->
-                                <div class="rounded-b-[16px] p-6 mt-[-8px]">
-                                    <p class="text-[#F5F5F5] text-[32px] leading-relaxed">Senectus ullamcorper lectus leo sit. Hendrerit sollicitudin quisque massa luctus sed egestas.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Two small cards side by side -->
-                        <div class="animate-on-scroll" style="animation-delay: 0.15s">
-                            <div class="guide-card-wrapper cursor-pointer"
-                                onclick="openVideoPopup('', 'Setting up a PT PMA')">
-                                <div class="video-card group relative rounded-[16px] overflow-hidden h-[320px] md:h-[420px]">
-                                    <div
-                                        class="w-full h-full bg-gradient-to-br from-[#73302A] to-[#4A1A2E] flex items-center justify-center">
-                                        <i class="fas fa-play-circle text-white/20 text-[60px]"></i>
-                                    </div>
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                                    <div class="absolute inset-0 flex items-center justify-center">
-                                        <div
-                                            class="play-btn w-[48px] h-[48px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-                                            <i class="fas fa-play text-white text-sm ml-0.5"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pt-4">
-                                    <h3 class="text-white text-[20px] font-semibold leading-tight mb-2">Tourist visa vs business visa: what's the difference?</h3>
-                                    <hr class="border-[rgba(255,255,255,0.1)] my-5">
-                                    <p class="text-white/50 text-sm leading-relaxed">Clear explanations to help you choose the right path.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="animate-on-scroll" style="animation-delay: 0.3s">
-                            <div class="guide-card-wrapper cursor-pointer"
-                                onclick="openVideoPopup('', 'Property ownership')">
-                                <div class="video-card group relative rounded-[16px] overflow-hidden h-[320px] md:h-[420px]">
-                                    <div
-                                        class="w-full h-full bg-gradient-to-br from-[#73302A] to-[#4A1A2E] flex items-center justify-center">
-                                        <i class="fas fa-play-circle text-white/20 text-[60px]"></i>
-                                    </div>
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                                    <div class="absolute inset-0 flex items-center justify-center">
-                                        <div
-                                            class="play-btn w-[48px] h-[48px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-                                            <i class="fas fa-play text-white text-sm ml-0.5"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pt-4">
-                                    <h3 class="text-white text-[20px] font-semibold leading-tight mb-2">Which visa do you actually need for Bali?</h3>
-                                    <hr class="border-[rgba(255,255,255,0.1)] my-5">
-                                    <p class="text-white/50 text-sm leading-relaxed">An honest look at what's permitted and what crosses the line.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Fallback 4-col rows -->
-                    @php
-                        $fallbackCards = [
-                            ['title' => 'Tourist visa vs business visa: what\'s the difference?', 'desc' => 'Clear explanations to help you choose the right path.'],
-                            ['title' => 'What "working legally" in Bali really means', 'desc' => 'Clear explanations to help you choose the right path.'],
-                            ['title' => 'How long can you legally stay in Bali?', 'desc' => 'Clear explanations to help you choose the right path.'],
-                            ['title' => 'Business licenses in Bali: what you actually need', 'desc' => 'Clear explanations to help you choose the right path.'],
-                        ];
-                        $fallbackCards2 = [
-                            ['title' => 'Tourist visa vs business visa: what\'s the difference?', 'desc' => 'Clear explanations to help you choose the right path.'],
-                            ['title' => 'What "working legally" in Bali really means', 'desc' => 'Clear explanations to help you choose the right path.'],
-                            ['title' => 'How long can you legally stay in Bali?', 'desc' => 'Clear explanations to help you choose the right path.'],
-                            ['title' => 'Business licenses in Bali: what you actually need', 'desc' => 'Clear explanations to help you choose the right path.'],
-                        ];
-                    @endphp
-                    @foreach([$fallbackCards, $fallbackCards2] as $rowCards)
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[20px] mb-[80px]">
-                            @foreach($rowCards as $idx => $card)
-                                <div class="animate-on-scroll" style="animation-delay: {{ $idx * 0.1 }}s">
-                                    <div class="guide-card-wrapper cursor-pointer"
-                                        onclick="openVideoPopup('', '{{ $card['title'] }}')">
-                                        <div class="video-card group relative rounded-[16px] overflow-hidden h-[320px] md:h-[420px]">
-                                            <div
-                                                class="w-full h-full bg-gradient-to-br from-[#73302A] to-[#4A1A2E] flex items-center justify-center">
-                                                <i class="fas fa-play-circle text-white/20 text-[60px]"></i>
-                                            </div>
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                                            <div class="absolute inset-0 flex items-center justify-center">
-                                                <div
-                                                    class="play-btn w-[48px] h-[48px] bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-                                                    <i class="fas fa-play text-white text-sm ml-0.5"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="pt-4">
-                                            <h3 class="text-white text-[20px] font-semibold leading-tight mb-2">{{ $card['title'] }}</h3>
-                                            <hr class="border-[rgba(255,255,255,0.1)] my-5">
-                                            <p class="text-white/50 text-sm leading-relaxed">{{ $card['desc'] }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    @endforeach
-                @endif
-
+                
                 <div class="text-center">
-                    <a href="#" class="bg-[rgba(245,245,245,0.3)] inline-block bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full items-center gap-2 transition"><span class="gradient-text">Need more legal guides? We can help you. Contact us</span> <i class="fa-solid fa-arrow-right text-sm"></i></a>
+                    <a href="{{ $guideSettings->cta_button_link ?? '#' }}" class="bg-[rgba(245,245,245,0.2)] inline-block bg-opacity-30 hover:bg-opacity-40 text-[#F5F5F5] px-6 py-3 rounded-full items-center gap-2 transition"><span class="gradient-text">{{ $guideSettings->cta_text ?? '' }} {{ $guideSettings->cta_button_text ?? '' }}</span> <i class="fa-solid fa-arrow-right text-sm"></i></a>
                 </div>
 
             </div>
@@ -309,33 +138,50 @@
         <div class="absolute left-0 top-0 right-0 bottom-0 bg-left bg-no-repeat bg-contain" style="background-image: url('{{ asset('assets/images/Bright Legal_Icon-06 1.png') }}');"></div>
         <div class="relative z-10 container mx-auto text-center">
             <h4 class="text-[44px] md:text-[84px] font-medium leading-[110%] text-[#3B0014] mb-[32px]">{{ $readyToTalk->title ?? 'Ready to talk?' }}</h4>
-            <a href="{{ $readyToTalk->button_link ?? '#' }}" class="bg-[#3B0014] bg-opacity-30 hover:bg-opacity-40 text-[#B8C1F8] px-6 py-3 rounded-full items-center gap-2 transition inline-block">{{ $readyToTalk->button_text ?? 'Book free consultation' }} <i class="fa-solid fa-arrow-right text-sm"></i></a>
+            <a href="{{ $readyToTalk->button_link ?? '#' }}" class="bg-[#3B0014] hover:bg-opacity-70 text-[#B8C1F8] px-6 py-3 rounded-full items-center gap-2 transition inline-block">{{ $readyToTalk->button_text ?? 'Book free consultation' }} <i class="fa-solid fa-arrow-right text-sm"></i></a>
         </div>
     </div>
 
     <!-- Video Popup Modal -->
     <div id="videoPopup" class="fixed inset-0 z-[9999] hidden items-center justify-center"
-        style="background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);">
-        <div class="relative w-full max-w-[900px] mx-4">
+        style="background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); overflow-y: auto;">
+        <div class="relative w-full max-w-[900px] mx-4 my-16">
             <!-- Close Button -->
             <button onclick="closeVideoPopup()"
                 class="absolute -top-12 right-0 text-white/70 hover:text-white transition text-lg">
                 <i class="fas fa-times mr-2"></i> Close
             </button>
             <!-- Video Title -->
-            <p id="videoPopupTitle" class="text-white text-xl font-semibold mb-4"></p>
-            <!-- Video Container -->
-            <div class="relative rounded-[16px] overflow-hidden bg-black" style="aspect-ratio: 16/9;">
+            <p id="videoPopupTitle" class="text-white text-xl font-semibold mb-4 hidden"></p>
+            <!-- Platform Tabs (shown only when both YouTube & Instagram exist) -->
+            <div id="videoTabs" class="hidden flex gap-2 mb-4">
+                <button id="tabYoutube" onclick="switchVideoTab('youtube')"
+                    class="px-4 py-2 rounded-full text-sm font-medium transition bg-white text-[#3B0014]">
+                    <i class="fa-brands fa-youtube mr-1"></i> YouTube
+                </button>
+                <button id="tabInstagram" onclick="switchVideoTab('instagram')"
+                    class="px-4 py-2 rounded-full text-sm font-medium transition bg-white/20 text-white hover:bg-white/30">
+                    <i class="fa-brands fa-instagram mr-1"></i> Instagram
+                </button>
+            </div>
+            <!-- YouTube Container -->
+            <div id="youtubeContainer" class="relative rounded-[16px] overflow-hidden bg-black" style="aspect-ratio: 16/9;">
                 <iframe id="videoIframe" class="w-full h-full" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen></iframe>
-                <!-- Fallback when no video URL -->
-                <div id="videoFallback"
-                    class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#6C342C] to-[#3B0014] hidden">
-                    <i class="fas fa-video text-white/20 text-[80px] mb-6"></i>
-                    <p class="text-white/60 text-lg">Video coming soon</p>
-                    <p class="text-white/40 text-sm mt-2">This video hasn't been uploaded yet.</p>
-                </div>
+            </div>
+            <!-- Instagram Container -->
+            <div id="instagramContainer" class="hidden flex justify-center">
+                <iframe id="instagramIframe" class="border-0 rounded-[16px]"
+                    style="width: 540px; max-width: 100%; height: 700px;"
+                    scrolling="no" allowtransparency="true"></iframe>
+            </div>
+            <!-- Fallback when no video URL -->
+            <div id="videoFallback"
+                class="hidden relative rounded-[16px] overflow-hidden bg-gradient-to-br from-[#6C342C] to-[#3B0014] flex flex-col items-center justify-center" style="aspect-ratio: 16/9;">
+                <i class="fas fa-video text-white/20 text-[80px] mb-6"></i>
+                <p class="text-white/60 text-lg">Video coming soon</p>
+                <p class="text-white/40 text-sm mt-2">This video hasn't been uploaded yet.</p>
             </div>
         </div>
     </div>
@@ -356,42 +202,83 @@
             });
         });
 
+        // Convert YouTube URL to embed URL
+        function toYoutubeEmbed(url) {
+            if (!url || url.trim() === '') return '';
+            var embedUrl = url.trim();
+            if (url.includes('youtube.com/watch')) {
+                var videoId = url.split('v=')[1];
+                if (videoId) {
+                    var ampPos = videoId.indexOf('&');
+                    if (ampPos !== -1) videoId = videoId.substring(0, ampPos);
+                    embedUrl = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+                }
+            } else if (url.includes('youtu.be/')) {
+                var videoId = url.split('youtu.be/')[1];
+                if (videoId) {
+                    var ampPos = videoId.indexOf('?');
+                    if (ampPos !== -1) videoId = videoId.substring(0, ampPos);
+                    embedUrl = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+                }
+            } else if (url.includes('youtube.com/embed/') && !url.includes('autoplay')) {
+                embedUrl = url + (url.includes('?') ? '&' : '?') + 'autoplay=1&rel=0';
+            }
+            return embedUrl;
+        }
+
+        // Convert Instagram post/reel URL to embed URL
+        function toInstagramEmbed(url) {
+            if (!url || url.trim() === '') return '';
+            var clean = url.trim().replace(/\/$/, '');
+            // e.g. https://www.instagram.com/p/CODE or /reel/CODE
+            return clean + '/embed/';
+        }
+
         // Video Popup Functions
-        function openVideoPopup(videoUrl, title) {
+        function openVideoPopup(videoUrl, title, instagramUrl) {
             var popup = document.getElementById('videoPopup');
             var iframe = document.getElementById('videoIframe');
+            var igIframe = document.getElementById('instagramIframe');
             var fallback = document.getElementById('videoFallback');
             var titleEl = document.getElementById('videoPopupTitle');
+            var tabs = document.getElementById('videoTabs');
+            var ytContainer = document.getElementById('youtubeContainer');
+            var igContainer = document.getElementById('instagramContainer');
 
             titleEl.textContent = title;
 
-            if (videoUrl && videoUrl.trim() !== '') {
-                // Convert YouTube watch URL to embed if needed
-                var embedUrl = videoUrl;
-                if (videoUrl.includes('youtube.com/watch')) {
-                    var videoId = videoUrl.split('v=')[1];
-                    if (videoId) {
-                        var ampPos = videoId.indexOf('&');
-                        if (ampPos !== -1) videoId = videoId.substring(0, ampPos);
-                        embedUrl = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
-                    }
-                } else if (videoUrl.includes('youtu.be/')) {
-                    var videoId = videoUrl.split('youtu.be/')[1];
-                    if (videoId) {
-                        var ampPos = videoId.indexOf('?');
-                        if (ampPos !== -1) videoId = videoId.substring(0, ampPos);
-                        embedUrl = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
-                    }
-                } else if (videoUrl.includes('youtube.com/embed/') && !videoUrl.includes('autoplay')) {
-                    embedUrl = videoUrl + (videoUrl.includes('?') ? '&' : '?') + 'autoplay=1&rel=0';
-                }
+            var hasYoutube = videoUrl && videoUrl.trim() !== '';
+            var hasInstagram = instagramUrl && instagramUrl.trim() !== '';
 
-                iframe.src = embedUrl;
-                iframe.style.display = 'block';
+            if (hasYoutube && hasInstagram) {
+                // Show tabs, start on YouTube
+                tabs.classList.remove('hidden');
+                tabs.classList.add('flex');
+                iframe.src = toYoutubeEmbed(videoUrl);
+                igIframe.src = '';
+                ytContainer.classList.remove('hidden');
+                igContainer.classList.add('hidden');
+                fallback.classList.add('hidden');
+                setActiveTab('youtube');
+            } else if (hasYoutube) {
+                tabs.classList.add('hidden');
+                tabs.classList.remove('flex');
+                iframe.src = toYoutubeEmbed(videoUrl);
+                ytContainer.classList.remove('hidden');
+                igContainer.classList.add('hidden');
+                fallback.classList.add('hidden');
+            } else if (hasInstagram) {
+                tabs.classList.add('hidden');
+                tabs.classList.remove('flex');
+                igIframe.src = toInstagramEmbed(instagramUrl);
+                igContainer.classList.remove('hidden');
+                ytContainer.classList.add('hidden');
                 fallback.classList.add('hidden');
             } else {
-                iframe.src = '';
-                iframe.style.display = 'none';
+                tabs.classList.add('hidden');
+                tabs.classList.remove('flex');
+                ytContainer.classList.add('hidden');
+                igContainer.classList.add('hidden');
                 fallback.classList.remove('hidden');
             }
 
@@ -399,12 +286,42 @@
             document.body.style.overflow = 'hidden';
         }
 
+        function switchVideoTab(platform) {
+            var iframe = document.getElementById('videoIframe');
+            var igIframe = document.getElementById('instagramIframe');
+            var ytContainer = document.getElementById('youtubeContainer');
+            var igContainer = document.getElementById('instagramContainer');
+
+            if (platform === 'youtube') {
+                ytContainer.classList.remove('hidden');
+                igContainer.classList.add('hidden');
+            } else {
+                igContainer.classList.remove('hidden');
+                ytContainer.classList.add('hidden');
+            }
+            setActiveTab(platform);
+        }
+
+        function setActiveTab(platform) {
+            var tabYt = document.getElementById('tabYoutube');
+            var tabIg = document.getElementById('tabInstagram');
+            if (platform === 'youtube') {
+                tabYt.className = 'px-4 py-2 rounded-full text-sm font-medium transition bg-white text-[#3B0014]';
+                tabIg.className = 'px-4 py-2 rounded-full text-sm font-medium transition bg-white/20 text-white hover:bg-white/30';
+            } else {
+                tabIg.className = 'px-4 py-2 rounded-full text-sm font-medium transition bg-white text-[#3B0014]';
+                tabYt.className = 'px-4 py-2 rounded-full text-sm font-medium transition bg-white/20 text-white hover:bg-white/30';
+            }
+        }
+
         function closeVideoPopup() {
             var popup = document.getElementById('videoPopup');
             var iframe = document.getElementById('videoIframe');
+            var igIframe = document.getElementById('instagramIframe');
 
             popup.classList.remove('show');
             iframe.src = '';
+            igIframe.src = '';
             document.body.style.overflow = '';
         }
 
