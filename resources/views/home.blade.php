@@ -241,16 +241,17 @@
                     :class="activeCard === {{ $index + 1 }} 
                         ? 'h-auto md:flex-[2] min-w-fit md:min-w-[400px]' 
                         : 'max-h-[90px] md:max-h-none overflow-hidden md:flex-[0_0_80px] md:min-w-[120px]'"
-
+                    style="z-index: {{ $index + 1 }}"
                     class="testimonial-card {{ $color['bg'] }} cursor-pointer 
-                        {{ $isLast 
-                                ? 'rounded-[20px]' 
-                                : 'rounded-t-[20px] md:rounded-l-[20px] md:mr-[-20px]' }} 
+                        rounded-[12px] md:rounded-r-[0px]
+                        {{ $loop->last ? 'md:rounded-r-[20px] md:ml-[-20px]' : '' }}
+                        {{ $loop->first ? '' : 'mt-[-20px] md:mt-0' }}
+                        md:rounded-l-[20px] {{ $isLast ? '' : 'md:ml-[-20px]' }}
                         transition-all duration-500 ease-in-out overflow-hidden relative w-full"
                 >
 
                     <div x-show="activeCard === {{ $index + 1 }}" 
-                        class="content h-full flex py-[20px] md:py-[52px] px-[18px] md:px-[48px]">
+                        class="content h-full flex py-[20px] md:py-[52px] px-[18px] md:px-[48px] {{ $loop->last ? 'pb-[20px]' : 'pb-[40px]' }} md:pb-[52px]">
 
                         <div class="flex flex-col items-center opacity-40">
                             <span class="number {{ $color['number'] }} text-[28px] font-light mb-6">
@@ -265,7 +266,7 @@
                         </div>
 
                         <div class="pl-[18px] md:pl-[53px] flex flex-col justify-between">
-                            <div class="{{ $color['text'] }} text-[16px] md:text-[32px] md:pt-10">
+                            <div class="{{ $color['text'] }} text-[14px] md:text-[32px] md:pt-10 pb-10 md:pb-0">
                                 {!! $testimonial->testimonial !!}
                             </div>
 
@@ -291,7 +292,7 @@
                     </div>
 
                     <div x-show="activeCard !== {{ $index + 1 }}" 
-                        class="collapsed-view py-[20px] md:py-[52px] px-4 md:px-0 h-full flex flex-row-reverse md:flex-col items-center justify-between md:justify-center opacity-40">
+                        class="collapsed-view py-[20px] md:py-[52px] px-4 md:px-0 h-full flex flex-row-reverse md:flex-col items-center justify-between md:justify-center opacity-40 {{ $loop->last ? 'pb-[20px]' : 'pb-[32px]' }} md:pb-[52px]">
 
                         <span class="number {{ $color['number'] }} text-[20px] md:text-[28px] font-light mb-0 md:mb-6">
                             {{ $index + 1 }}

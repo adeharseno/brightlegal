@@ -117,10 +117,11 @@ class ServiceController extends Controller
     {
         $validated = $request->validate([
             'category_id' => 'nullable|exists:service_categories,id',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'title' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'key_benefits' => 'nullable|string',
+            'fees' => 'nullable|string',
             'required_documents' => 'nullable|string',
             'important_notes' => 'nullable|string',
             'consult_link' => 'nullable|url|max:500',
@@ -151,10 +152,11 @@ class ServiceController extends Controller
     {
         $validated = $request->validate([
             'category_id' => 'nullable|exists:service_categories,id',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'title' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'key_benefits' => 'nullable|string',
+            'fees' => 'nullable|string',
             'required_documents' => 'nullable|string',
             'important_notes' => 'nullable|string',
             'consult_link' => 'nullable|url|max:500',

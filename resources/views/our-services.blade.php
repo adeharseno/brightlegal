@@ -118,17 +118,22 @@
 
                 <!-- Tab Navigation -->
                 <div class="flex border-b border-white/10 px-8">
-                    <button @click="modalTab = 'benefits'"
+                    <button x-show="modalContent.benefits" @click="modalTab = 'benefits'"
                         :class="modalTab === 'benefits' ? 'border-b-2 border-[#E97D8C] text-[#FBF4E1]' : 'text-[#A0A0A0] hover:text-[#D0D0D0]'"
                         class="py-4 px-4 font-medium text-sm transition-colors">
                         Key benefits
                     </button>
-                    <button @click="modalTab = 'documents'"
+                    <button x-show="modalContent.fees" @click="modalTab = 'fees'"
+                        :class="modalTab === 'fees' ? 'border-b-2 border-[#E97D8C] text-[#FBF4E1]' : 'text-[#A0A0A0] hover:text-[#D0D0D0]'"
+                        class="py-4 px-4 font-medium text-sm transition-colors">
+                        Fees
+                    </button>
+                    <button x-show="modalContent.documents" @click="modalTab = 'documents'"
                         :class="modalTab === 'documents' ? 'border-b-2 border-[#E97D8C] text-[#FBF4E1]' : 'text-[#A0A0A0] hover:text-[#D0D0D0]'"
                         class="py-4 px-4 font-medium text-sm transition-colors">
                         Required documents
                     </button>
-                    <button @click="modalTab = 'notes'"
+                    <button x-show="modalContent.notes" @click="modalTab = 'notes'"
                         :class="modalTab === 'notes' ? 'border-b-2 border-[#E97D8C] text-[#FBF4E1]' : 'text-[#A0A0A0] hover:text-[#D0D0D0]'"
                         class="py-4 px-4 font-medium text-sm transition-colors">
                         Important notes
@@ -158,6 +163,18 @@
                             x-transition:leave-end="opacity-0"
                             class="space-y-4">
                             <div x-html="modalContent.benefits" class="text-[#F1ECEC] prose prose-invert max-w-none"></div>
+                        </div>
+
+                        <!-- Fees Tab -->
+                        <div x-show="modalTab === 'fees'"
+                            x-transition:enter="transition ease-in-out duration-300"
+                            x-transition:enter-start="opacity-0 translate-x-2"
+                            x-transition:enter-end="opacity-100 translate-x-0"
+                            x-transition:leave="transition ease-in-out duration-150"
+                            x-transition:leave-start="opacity-100"
+                            x-transition:leave-end="opacity-0"
+                            class="space-y-4">
+                            <div x-html="modalContent.fees" class="text-[#F1ECEC] prose prose-invert max-w-none"></div>
                         </div>
 
                         <!-- Documents Tab -->
@@ -215,6 +232,7 @@
                 modalLoading: false,
                 modalContent: {
                     benefits: '',
+                    fees: '',
                     documents: '',
                     notes: ''
                 },
@@ -231,6 +249,7 @@
             return [
                 'id' => $s->id,
                 'key_benefits' => $s->key_benefits,
+                'fees' => $s->fees,
                 'required_documents' => $s->required_documents,
                 'important_notes' => $s->important_notes,
                 'consult_link' => $s->consult_link
@@ -247,14 +266,14 @@
                         consult_link: serviceData ? (serviceData.consult_link || '') : ''
                     };
                     this.modalOpen = true;
-                    this.modalContent = { benefits: '', documents: '', notes: '' };
+                    this.modalContent = { benefits: '', fees: '', documents: '', notes: '' };
                     this.loadServiceDetails(id);
                 },
 
                 closeModal() {
                     this.modalOpen = false;
                     this.modalData = { id: '', title: '', image: '', consult_link: '' };
-                    this.modalContent = { benefits: '', documents: '', notes: '' };
+                    this.modalContent = { benefits: '', fees: '', documents: '', notes: '' };
                 },
 
                 async loadServiceDetails(serviceId) {
@@ -268,23 +287,33 @@
 
                         if (serviceData) {
                             this.modalContent = {
-                                benefits: serviceData.key_benefits || '<p class="opacity-60">No key benefits specified.</p>',
-                                documents: serviceData.required_documents || '<p class="opacity-60">No required documents specified.</p>',
-                                notes: serviceData.important_notes || '<p class="opacity-60">No important notes specified.</p>'
+                                benefits: serviceData.key_benefits || '',
+                                fees: serviceData.fees || '',
+                                documents: serviceData.required_documents || '',
+                                notes: serviceData.important_notes || ''
                             };
                         } else {
                             this.modalContent = {
-                                benefits: '<p class="opacity-60">No key benefits specified.</p>',
-                                documents: '<p class="opacity-60">No required documents specified.</p>',
-                                notes: '<p class="opacity-60">No important notes specified.</p>'
+                                benefits: '',
+                                fees: '',
+                                documents: '',
+                                notes: ''
                             };
                         }
+
+                        // Set active tab to first non-empty tab
+                        if (this.modalContent.benefits) this.modalTab = 'benefits';
+                        else if (this.modalContent.fees) this.modalTab = 'fees';
+                        else if (this.modalContent.documents) this.modalTab = 'documents';
+                        else if (this.modalContent.notes) this.modalTab = 'notes';
+                        else this.modalTab = 'benefits';
                     } catch (error) {
                         console.error('Error loading service details:', error);
                         this.modalContent = {
                             benefits: '<p class="text-red-400">Error loading details. Please try again.</p>',
-                            documents: '<p class="text-red-400">Error loading details. Please try again.</p>',
-                            notes: '<p class="text-red-400">Error loading details. Please try again.</p>'
+                            fees: '',
+                            documents: '',
+                            notes: ''
                         };
                     } finally {
                         this.modalLoading = false;

@@ -18,8 +18,8 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-                <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Title <span class="text-red-500">*</span></label>
-                <input type="text" name="title" id="title" value="{{ old('title', $service->title) }}" required
+                <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Title</label>
+                <input type="text" name="title" id="title" value="{{ old('title', $service->title) }}"
                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B0014] focus:border-transparent">
             </div>
             <div>
@@ -34,8 +34,8 @@
         </div>
 
         <div class="mb-4">
-            <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description <span class="text-red-500">*</span></label>
-            <textarea name="description" id="description" rows="3" required class="wysiwyg w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B0014] focus:border-transparent">{{ old('description', $service->description) }}</textarea>
+            <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+            <textarea name="description" id="description" rows="3" class="wysiwyg w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B0014] focus:border-transparent">{{ old('description', $service->description) }}</textarea>
         </div>
 
         <div class="mb-4">
@@ -50,19 +50,45 @@
             <p class="text-sm text-gray-500 mt-1">Max 2MB. Format: JPEG, PNG, JPG, GIF, WebP. Biarkan kosong jika tidak ingin mengubah.</p>
         </div>
 
-        <div class="mb-4">
-            <label for="key_benefits" class="block text-sm font-medium text-gray-700 mb-2">Key Benefits</label>
-            <textarea name="key_benefits" id="key_benefits" rows="4" class="wysiwyg w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B0014] focus:border-transparent">{{ old('key_benefits', $service->key_benefits) }}</textarea>
-        </div>
+        <!-- Tabbed content fields -->
+        <div class="mb-4" x-data="{ activeTab: 'key_benefits' }">
+            <div class="border-b border-gray-200 mb-4">
+                <nav class="-mb-px flex space-x-4" aria-label="Tabs">
+                    <button type="button" @click="activeTab = 'key_benefits'"
+                        :class="activeTab === 'key_benefits' ? 'border-[#3B0014] text-[#3B0014]' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                        class="whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm transition-colors">
+                        Key Benefits
+                    </button>
+                    <button type="button" @click="activeTab = 'fees'"
+                        :class="activeTab === 'fees' ? 'border-[#3B0014] text-[#3B0014]' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                        class="whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm transition-colors">
+                        Fees
+                    </button>
+                    <button type="button" @click="activeTab = 'required_documents'"
+                        :class="activeTab === 'required_documents' ? 'border-[#3B0014] text-[#3B0014]' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                        class="whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm transition-colors">
+                        Required Documents
+                    </button>
+                    <button type="button" @click="activeTab = 'important_notes'"
+                        :class="activeTab === 'important_notes' ? 'border-[#3B0014] text-[#3B0014]' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                        class="whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm transition-colors">
+                        Important Notes
+                    </button>
+                </nav>
+            </div>
 
-        <div class="mb-4">
-            <label for="required_documents" class="block text-sm font-medium text-gray-700 mb-2">Required Documents</label>
-            <textarea name="required_documents" id="required_documents" rows="4" class="wysiwyg w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B0014] focus:border-transparent">{{ old('required_documents', $service->required_documents) }}</textarea>
-        </div>
-
-        <div class="mb-4">
-            <label for="important_notes" class="block text-sm font-medium text-gray-700 mb-2">Important Notes</label>
-            <textarea name="important_notes" id="important_notes" rows="4" class="wysiwyg w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B0014] focus:border-transparent">{{ old('important_notes', $service->important_notes) }}</textarea>
+            <div x-show="activeTab === 'key_benefits'">
+                <textarea name="key_benefits" id="key_benefits" rows="8" class="wysiwyg w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B0014] focus:border-transparent">{{ old('key_benefits', $service->key_benefits) }}</textarea>
+            </div>
+            <div x-show="activeTab === 'fees'">
+                <textarea name="fees" id="fees" rows="8" class="wysiwyg w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B0014] focus:border-transparent">{{ old('fees', $service->fees) }}</textarea>
+            </div>
+            <div x-show="activeTab === 'required_documents'">
+                <textarea name="required_documents" id="required_documents" rows="8" class="wysiwyg w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B0014] focus:border-transparent">{{ old('required_documents', $service->required_documents) }}</textarea>
+            </div>
+            <div x-show="activeTab === 'important_notes'">
+                <textarea name="important_notes" id="important_notes" rows="8" class="wysiwyg w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B0014] focus:border-transparent">{{ old('important_notes', $service->important_notes) }}</textarea>
+            </div>
         </div>
 
         <div class="mb-4">

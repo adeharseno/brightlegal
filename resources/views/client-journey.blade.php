@@ -87,7 +87,7 @@
                                     <!-- Top row: Challenge + How We Helped -->
                                     <div class="flex flex-col md:flex-row">
                                         <!-- The Challenge -->
-                                        <div class="flex-1 p-6 md:p-8 border border-b-0 border-white/10">
+                                        <div class="flex-1 p-6 md:p-8 border border-b-0 border-white/10 text-justify md:text-left">
                                             <h4 class="text-[#B8C1F8] text-base font-medium mb-4 tracking-wide">The challenge</h4>
                                             <p class="text-white/60 text-sm leading-[180%]">
                                                 {{ $item->challenge ?? 'The client was planning to relocate to Bali but felt overwhelmed by conflicting information online.' }}
@@ -95,7 +95,7 @@
                                         </div>
 
                                         <!-- How We Helped -->
-                                        <div class="flex-1 p-6 md:p-8 border border-b-0 border-white/10">
+                                        <div class="flex-1 p-6 md:p-8 border border-b-0 border-white/10 text-justify md:text-left">
                                             <h4 class="text-[#B8C1F8] text-base font-medium mb-4 tracking-wide">How we helped</h4>
                                             <p class="text-white/60 text-sm leading-[180%]">
                                                 {{ $item->how_we_helped ?? 'We started by understanding their plans, timeline, and personal situation. From there, we explained the relevant visa options in plain language.' }}
@@ -104,7 +104,7 @@
                                     </div>
 
                                     <!-- Outcome (below challenge + how we helped) -->
-                                    <div class="p-6 md:p-8 border border-b-0 border-white/10">
+                                    <div class="p-6 md:p-8 border border-b-0 border-white/10 text-justify md:text-left">
                                         <h4 class="text-[#F1AE43] text-base font-medium mb-4 tracking-wide">Outcome</h4>
                                         <p class="text-white/60 text-sm leading-[180%]">
                                             {{ $item->outcome ?? 'The client was planning to relocate to Bali but felt overwhelmed by conflicting information online. They weren\'t sure which visa suited their situation, how long they could legally stay, or what risks they might be taking by choosing the wrong option.' }}

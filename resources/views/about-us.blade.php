@@ -97,7 +97,7 @@
                     </div>
 
                     <!-- Two column body text -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-base leading-[160%] text-white/65">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-base leading-[160%] text-white/65 text-justify md:text-left">
                         <p>
                             {{ $aboutUsSettings->mission_body_left ?? 'Born in Bali, we\'re a small but mighty team of legal professionals who believe in clear answers, practical solutions, and treating clients like people — not case numbers. Whether you\'re here to build your dream business or just sort out your visa, we\'re here to make it easier, not scarier.' }}
                         </p>

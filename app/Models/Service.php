@@ -15,6 +15,7 @@ class Service extends Model
         'description',
         'image',
         'key_benefits',
+        'fees',
         'required_documents',
         'important_notes',
         'consult_link',
